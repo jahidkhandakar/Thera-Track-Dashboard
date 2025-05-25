@@ -1,3 +1,3 @@
 
-// const url = "http://192.168.10.169:8083"
-// export default url
+const url = "http://10.0.80.71:5000"
+export default url

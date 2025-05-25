@@ -46,10 +46,11 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="lg:w-[250px] xl:w-[300px] bg-[#2196F3] md:w-[200px] sm:w-[120px] w-[120px] flex flex-col justify-between bg-primaryBg h-full min-h-screen rounded-md">
+    <div className="lg:w-[250px] xl:w-[300px] md:w-[200px] sm:w-[120px] w-[120px] flex flex-col justify-between bg-primaryBg h-full min-h-screen rounded-md">
       <div>
         <div className="p-[10px] grid justify-items-stretch  sm:p-[16px]">
           <img className="h-24 rounded-lg justify-self-center" src={logo} alt="Logo" />
+          <img className=" rounded-lg justify-self-center" src="/public/image/logo1.png" alt="Logo" />
          
           {/* <hr className="w-full mt-4 text-[#54D496] hidden sm:block" /> */}
         </div>

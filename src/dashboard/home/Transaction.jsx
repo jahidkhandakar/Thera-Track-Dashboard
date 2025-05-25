@@ -1,160 +1,168 @@
-import React, { useState } from 'react';
-import { Table, Modal } from 'antd';
-import users from '../../../public/image/randomuser.jpg'
-import './transaction.css'
+import { Button, DatePicker, Input, Modal, Space, Table } from "antd";
+import { BsInfoCircle } from "react-icons/bs";
+import { useState } from "react";
+import { CloseOutlined } from "@ant-design/icons";
+import styles from './../menu/sidebarMenu/style.module.css';
+import { useAllUsersQuery } from "../../redux/features/otherApi/allUsers";
+ 
 
-import { BsInfoCircle } from 'react-icons/bs';
+const { Search } = Input;
 
 const Transaction = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-const dataSource = [
-  {
-    key: '1',
-    applicationId: '12345678',
-    customerName: 'abSayed',
-    email: 'abc@email.com',
-    address: 'Dhaka Bangladesh',
-    date: '16 Apr 2024',
-  },
-  {
-    key: '2',
-    applicationId: '12345678',
-    customerName: 'Bashar Islam',
-    email: 'abc@email.com',
-    address: 'Dhaka Bangladesh',
-    date: '16 Apr 2024',
-  },
-  {
-    key: '3',
-    applicationId: '12345678',
-    customerName: 'Bashar Islam',
-    email: 'abc@email.com',
-    address: 'Dhaka Bangladesh',
-    date: '16 Apr 2024',
-  },
-  {
-    key: '4',
-    applicationId: '12345678',
-    customerName: 'Bashar Islam',
-    email: 'abc@email.com',
-    address: 'Dhaka Bangladesh',
-    date: '16 Apr 2024',
-  },
-  {
-    key: '5',
-    applicationId: '12345678',
-    customerName: 'Bashar Islam',
-    email: 'abc@email.com',
-    address: 'Dhaka Bangladesh',
-    date: '16 Apr 2024',
-  },
-];
+  const { data: users, isLoading, error } = useAllUsersQuery();
 
-const columns = [
-  {
-    title: '#Application ID',
-    dataIndex: 'applicationId',
-    key: 'applicationId',
-  },
-  {
-    title: 'Customer Name',
-    dataIndex: 'customerName',
-    key: 'customerName',
-  },
-  {
-    title: 'Email',
-    dataIndex: 'email',
-    key: 'email',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Date',
-    dataIndex: 'date',
-    key: 'date',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-        <BsInfoCircle  onClick={() => handleView(record)}  size={18} className="text-[red] cursor-pointer" />
-    ),
-  },
-];
+  // Safe access to user list
+  const dataSource = users?.data?.attributes?.results?.slice(0,5) || [];
 
-const handleView = () => {
-    // setUser(value);
-    // console.log(value)
+  const columns = [
+    {
+      title: "#SI",
+      key: "si",
+      render: (_, __, index) => index + 1,
+    },
+    {
+      title: "User Name",
+      dataIndex: "firstName",
+      key: "firstName",
+      render: (text) => <p className="font-medium">{text || "N/A"}</p>,
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      render: (text) => <p>{text || "Apple Or Facebook User"}</p>,
+    },
+    {
+      title: "Phone",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
+      render: (text) => <p>{text || "N/A"}</p>,
+    },
+    {
+      title: "Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (text) => <p>{text ? text.split("T")[0] : "N/A"}</p>,
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <BsInfoCircle
+            onClick={() => handleView(record)}
+            size={18}
+            className="text-[red] cursor-pointer"
+          />
+        </Space>
+      ),
+    },
+  ];
+
+  const handleView = (user) => {
+    setSelectedUser(user);
     setIsModalOpen(true);
   };
 
+  const onSearch = (value) => {
+    console.log("Search value:", value);
+    // Implement search/filter logic here if needed
+  };
+
+  const onChange = (date, dateString) => {
+    console.log("Selected Date:", date, dateString);
+  };
+
+  if (isLoading) return <p>Loading users...</p>;
+  if (error) return <p>Failed to load users.</p>;
 
   return (
-    <div className="table-container">
-        <h1 className='text-header font-medium my-2'>Recent User List</h1>
-      <Table
-        dataSource={dataSource}
-        columns={columns}
-        pagination={false}
-        bordered
-      />
-       <Modal
+    <div>
+      <div className="rounded-t-lg mt-[24px]">
+        <div className="flex py-[22px] justify-between items-center">
+          <p className="text-header">Recent User</p>
+
+       
+        </div>
+
+        <Table
+          pagination={{
+            total: dataSource.length,
+            showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+            defaultPageSize: 2,
+            showSizeChanger: false,
+            itemRender: (current, type, originalElement) => {
+              if (type === "prev") {
+                return <Button className={styles.paginationButton}>Back</Button>;
+              }
+              if (type === "next") {
+                return <Button className={styles.paginationButton}>Next</Button>;
+              }
+              return originalElement;
+            },
+            className: styles.paginationCenter,
+          }}
+          columns={columns}
+          dataSource={dataSource}
+          rowKey={(record) => record._id} // Use _id as unique key
+          className={styles.customTable}
+          components={{
+            header: {
+              cell: (props) => <th {...props} className={styles.tableHeader} />,
+            },
+          }}
+        />
+      </div>
+
+      <Modal
         open={isModalOpen}
         onOk={() => setIsModalOpen(false)}
         onCancel={() => setIsModalOpen(false)}
-        footer={[]}
-        closeIcon
+        footer={null}
+        closeIcon={
+          <CloseOutlined
+            style={{
+              color: "white",
+              backgroundColor: "#de0a26",
+              borderRadius: "10%",
+              padding: "10px",
+            }}
+          />
+        }
       >
-      <div>
-        <div style={{fontFamily:'Aldrich'}} className="flex justify-center items-center gap-2 flex-col border-b border-b-gray-300">
-          <img className="w-[140px] h-[140px] rounded-full my-4"   src={users} alt="" />
-          <p className="text-[16px] mb-[16px]">absayed</p>
-        </div>
-        <div style={{fontFamily:'Aldrich'}} className="p-[20px]">
-        <div className="flex justify-between border-b py-[16px]">
-            <p>Full Name:</p>
-            <p>
-              {/* {user?.name ? user?.name : "N/A"} */}
-              absayed
-            </p>
+        <div>
+          <div className="flex justify-center py-4 items-center gap-2 flex-col border-b border-b-gray-300">
+            <h1 className="text-xl font-medium">Agency Details</h1>
           </div>
-        
-         
-          <div className="flex justify-between border-b py-[16px] ">
-            <p>Email:</p>
-            <p>
-              {/* {user?.email ? user?.email : "N/A"} */}
-              ab@gmail.com
-            </p>
-          </div>
-          <div className="flex justify-between border-b py-[16px]">
-            <p>Phone:</p>
-            <p>
-              {/* {user?.phone ? user?.phone : "N/A"} */}
-              +45269875
-            </p>
-          </div>
-          <div className="flex justify-between border-b py-[16px]">
-            <p>Date:</p>
-            <p>
-              {/* {user?.createdAt  ? user?.createdAt?.split("T")[0] : "N/A"} */}
-              23-11-24
-            </p>
-          </div>
-          <div className="flex justify-between items-center pt-[16px]">
-            <p>address:</p>
-            <p className="px-[15px] py-[10px] rounded-lg">
-              {/* Regular P550 */}
-              UK
-            </p>
-          </div>
+          <div className="p-[20px]">
+            <div className="flex justify-between border-b py-[16px]">
+              <p>Full Name:</p>
+              <p>{selectedUser?.fullName || "N/A"}</p>
+            </div>
 
+            <div className="flex justify-between border-b py-[16px]">
+              <p>Email:</p>
+              <p>{selectedUser?.email || "N/A"}</p>
+            </div>
+            <div className="flex justify-between border-b py-[16px]">
+              <p>Phone:</p>
+              <p>{selectedUser?.phoneNumber || "N/A"}</p>
+            </div>
+            <div className="flex justify-between border-b py-[16px]">
+              <p>Date:</p>
+              <p>{selectedUser?.createdAt ? selectedUser.createdAt.split("T")[0] : "N/A"}</p>
+            </div>
+            <div className="flex justify-between items-center pt-[16px]">
+              <p>Address:</p>
+              <p className="px-[15px] py-[10px] rounded-lg">
+                {selectedUser?.country || "N/A"}
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
       </Modal>
     </div>
   );

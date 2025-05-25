@@ -1,3 +1,4 @@
+
 import { Button, Form, Input, Upload } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,40 +8,52 @@ import { LuImagePlus } from "react-icons/lu";
 import "react-phone-number-input/style.css";
 import defaultUserImage from "../../../../public/image/randomuser.jpg";
  
+import url from "../../../redux/api/baseUrl";
+ 
+import toast, { Toaster } from "react-hot-toast";
+import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
+import { useUpdateProfileMutation } from "../../../redux/features/auth/profile/editProfile";
  
  
 
-const EditProfiel = () => {
+const EditProfile = () => {
   const navigate = useNavigate();
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(" ");
   const [fileList, setFileList] = useState([]);
+ 
+  const [imageUrl, setImageUrl] = useState(defaultUserImage);
+  const [form] = Form.useForm(); // Form instance
+ 
+
+  // Fetch user profile only if ID is available
+  const { data: profile } = useGetProfileQuery();
+  // console.log(profile)
+ 
   
+  const user = profile?.data;
+  // console.log(user)
   
- 
-  const [imageUrl, setImageUrl] = useState();
- 
-//  console.log(profile?.data?.attributes);
- 
-//  const initialValues = {
-//   name: profile?.data?.attributes?.name ||'',
-//   email: profile?.data?.attributes?.email ||'',
-//   phoneNumber: profile?.data?.attributes?.phoneNumber ||'',
-// };
 
-// useEffect(() => {
-//   if (profile?.data?.attributes) {
-//     setPhoneNumber(profile.data.attributes.phoneNumber || '');
-//     const existingImageUrl = url + profile?.data?.attributes?.image;
-//     if (existingImageUrl) {
-//       setImageUrl(existingImageUrl);
-//     }
-//     initialValues.fullName = profile.data.attributes.fullName || '';
-//     initialValues.email = profile.data.attributes.email || '';
-//   }
-// }, [profile]);
+  useEffect(() => {
+    if (profile) {
+      setPhoneNumber(String(profile?.data?.attributes.phoneNumber || ""));
 
 
+      const profileImageUrl = profile?.data?.attributes.profileImage
+        ? url + profile?.data?.attributes.profileImage
+        : defaultUserImage;
 
+      setImageUrl(profileImageUrl);
+
+      // Update form fields dynamically
+      form.setFieldsValue({
+        name: profile?.data?.attributes.firstName || "",
+        email: profile?.data?.attributes.email || "",
+      });
+    }
+  }, [profile, form]);
+
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
   const handleUploadChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
@@ -50,41 +63,39 @@ const EditProfiel = () => {
       reader.onload = () => setImageUrl(reader.result);
     }
   };
-//  console.log("fileeeeeeeeeeeeeeeeeeeee", imageUrl);
-//  console.log(fileList, phoneNumber);
- 
- 
-  const handleUpdateProfile = async (values) => {
-    console.log(values); 
-    
-    
-    // const formData = new FormData();
-    // formData.append("name", values?.name); 
-    // formData.append("phoneNumber", phoneNumber);
-    // if (fileList[0]?.originFileObj) {
-    //   formData.append("image", fileList[0].originFileObj);
-    //   // formData.append("image", imageUrl);
-    // }
-    // try{
-    //   const res = await updateProfile(formData).unwrap();
-    //   console.log(res);
-    //   if(res?.code === 200){
-    //     toast.success(res?.message)
-    //   }
-    //   setTimeout(() => {
-    //     navigate('/dashboard/profile')
-    //   }, 1000);
-      
-    // }catch(error){
-    //   console.log(error?.data);
-       
-    // }
-     
-  };
+  console.log(fileList)
 
+  const handleUpdateProfile = async (values) => {
+    console.log(values?.name)
+    console.log(phoneNumber)
+    console.log(fileList)
+    const formData = new FormData();
+    formData.append("firstName", values?.name);
+    formData.append("phoneNumber", phoneNumber);
+    if (fileList[0]?.originFileObj) {
+      formData.append("profileImage", fileList[0]?.originFileObj);
+    }
+  
+    try {
+      const res = await updateProfile(formData).unwrap();
+      console.log(res);
+  
+      if (res?.code === 200) {
+        toast.success(res?.message);
+        // Update local state if needed
+      
+        setTimeout(() => {
+          navigate("/dashboard/profile");
+        }, 1000);
+      }
+    } catch (error) {
+      toast.error(error?.data?.message || "Failed to update profile");
+    }
+  };
+  
   return (
     <div className="">
-      {/* <Toaster /> */}
+      <Toaster />
       <div
         onClick={() => navigate("/dashboard/profile")}
         className="flex items-center cursor-pointer ml-6 mt-10 mb-16"
@@ -95,27 +106,16 @@ const EditProfiel = () => {
 
       <div className="mx-6 p-9 rounded-xl bg-white shadow-md">
         <Form
+          form={form} // Use form instance
           layout="vertical"
-          // initialValues={initialValues}
           autoComplete="off"
           onFinish={handleUpdateProfile}
         >
           <div className="flex flex-col lg:flex-row gap-10">
             <div className="flex flex-col items-center w-full lg:w-1/3 border-dotted border">
               <div className="relative w-56 h-56 rounded-full flex justify-center items-center mt-5 bg-gray-50 border">
-                <Upload
-                  name="avatar"
-
-                  showUploadList={false}
-                  onChange={handleUploadChange}
-                 
-                >
-                  <img
-                    className="w-44 h-44 rounded-full"
-                    src={imageUrl}
-                    in
-                    alt="Profile"
-                  />
+                <Upload name="avatar" showUploadList={false} onChange={handleUploadChange}>
+                  <img className="w-44 h-44 rounded-full" src={imageUrl} alt="Profile" />
                   <Button
                     className="border-none text-md text-blue-500 absolute bottom-6 flex items-center"
                     icon={<LuImagePlus size={20} className="mr-2" />}
@@ -123,13 +123,11 @@ const EditProfiel = () => {
                     Change Picture
                   </Button>
                 </Upload>
-
               </div>
 
-
               <div className="text-center mt-6">
-                <p className="text-lg">{'admin'}</p>
-                <h1 className="text-2xl font-medium">{"absayed"}</h1>
+                <p className="text-lg">{profile?.data?.attributes?.role || "Admin"}</p>
+                <h1 className="text-2xl font-medium">{profile?.data?.attributes?.fullName || "User"}</h1>
               </div>
             </div>
 
@@ -139,7 +137,6 @@ const EditProfiel = () => {
                   label={<span className="text-lg font-medium">Name</span>}
                   name="name"
                   rules={[{ required: true, message: "Please input your name!" }]}
-                  // initialValue={"absayed"}
                 >
                   <Input
                     placeholder="Name"
@@ -150,15 +147,12 @@ const EditProfiel = () => {
                 <Form.Item
                   label={<span className="text-lg font-medium">Email</span>}
                   name="email"
-                  
                   rules={[{ required: true, message: "Please input your email!" }]}
-                  // initialValue={"ab@gamil.com"}
                 >
                   <Input
                     placeholder="Email"
                     readOnly
                     className="p-4 rounded-lg border-gray-300 bg-gray-100"
-                   
                   />
                 </Form.Item>
 
@@ -167,11 +161,10 @@ const EditProfiel = () => {
                   <PhoneInput
                     placeholder="Enter phone number"
                     international
-                    // defaultCountry="us"
                     value={phoneNumber}
                     onChange={setPhoneNumber}
                     className="p-2 rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                    style={{ height: '50px',  }}
+                    style={{ height: "50px" }}
                   />
                 </div>
               </div>
@@ -180,7 +173,9 @@ const EditProfiel = () => {
 
           <Button
             htmlType="submit"
-            className="w-full mt-12 h-14 !bg-[#193664] !text-white rounded-lg text-lg font-medium"
+            className="w-full mt-12 h-14 !bg-[#2E7D32] !text-white rounded-lg text-lg font-medium"
+            loading={isLoading}
+            disabled={isLoading}
           >
             Update Profile
           </Button>
@@ -190,4 +185,4 @@ const EditProfiel = () => {
   );
 };
 
-export default EditProfiel;
+export default EditProfile;

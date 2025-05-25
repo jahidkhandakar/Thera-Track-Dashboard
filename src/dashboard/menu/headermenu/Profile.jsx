@@ -3,12 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import user from '../../../../public/image/randomuser.jpg';
  
+import url from "./../../../redux/api/baseUrl"
+import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
 
 const Profile = () => {
+  
   const navigate = useNavigate();
  
-  // console.log(profile);
-  
+ const {data:admin} = useGetProfileQuery()
+ console.log(admin)
 
   return (
     <div className="p-4">
@@ -16,7 +19,7 @@ const Profile = () => {
         <h1 className="text-2xl md:text-3xl font-medium">Profile Information</h1>
         <div
           onClick={() => navigate(`/dashboard/editprofile`)}
-          className="flex gap-2 items-center py-3 px-6 rounded-lg cursor-pointer bg-[#193664] text-white"
+          className="flex gap-2 items-center py-3 px-6 rounded-lg cursor-pointer bg-[#995252] text-whiteText"
         >
           <FaEdit size={17} />
           <p>Edit Profile</p>
@@ -27,13 +30,13 @@ const Profile = () => {
         <div className="lg:w-1/3 flex flex-col border border-dotted p-4 justify-center items-center gap-8">
         <div className="rounded-full  overflow-hidden h-[180px] w-[180px] mx-auto">
               {/* <Image src={url + profile?.data?.attributes?.image} /> */}
-              <Image src={"https://randomuser.me/api/portraits/men/57.jpg"} />
+              <Image src={url + admin?.data?.attributes.profileImage} />
             </div>
            
           <div className="flex flex-col justify-center items-center text-center">
             {/* <p className="text-lg md:text-xl">{profile?.data?.attributes?.role}</p> */}
-            <p className="text-lg md:text-xl">{"admin"}</p>
-            <h1 className="text-2xl md:text-3xl font-medium">{"absayed"}</h1>
+            <p className="text-lg md:text-xl">{admin?.data?.attributes.role}</p>
+            <h1 className="text-2xl md:text-3xl font-medium">{admin?.data?.attributes.firstName}</h1>
           </div>
         </div>
 
@@ -47,7 +50,7 @@ const Profile = () => {
                 <Input
                   placeholder="First name"
                   // value={profile?.data?.attributes?.name}
-                  value={"absayed"}
+                  value={admin?.data?.attributes.firstName}
                   className="p-4 cursor-pointer text-lg md:text-xl bg-[#ebf5f5] text-black rounded w-full mt-3 outline-none focus:bg-[#69C0BE] hover:bg-[#e1f1f1]"
                   type="text"
                   readOnly
@@ -61,7 +64,7 @@ const Profile = () => {
               </label>
               <Input
                 placeholder="Email"
-                value={"ab@gmail.com"}
+                value={admin?.data?.attributes.email}
                 className="p-4 text-lg md:text-xl bg-[#ebf5f5] rounded w-full mt-3 outline-none focus:bg-[#69C0BE] hover:bg-[#69C0BE]"
                 type="text"
                 readOnly
@@ -74,7 +77,7 @@ const Profile = () => {
               </label>
               <Input
                 placeholder="Phone"
-                value={"454565465"}
+                value={admin?.data?.attributes.phoneNumber}
                 className="p-4 text-lg md:text-xl bg-[#ebf5f5] rounded w-full mt-3 outline-none focus:bg-[#69C0BE] hover:bg-[#69C0BE]"
                 type="text"
                 readOnly

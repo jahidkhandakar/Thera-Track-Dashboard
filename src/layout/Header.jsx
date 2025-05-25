@@ -8,12 +8,9 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 // import { FaRegUser } from "react-icons/fa6";
 import './header.css' 
 import Swal from "sweetalert2";
-import { useState } from "react";
-  
- 
- 
- 
- 
+import { useState } from "react"; 
+import { useGetProfileQuery } from "../redux/features/auth/profile/getProfile";
+import url from "../redux/api/baseUrl";
 
 const Header = () => {
 
@@ -26,6 +23,10 @@ const Header = () => {
   const openModal = () => {
     setIsModalOpen(true);
   };
+
+  const {data:admin} = useGetProfileQuery()
+  // console.log(admin)
+ 
 
   const handleLogOut = () => {
     Swal.fire({
@@ -96,12 +97,12 @@ const menu = (
 
 
   return (
-    <div className=" flex justify-between items-center bg-[#2196F3] shadow-xl mb-[24px] p-[16px] rounded-md !bg-primaryBg"> 
+    <div className=" flex justify-between items-center shadow-xl mb-[24px] p-[16px] rounded-md !bg-primaryBg"> 
     {/* <Toaster /> */}
      <div className="text-white">
-      <p className="text-header text-whiteText font-medium">Webcome !</p>
+      <p className="text-header text-whiteText font-medium">Welcome !</p>
       {/* <h1>{profile?.data?.attributes?.name}</h1> */}
-      <h1 className="text-whiteText">{"absayed"}</h1>
+      <h1 className="text-whiteText">{admin?.data?.attributes.firstName}</h1>
      </div>
 
       <div className="flex gap-5">
@@ -127,9 +128,9 @@ const menu = (
         <div>
         <Dropdown className="px-2" overlay={menu} trigger={['click']} onVisibleChange={handleMenuVisibility}>
     <a className="flex items-center text-white cursor-pointer text-whiteText">
-      <Avatar src={'https://randomuser.me/api/portraits/men/57.jpg'} className="mr-2 h-[52px] w-[52px]" />
+      <Avatar src={url + admin?.data?.attributes.profileImage} className="mr-2 h-[52px] w-[52px]" />
       {/* <Avatar src={url + profile?.data?.attributes?.image} className="mr-2 h-[52px] w-[52px]" /> */}
-      AbSayed <DownOutlined className="ml-1" />
+      {admin?.data?.attributes.firstName} <DownOutlined className="ml-1" />
     </a>
   </Dropdown>
         </div>

@@ -5,10 +5,11 @@ const updateProfile = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         updateProfile: builder.mutation({
             query : (data) => ({
-                url: `/common/self`,
-                method: "PUT",
+                url: `/user/profile`,
+                method: "PATCH",
                 body: data
-            })
+            }),
+            invalidatesTags:[{type: "Users"}]
         })
     })
 })

@@ -130,7 +130,7 @@ const Login = () => {
                             {/* <p className='text-red-500 font-semibold'>{error}</p> */}
                             <Button
                                 htmlType="submit"
-                                className="block w-full h-[52px] px-2 py-4 mt-2 !text-white !bg-primaryBg"
+                                className="block w-full h-[52px] px-2 py-4 mt-2 !text-[#FFF] !bg-primaryBg"
                             >
                                 Log in
                             </Button>

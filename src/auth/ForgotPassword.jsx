@@ -15,6 +15,7 @@ const ForgotPassword = () => {
  
   const handleForgotPassword = async(values) => {
     console.log("Received values:", values);
+    navigate(`/verifyotp?email=${values?.email}`);
     // navigate(`/verifyotp`);
     // try{
     //   const res = await forgotpassword(values).unwrap()

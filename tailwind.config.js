@@ -6,10 +6,10 @@ export default {
   ],
   theme: {
     extend: {},
-    // colors: {
-    //   primaryBg: '#2196F3', 
-    //   whiteText: '#FFFFFF',  
-    // },
+    colors: {
+      primaryBg: '#2196F3', 
+      whiteText: '#FFFFFF',  
+    },
     fontSize : {
       'header': '32px'
     }

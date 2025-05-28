@@ -79,14 +79,7 @@ const ForgotPassword = () => {
       required: true,
       message: "Please input your email!",
     },
-    {
-      type: 'email',
-      message: 'Please enter a valid email address!',
-    },
-    {
-      pattern: /^[a-zA-Z0-9._%+-]+@gmail\.com$/,
-      message: 'Please enter a Gmail address!',
-    },
+ 
   ]}
 >
   <Input

@@ -384,7 +384,8 @@ const Feedback = () => {
           <div>
             <p className="text-header">Feedback ({filteredData.length})</p>
           </div>
-          <div className="flex gap-2">
+
+          {/* <div className="flex gap-2">
             <Space direction="vertical">
               <DatePicker onChange={onChange} placeholder="Filter by date" />
             </Space>
@@ -398,7 +399,8 @@ const Feedback = () => {
               value={searchText}
               enterButton 
             />
-          </div>
+          </div> */}
+          
         </div>
         
         <Table

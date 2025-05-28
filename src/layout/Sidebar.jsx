@@ -109,6 +109,18 @@ const Sidebar = () => {
             </NavLink>
 
             <NavLink
+              to="earning"
+              className={({ isActive }) =>
+                isActive
+                  ? "flex cursor-pointer items-center text-[18px] font-medium p-[10px] bg-[#FFFFFF] text-[#193664] m-[6px] rounded-lg"
+                  : "flex text-[white] cursor-pointer items-center text-[18px] font-medium p-[10px]  m-[6px] rounded-lg"
+              }
+            >
+              <RiFeedbackLine className="h-7 w-7 lg:h-5 lg:w-5"/>
+              <span className="hidden ml-2 sm:block">Earning</span>
+            </NavLink>
+
+            {/* <NavLink
               to="settings"
               className={({ isActive }) =>
                 isActive
@@ -118,7 +130,7 @@ const Sidebar = () => {
             >
               <CiSettings className="h-8 w-8 lg:h-5 lg:w-5" />
               <span className="hidden ml-2 sm:block">Settings</span>
-            </NavLink>
+            </NavLink> */}
           </ul>
         </div>
       </div>

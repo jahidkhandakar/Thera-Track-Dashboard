@@ -15,7 +15,7 @@ const Transaction = () => {
   const { data: users, isLoading, error } = useAllUsersQuery();
 
   // Safe access to user list
-  const dataSource = users?.data?.attributes?.results?.slice(0,5) || [];
+  const dataSource = users?.data?.attributes?.slice(0,5) || [];
 
   const columns = [
     {
@@ -92,7 +92,7 @@ const Transaction = () => {
           pagination={{
             total: dataSource.length,
             showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
-            defaultPageSize: 2,
+            defaultPageSize: 5,
             showSizeChanger: false,
             itemRender: (current, type, originalElement) => {
               if (type === "prev") {
@@ -135,12 +135,12 @@ const Transaction = () => {
       >
         <div>
           <div className="flex justify-center py-4 items-center gap-2 flex-col border-b border-b-gray-300">
-            <h1 className="text-xl font-medium">Agency Details</h1>
+            <h1 className="text-xl font-medium">User Details</h1>
           </div>
           <div className="p-[20px]">
             <div className="flex justify-between border-b py-[16px]">
               <p>Full Name:</p>
-              <p>{selectedUser?.fullName || "N/A"}</p>
+              <p>{selectedUser?.firstName || "N/A"}</p>
             </div>
 
             <div className="flex justify-between border-b py-[16px]">

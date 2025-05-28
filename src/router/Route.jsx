@@ -25,6 +25,7 @@ import Feedback from "../dashboard/menu/sidebarMenu/Feedback";
  
 import Settings from "../dashboard/menu/sidebarMenu/Settings";
 import FeedbackDetails from "../dashboard/menu/sidebarMenu/FeedbackDetails";
+import Earning from "../dashboard/menu/sidebarMenu/Earning";
 
 
 export const router = createBrowserRouter([
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
                 element: <User />
             },
              
+            {
+                path: 'earning',
+                element:<Earning />
+            },
             {
                 path: 'settings',
                 element:<Settings />

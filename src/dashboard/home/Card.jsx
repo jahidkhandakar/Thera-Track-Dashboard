@@ -5,8 +5,14 @@ import { CiBag1 } from 'react-icons/ci';
 import { FaPersonRunning, FaUsers } from 'react-icons/fa6';
 import { HiOutlineCurrencyDollar } from 'react-icons/hi';
 import { SiMagento } from 'react-icons/si';
+import { useStatusQuery } from '../../redux/features/otherApi/status';
 
 const Card = () => {
+
+const {data: status} = useStatusQuery()
+// console.log(status?.data?.attributes)
+
+
     return (
         <div className=' mt-6'>
             <h1 className="font-medium text-xl">Overview</h1>
@@ -19,7 +25,9 @@ const Card = () => {
             <p className="text-[18px] font-semibold text-[#193664] my-4">
               Total Earnings
             </p>
-            <h1 className="text-[34px] font-medium">$570</h1>
+           <h1 className="text-[34px] font-medium">
+  ${status?.data?.attributes?.totalEarning.toFixed(2)}
+</h1>
           </div>
         </div>
         <div className=" rounded h-[180px] flex justify-between items-center card bg-[#FFFFFF] shadow-xl">
@@ -30,7 +38,7 @@ const Card = () => {
             <p className="text-[18px] font-semibold text-primaryBg my-4">
               Total Users
             </p>
-            <h1 className="text-[34px] font-medium">23</h1>
+            <h1 className="text-[34px] font-medium">{status?.data?.attributes?.userCount}</h1>
           </div>
         </div>
 

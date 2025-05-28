@@ -12,9 +12,10 @@ const User = () => {
   const [selectedUser, setSelectedUser] = useState(null);
 
   const { data: users, isLoading, error } = useAllUsersQuery();
+  console.log(users)
 
   // Safe access to user list
-  const dataSource = users?.data?.attributes?.results || [];
+  const dataSource = users?.data?.attributes || [];
 
   const columns = [
     {
@@ -84,7 +85,7 @@ const User = () => {
         <div className="flex py-[22px] justify-between items-center">
         <p className="text-header">Users</p>
 
-          <Space direction="vertical">
+          {/* <Space direction="vertical">
             <DatePicker onChange={onChange} />
           </Space>
           <Search
@@ -92,14 +93,14 @@ const User = () => {
             placeholder="input search text"
             onSearch={onSearch}
             enterButton
-          />
+          /> */}
         </div>
 
         <Table
           pagination={{
             total: dataSource.length,
             showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
-            defaultPageSize: 2,
+            defaultPageSize: 10,
             showSizeChanger: false,
             itemRender: (current, type, originalElement) => {
               if (type === "prev") {

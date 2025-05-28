@@ -11,6 +11,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const Login = () => {
     const [checkboxError, setCheckboxError] = useState('');
     const [isChecked, setIsChecked] = useState(false);
+    const [error, setError] = useState(" ");
     const navigate = useNavigate()
    
  
@@ -82,9 +83,7 @@ const [adminLogin] = useAdminLoginMutation()
                             name="email"
                             label={<span className="text-[16px] mt-5 font-medium">Email</span>}
                             rules={[
-                                { required: true, message: "Please input your email!" },
-                                { type: 'email', message: 'Please enter a valid email address!' },
-                                { pattern: /^[a-zA-Z0-9._%+-]+@gmail\.com$/, message: 'Please enter a Gmail address!' },
+                                { required: true, message: "Please input your email!" }, 
                             ]}
                         >
                             <Input
@@ -125,7 +124,7 @@ const [adminLogin] = useAdminLoginMutation()
                         </div>
 
                         <Form.Item>
-                            {/* <p className='text-red-500 font-semibold'>{error}</p> */}
+                            <p className='text-red-500 font-semibold'>{error}</p>
                             <Button
                                 htmlType="submit"
                                 className="block w-full h-[52px] px-2 py-4 mt-2 !text-[#FFF] !bg-primaryBg"

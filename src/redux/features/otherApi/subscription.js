@@ -5,7 +5,7 @@ const subscription = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         subscription: builder.query({
             query: () => `/subscription/read`,
-           
+            providesTags: [{type: "Subscription"}]
         })
     })
 })

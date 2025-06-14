@@ -111,7 +111,7 @@ const menu = (
           onClick={(e) => navigate("/dashboard/notification")}
           className="relative flex items-center"
         >
-          <Badge style={{ backgroundColor: "red", marginTop:'10px', marginRight:'5px' }} count={2}>
+          <Badge style={{ backgroundColor: "red", marginTop:'10px', marginRight:'5px' }}>
             <IoIosNotificationsOutline
               style={{ cursor: "pointer" }}
               className={` bg-primary w-[52px] h-[52px] text-[#Ffffffff] border-2 border-[#e7e0e0] rounded-full p-2 `}

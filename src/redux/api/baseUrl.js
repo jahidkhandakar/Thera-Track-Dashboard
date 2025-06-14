@@ -1,3 +1,3 @@
 
-const url = "http://10.0.80.71:5000"
+const url = "https://s5000.sobhoy.com"
 export default url

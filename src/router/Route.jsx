@@ -120,10 +120,10 @@ export const router = createBrowserRouter([
                 path: 'subscription/addsubscription',
                 element: <Addsubscripton />
             },
-            {
-                path: 'subscription/editsubscription',
-                element: <Editsubscription/>
-            }
+           {
+  path: 'subscription/editsubscription/:id',
+  element: <Editsubscription />
+}
         ]
     }
 ])

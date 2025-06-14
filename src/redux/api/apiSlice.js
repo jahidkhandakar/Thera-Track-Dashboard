@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://10.0.80.71:5000/api/v1",
+    baseUrl: "https://s5000.sobhoy.com/api/v1",
     prepareHeaders: (headers, { getState }) => {
       const token = localStorage.getItem("token");
     //   console.log("9 baseApi", token);
@@ -15,7 +15,7 @@ export const apiSlice = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Promotion", "Product", "Users", "Coupon", "About"],  
+  tagTypes: ["Promotion", "Product", "Users", "Subscription", "About"],  
 
   endpoints: () => ({}),
 });

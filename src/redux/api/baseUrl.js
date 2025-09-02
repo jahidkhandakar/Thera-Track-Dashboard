@@ -1,3 +1,3 @@
 
-const url = "https://s5000.sobhoy.com"
+const url = "https://api.threatrack.net"
 export default url

@@ -10,7 +10,7 @@ import { useStatusQuery } from '../../redux/features/otherApi/status';
 const Card = () => {
 
 const {data: status} = useStatusQuery()
-// console.log(status?.data?.attributes)
+console.log(status?.data?.attributes)
 
 
     return (

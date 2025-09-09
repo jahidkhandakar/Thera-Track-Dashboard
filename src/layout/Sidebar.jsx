@@ -3,18 +3,16 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from '../../public/image/logo.png'
 // import logo from '../../public/image/logo.png'
-import { FaDollarSign, FaPersonRunning, FaSackDollar, FaUser, FaUsers, FaUsersLine } from "react-icons/fa6";
-import { MdCategory, MdOutlineMedicalServices, MdSubscriptions } from "react-icons/md";
-import { BiMenu, BiSolidDashboard } from "react-icons/bi";
-import { HiLogout } from "react-icons/hi";
-import { AiOutlineSafetyCertificate } from "react-icons/ai";
-import { PiGitPullRequestDuotone } from "react-icons/pi";
-import { RiFeedbackLine, RiSecurePaymentFill } from "react-icons/ri";
-import { CiSettings } from "react-icons/ci";
+import { FaDollarSign, FaSackDollar, FaUsers } from "react-icons/fa6";
+ 
+import {BiSolidDashboard } from "react-icons/bi";
+ 
+import { RiFeedbackLine } from "react-icons/ri";
+ 
 import Swal from "sweetalert2";
-import { SiMagento } from "react-icons/si";
-import { BsExclude } from "react-icons/bs";
-import { FaUserAlt } from "react-icons/fa";
+import { MdOutlineRateReview } from "react-icons/md";
+import { CiSettings } from "react-icons/ci";
+ 
 
 const Sidebar = () => {
 
@@ -104,7 +102,7 @@ const Sidebar = () => {
                   : "flex text-[white] cursor-pointer items-center text-[18px] font-medium p-[10px]  m-[6px] rounded-lg"
               }
             >
-              <RiFeedbackLine className="h-7 w-7 lg:h-5 lg:w-5"/>
+              <MdOutlineRateReview className="h-7 w-7 lg:h-5 lg:w-5"/>
               <span className="hidden ml-2 sm:block">Feed Back</span>
             </NavLink>
 
@@ -116,11 +114,11 @@ const Sidebar = () => {
                   : "flex text-[white] cursor-pointer items-center text-[18px] font-medium p-[10px]  m-[6px] rounded-lg"
               }
             >
-              <RiFeedbackLine className="h-7 w-7 lg:h-5 lg:w-5"/>
+              <FaSackDollar className="h-7 w-7 lg:h-5 lg:w-5"/>
               <span className="hidden ml-2 sm:block">Earning</span>
             </NavLink>
 
-            {/* <NavLink
+            <NavLink
               to="settings"
               className={({ isActive }) =>
                 isActive
@@ -130,7 +128,7 @@ const Sidebar = () => {
             >
               <CiSettings className="h-8 w-8 lg:h-5 lg:w-5" />
               <span className="hidden ml-2 sm:block">Settings</span>
-            </NavLink> */}
+            </NavLink>
           </ul>
         </div>
       </div>

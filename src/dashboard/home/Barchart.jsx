@@ -5,7 +5,7 @@ import { useEarningStatusQuery } from '../../redux/features/otherApi/earningStat
 
 const EarningsChart = () => {
   const { data: earnigns } = useEarningStatusQuery();
-  // console.log(earnigns);
+  console.log(earnigns);
   
   // Transform your API data for the chart
   const chartData = earnigns?.data?.attributes?.map(item => ({

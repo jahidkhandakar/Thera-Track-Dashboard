@@ -3,27 +3,28 @@ import { FaCircleArrowLeft } from "react-icons/fa6";
 import { Link, useNavigate, useParams } from "react-router-dom";
  
 import { Button } from "antd";
+import { useGetAboutQuery } from "../../../redux/features/setting/settingSlice";
  
-// const decodeHtml = (html) => {
-//   const txt = document.createElement("textarea");
-//   txt.innerHTML = html;
-//   return txt.value;
-// };
+const decodeHtml = (html) => {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
 
 const About = () => {
  
   const navigate = useNavigate(); 
   const [content, setContent] = useState("");
  
+ const {data: aboutus} = useGetAboutQuery()
+ console.log(aboutus)
  
-
- 
-//   useEffect(() => {
-//     if (aboutus?.data?.attributes?.docs?.length) {
-//       const decodedContent = decodeHtml(aboutus.data.attributes.docs[0].content);
-//       setContent(decodedContent);
-//     }
-//   }, [aboutus]);
+  useEffect(() => {
+    if (aboutus?.data?.attributes) {
+      const decodedContent = decodeHtml(aboutus.data.attributes?.aboutUs);
+      setContent(decodedContent);
+    }
+  }, [aboutus]);
 
  
 
@@ -35,9 +36,9 @@ const About = () => {
         <p className=" font-semibold text-[30px]">About Us</p>
       </Link>
       <div className='mt-4'>
-        {/* <p dangerouslySetInnerHTML={{ __html: content }}> 
-        </p> */}
-        <p>about us heare</p>
+        <p dangerouslySetInnerHTML={{ __html: content }}> 
+        </p>
+        {/* <p>about us heare</p> */}
  
       </div>
       <div className=" text-right mt-16">

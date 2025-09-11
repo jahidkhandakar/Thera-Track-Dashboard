@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom"; 
+import { useGetPrivacyQuery } from "../../../redux/features/setting/settingSlice";
 
 
 // Function to decode HTML entities
-// const decodeHtml = (html) => {
-//   const txt = document.createElement("textarea");
-//   txt.innerHTML = html;
-//   return txt.value;
-// };
+const decodeHtml = (html) => {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
 
 const PrivacyPolicy = () => {  
   const [content, setContent] = useState("");
 
   const navigate = useNavigate(); 
-//   const { data: privacy } = usePrivacyPolicyQuery();
-
-//   useEffect(() => {
-//     if (privacy?.data?.attributes?.docs?.length) {
-//       // Decode the HTML content before setting it
-//       const decodedContent = decodeHtml(privacy.data.attributes.docs[0].content);
-//       setContent(decodedContent);
-//     }
-//   }, [privacy]);
+  const { data: privacy } = useGetPrivacyQuery();
+    // console.log(privacy)
+  useEffect(() => {
+    if (privacy?.data?.attributes) {
+      // Decode the HTML content before setting it
+      const decodedContent = decodeHtml(privacy.data.attributes?.privacyPolicy);
+      setContent(decodedContent);
+    }
+  }, [privacy]);
 
   return (
     <div className="h-[575px]">
@@ -33,8 +34,8 @@ const PrivacyPolicy = () => {
         </Link>
         <div className='mt-4'>
           {/* Render the decoded content as HTML */}
-          {/* <div dangerouslySetInnerHTML={{ __html: content }} /> */}
-          <p>privacypolicy</p>
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+          {/* <p>privacypolicy</p> */}
         </div>
         <div className="text-right mt-16"> 
           <button 

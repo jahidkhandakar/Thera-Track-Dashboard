@@ -18,30 +18,35 @@ const settingSlice = apiSlice.injectEndpoints({
          invalidatesTags: [{type: "Setting"}]
        }),
         getAbout: builder.query({
-            query: () => `/settings/terms`,
+            query: () => `/settings/about-us`,
             providesTags: [{type: "Setting"}]
         }),
        updateAbout: builder.mutation({
          query: (data) => ({
-            url: `/settings/terms`,
+            url: `/settings/about-us`,
             method: "POST",
-            body: data
+            body: {
+                aboutUs: data
+            }
+         }),
+         invalidatesTags: [{type: "Setting"}]
+       }),
+
+        getPrivacy: builder.query({
+            query: () => `/settings/privacy-policy`,
+            providesTags: [{type: "Setting"}]
+        }),
+
+       updatePrivacy : builder.mutation({
+         query: (data) => ({
+            url: `/settings/privacy-policy`,
+            method: "POST",
+            body: {
+                privacyPolicy:data
+            }
          }),
          invalidatesTags: [{type: "Setting"}]
        })
-
-    //     getTearms: builder.query({
-    //         query: () => `/settings/terms`,
-    //         providesTags: [{type: "Setting"}]
-    //     }),
-    //    updateTearms: builder.mutation({
-    //      query: (data) => ({
-    //         url: `/settings/terms`,
-    //         method: "POST",
-    //         body: data
-    //      }),
-    //      invalidatesTags: [{type: "Setting"}]
-    //    })
   
 
     })
@@ -50,4 +55,8 @@ const settingSlice = apiSlice.injectEndpoints({
 export const {  
     useGetTearmsQuery,
     useUpdateTearmsMutation,
+    useGetAboutQuery,
+    useUpdateAboutMutation,
+    useGetPrivacyQuery,
+    useUpdatePrivacyMutation
 } = settingSlice;

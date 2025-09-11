@@ -4,55 +4,60 @@ import JoditEditor from "jodit-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import { Button, Form, notification } from "antd";
+import { useGetTearmsQuery, useUpdateTearmsMutation } from "../../../redux/features/setting/settingSlice";
+import toast, { Toaster } from "react-hot-toast";
  
 // import Swal from "sweetalert2";
-// const decodeHtml = (html) => {
-//   const txt = document.createElement("textarea");
-//   txt.innerHTML = html;
-//   return txt.value;
-// };
+const decodeHtml = (html) => {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
  
 
 const EditTermCondition = () => {
-//   const {data: termcondition} = useTearmConditonQuery()
-//   const {id} = useParams()
-//   const [updateTC, {isLoading}] =  useUpdatetermConditionMutation(id)
+ const {data: termcondition} = useGetTearmsQuery()
+ console.log(termcondition); 
+  const [updateTC, {isLoading}] =  useUpdateTearmsMutation()
   // console.log(addTermCondition);
   const editor = useRef(null);
   const [content, setContent] = useState(" "); 
   const navigate = useNavigate() 
-//   useEffect(() => {
-//     if (termcondition?.data?.attributes?.docs?.length) {
-//       // Decode the HTML content before setting it
-//       const decodedContent = decodeHtml(termcondition.data.attributes.docs[0].content);
-//       setContent(decodedContent);
-//     }
-//   }, [termcondition]); 
+
+  useEffect(() => {
+    if (termcondition?.data?.attributes) {
+      // Decode the HTML content before setting it
+      const decodedContent = decodeHtml(termcondition.data.attributes?.termsConditions);
+      setContent(decodedContent);
+    }
+  }, [termcondition]); 
  
 
   const handleEditTermCondition = async () => {
-    navigate("/dashboard/settings/termcondition")
-    // try{
+    console.log(content)
+    try{
       
-    //   const res = await updateTC({id: id, content}).unwrap();
-    //   if(res?.code ==200){
-    //     toast.success(res?.message)
-    //   }
-    //   setTimeout(() => {
-    //     navigate("/dashboard/settings/termcondition")
-    //   }, 1000);
-    // }
-    // catch(error){
-    //    console.log(error);
+      const res = await updateTC(content).unwrap();
+      console.log(res)
+      if(res?.code ==200){
+        toast.success(res?.message)
+
+        setTimeout(() => {
+          navigate("/dashboard/settings/termcondition")
+        }, 1000);
+      }
+    }
+    catch(error){
+       console.log(error);
        
-    //   }
+      }
        
    
   }
     
   return (
     <div className="mt-8 mx-6">
-      {/* <Toaster position="top-center" reverseOrder= {false} /> */}
+      <Toaster position="top-center" reverseOrder= {false} />
         <Link to ='/dashboard/settings/termcondition' className="flex items-center gap-2">
       <FaCircleArrowLeft className=" !text-primaryBg w-8 h-8" />
         <p className=" font-semibold text-[30px]">Edit Term&Condition</p>

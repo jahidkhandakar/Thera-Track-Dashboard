@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
+import { useGetTearmsQuery } from "../../../redux/features/setting/settingSlice";
  
  
-// const decodeHtml = (html) => {
-//   const txt = document.createElement("textarea");
-//   txt.innerHTML = html;
-//   return txt.value;
-// };
+const decodeHtml = (html) => {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
 
 const TermCondition = () => {
   const [content, setContent] = useState("");
-//  const {data: termcondition} = useTearmConditonQuery()
+ const {data: termcondition} = useGetTearmsQuery()
 //  console.log(termcondition); 
   const navigate = useNavigate(); 
 //   console.log(termcondition?.data?.attributes?.docs[0]._id);
   
 
-//   useEffect(() => {
-//     if (termcondition?.data?.attributes?.docs?.length) {
-//       // Decode the HTML content before setting it
-//       const decodedContent = decodeHtml(termcondition?.data?.attributes?.docs[0].content);
-//       setContent(decodedContent);
-//     }
-//   }, [termcondition]);
+  useEffect(() => {
+    if (termcondition?.data?.attributes) {
+      // Decode the HTML content before setting it
+      const decodedContent = decodeHtml(termcondition?.data?.attributes?.termsConditions);
+      setContent(decodedContent);
+    }
+  }, [termcondition]);
 
 
  
@@ -39,8 +40,8 @@ const TermCondition = () => {
       <div className='mt-4'>
         {/* <p dangerouslySetInnerHTML={{ __html: termCondition?.data?.attributes[0]?.content }}> 
         </p> */}
-          {/* <div dangerouslySetInnerHTML={{ __html: content }} /> */}
-          <p>termcomditions</p>
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+          {/* <p>termcomditions</p> */}
        
       </div>
       <div className=" text-right mt-16">

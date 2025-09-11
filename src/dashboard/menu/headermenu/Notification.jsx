@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Card, List, Avatar, Tag, Typography, Space, Badge, Pagination } from 'antd';
 import { BellOutlined, CrownOutlined, DollarOutlined, CalendarOutlined } from '@ant-design/icons';
-import { usePaymentQuery } from '../../../redux/features/otherApi/Payment';
+import { usePaymentQuery } from '../../../redux/features/otherApi/payment';
 
 const { Title, Text } = Typography;
 

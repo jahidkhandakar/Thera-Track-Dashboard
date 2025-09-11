@@ -1,6 +1,8 @@
 import React from 'react';
 import { Table, Tag, Card, Typography, Space } from 'antd';
-import { usePaymentQuery } from '../../../redux/features/otherApi/Payment';
+import { usePaymentQuery } from '../../../redux/features/otherApi/payment';
+// import { usePaymentQuery } from '../../../redux/features/otherApi/payment';
+// import { usePaymentQuery } from './../../../redux/features/otherApi/payment';
 
 const { Title } = Typography;
 

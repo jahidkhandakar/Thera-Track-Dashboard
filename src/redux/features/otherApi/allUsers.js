@@ -12,4 +12,4 @@ const allUsers = apiSlice.injectEndpoints({
     })
 })
 
-export const {useAllUsersQuery} = allUsers;
+export const {useAllUsersQuery} = allUsers; 

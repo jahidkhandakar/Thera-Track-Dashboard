@@ -11,6 +11,8 @@ import Swal from "sweetalert2";
 import { useState } from "react"; 
 import { useGetProfileQuery } from "../redux/features/auth/profile/getProfile";
 import url from "../redux/api/baseUrl";
+import { useChangePasswordMutation } from "../redux/features/auth/changePassword";
+import toast, { Toaster } from "react-hot-toast";
 
 const Header = () => {
 
@@ -54,25 +56,27 @@ const Header = () => {
     });
   };
 
+  const [passwordChange] = useChangePasswordMutation()
   const changePassword = async (values) => {
     const { confirmPassword, ...ChangePassword } = values;
     console.log("Form values: ", ChangePassword);
  
-  // try{
-  //   const res = await passwordChange(ChangePassword).unwrap();
-  //   if(res?.code == 200){
-  //     setIsModalOpen(false)
-  //     toast.success(res?.message)
-  //   }
-  //   setTimeout(() => { 
-  //     navigate('/dashboard/home')
-  //   }, 1000);
+  try{
+    const res = await passwordChange(ChangePassword).unwrap();
+    console.log(res);
+    if(res?.code == 200){
+      setIsModalOpen(false)
+      toast.success(res?.message)
+    }
+    setTimeout(() => { 
+      navigate('/dashboard/home')
+    }, 1000);
     
-  // }catch(error){
-  //   console.log(error.data);
-  //   setError(error?.data?.message)
+  }catch(error){
+    console.log(error.data);
+    setError(error?.data?.message)
     
-  // }
+  }
 };
  
 
@@ -98,7 +102,7 @@ const menu = (
 
   return (
     <div className=" flex justify-between items-center shadow-xl mb-[24px] p-[16px] rounded-md !bg-primaryBg"> 
-    {/* <Toaster /> */}
+     <Toaster />
      <div className="text-white">
       <p className="text-header text-whiteText font-medium">Welcome !</p>
       {/* <h1>{profile?.data?.attributes?.name}</h1> */}

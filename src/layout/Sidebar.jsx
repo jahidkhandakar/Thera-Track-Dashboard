@@ -2,7 +2,7 @@
 
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from '../../public/image/logo.png'
-// import logo from '../../public/image/logo.png'
+import logo1 from '../../public/image/logo1.png'
 import { FaDollarSign, FaSackDollar, FaUsers } from "react-icons/fa6";
  
 import {BiSolidDashboard } from "react-icons/bi";
@@ -48,7 +48,7 @@ const Sidebar = () => {
       <div>
         <div className="p-[10px] grid justify-items-stretch  sm:p-[16px]">
           <img className="h-24 rounded-lg justify-self-center" src={logo} alt="Logo" />
-          <img className=" rounded-lg justify-self-center" src="/public/image/logo1.png" alt="Logo" />
+          <img className=" rounded-lg justify-self-center" src={logo1} alt="Logo" />
          
           {/* <hr className="w-full mt-4 text-[#54D496] hidden sm:block" /> */}
         </div>

@@ -258,14 +258,26 @@ const Feedback = () => {
   const { data: feedbackResponse, isLoading, error } = useGetFeedbackQuery();
   
   // Extract feedback data from API response
-  const feedbackData = feedbackResponse?.data || [];
-  
+  // Handle different possible API response structures
+  const feedbackData = Array.isArray(feedbackResponse?.data)
+    ? feedbackResponse.data
+    : Array.isArray(feedbackResponse?.data?.feedbacks)
+    ? feedbackResponse.data.feedbacks
+    : Array.isArray(feedbackResponse)
+    ? feedbackResponse
+    : [];
+
+  console.log('Feedback Response:', feedbackResponse);
+  console.log('Feedback Data:', feedbackData);
+
   // Filter feedback based on search text
-  const filteredData = feedbackData.filter(item => 
-    item?.userId?.fullName?.toLowerCase().includes(searchText.toLowerCase()) ||
-    item?.userId?.email?.toLowerCase().includes(searchText.toLowerCase()) ||
-    item?.message?.toLowerCase().includes(searchText.toLowerCase())
-  );
+  const filteredData = Array.isArray(feedbackData)
+    ? feedbackData.filter(item =>
+        item?.userId?.fullName?.toLowerCase().includes(searchText.toLowerCase()) ||
+        item?.userId?.email?.toLowerCase().includes(searchText.toLowerCase()) ||
+        item?.message?.toLowerCase().includes(searchText.toLowerCase())
+      )
+    : [];
 
   const columns = [
     {

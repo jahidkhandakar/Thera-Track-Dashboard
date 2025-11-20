@@ -26,6 +26,9 @@ import Feedback from "../dashboard/menu/sidebarMenu/Feedback";
 import Settings from "../dashboard/menu/sidebarMenu/Settings";
 import FeedbackDetails from "../dashboard/menu/sidebarMenu/FeedbackDetails";
 import Earning from "../dashboard/menu/sidebarMenu/Earning";
+import PrivacyPolicyy from "../settings/PrivacyPolicyy";
+import TermsAndConditions from "../settings/TermsCondition";
+import SupportPage from "../settings/Supportt";
 
 
 export const router = createBrowserRouter([
@@ -45,6 +48,18 @@ export const router = createBrowserRouter([
     {
         path: "updatepassword",
         element: <UpdatePassword />
+    },
+     {
+        path: "privacypolicy",
+        element: <PrivacyPolicyy />
+    },
+     {
+        path: "termscondition",
+        element: < TermsAndConditions/>
+    },
+    {
+        path: "support",
+        element: < SupportPage/>
     },
 
     {

@@ -28,7 +28,7 @@ import FeedbackDetails from "../dashboard/menu/sidebarMenu/FeedbackDetails";
 import Earning from "../dashboard/menu/sidebarMenu/Earning";
 import PrivacyPolicy from "../settings/PrivacyPolicyy";
 import TermsAndConditions from "../settings/TermsCondition";
-import SupportPage from "../settings/Supportt";
+import SupportPage from "../settings/Support";
 
 export const router = createBrowserRouter([
   {

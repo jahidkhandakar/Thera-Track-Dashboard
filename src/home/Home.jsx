@@ -1,12 +1,7 @@
-import React from 'react';
-import Login from '../auth/Login';
+import Login from "../auth/Login";
 
 const Home = () => {
-    return (
-        <div>
-            <Login />
-        </div>
-    );
+  return <Login />;
 };
 
 export default Home;

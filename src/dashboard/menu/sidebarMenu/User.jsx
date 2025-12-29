@@ -1,18 +1,16 @@
-import { Button, DatePicker, Input, Modal, Space, Table } from "antd";
+import { Button, Modal, Space, Table } from "antd";
 import { BsInfoCircle } from "react-icons/bs";
 import { useState } from "react";
 import { CloseOutlined } from "@ant-design/icons";
-import styles from './style.module.css';
+import styles from "./style.module.css";
 import { useAllUsersQuery } from "../../../redux/features/otherApi/allUsers";
-
-const { Search } = Input;
 
 const User = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
   const { data: users, isLoading, error } = useAllUsersQuery();
-  console.log(users)
+  console.log(users);
 
   // Safe access to user list
   const dataSource = users?.data?.attributes || [];
@@ -25,8 +23,8 @@ const User = () => {
     },
     {
       title: "User Name",
-      dataIndex: "firstName",
-      key: "firstName",
+      dataIndex: "fullName",
+      key: "fullName",
       render: (text) => <p className="font-medium">{text || "N/A"}</p>,
     },
     {
@@ -67,15 +65,6 @@ const User = () => {
     setIsModalOpen(true);
   };
 
-  const onSearch = (value) => {
-    console.log("Search value:", value);
-    // Implement search/filter logic here if needed
-  };
-
-  const onChange = (date, dateString) => {
-    console.log("Selected Date:", date, dateString);
-  };
-
   if (isLoading) return <p>Loading users...</p>;
   if (error) return <p>Failed to load users.</p>;
 
@@ -83,31 +72,26 @@ const User = () => {
     <div>
       <div className="rounded-t-lg mt-[24px]">
         <div className="flex py-[22px] justify-between items-center">
-        <p className="text-header">Users</p>
-
-          {/* <Space direction="vertical">
-            <DatePicker onChange={onChange} />
-          </Space>
-          <Search
-            style={{ width: "200px", marginLeft: "4px" }}
-            placeholder="input search text"
-            onSearch={onSearch}
-            enterButton
-          /> */}
+          <p className="text-header">Users</p>
         </div>
 
         <Table
           pagination={{
             total: dataSource.length,
-            showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+            showTotal: (total, range) =>
+              `${range[0]}-${range[1]} of ${total} items`,
             defaultPageSize: 10,
             showSizeChanger: false,
             itemRender: (current, type, originalElement) => {
               if (type === "prev") {
-                return <Button className={styles.paginationButton}>Back</Button>;
+                return (
+                  <Button className={styles.paginationButton}>Back</Button>
+                );
               }
               if (type === "next") {
-                return <Button className={styles.paginationButton}>Next</Button>;
+                return (
+                  <Button className={styles.paginationButton}>Next</Button>
+                );
               }
               return originalElement;
             },
@@ -161,7 +145,11 @@ const User = () => {
             </div>
             <div className="flex justify-between border-b py-[16px]">
               <p>Date:</p>
-              <p>{selectedUser?.createdAt ? selectedUser.createdAt.split("T")[0] : "N/A"}</p>
+              <p>
+                {selectedUser?.createdAt
+                  ? selectedUser.createdAt.split("T")[0]
+                  : "N/A"}
+              </p>
             </div>
             <div className="flex justify-between items-center pt-[16px]">
               <p>Address:</p>

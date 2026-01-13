@@ -2,7 +2,7 @@
 import { Card } from 'antd';
 import PublicLayout from '../layout/PublicLayout';
 
-const PrivacyPolicy = () => {
+const PrivacyPolicyy = () => {
   return (
     <PublicLayout>
       <div className="p-6 max-w-6xl mx-auto">
@@ -106,4 +106,4 @@ const PrivacyPolicy = () => {
   );
 };
 
-export default PrivacyPolicy;
+export default PrivacyPolicyy;

@@ -94,124 +94,88 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
-           
-          <div className="flex flex-col justify-center items-center text-center">
-            {/* <p className="text-lg md:text-xl">{profile?.data?.attributes?.role}</p> */}
-            <p className="text-lg md:text-xl">{admin?.data?.attributes.role}</p>
-            <h1 className="text-2xl md:text-3xl font-medium">{admin?.data?.attributes.fullName}</h1>
-          </div>
-        </div>
-
-        <div className="lg:w-2/3 mt-8 lg:mt-0 px-5">
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="flex-1">
-                <label htmlFor="name" className="text-lg md:text-xl font-medium">
-                  Name
-                </label>
-                <Input
-                  placeholder="First name"
-                  // value={profile?.data?.attributes?.name}
-                  value={admin?.data?.attributes.fullName}
-                  className="p-4 cursor-pointer text-lg md:text-xl bg-[#ebf5f5] text-black rounded w-full mt-3 outline-none focus:bg-[#69C0BE] hover:bg-[#e1f1f1]"
-                  type="text"
-                  readOnly
-                />
-=======
           </Card>
         </div>
 
-        {/* Personal Information Card */}
+        {/* Contact Information Card */}
         <div className="lg:col-span-2">
           <Card 
             className="shadow-lg rounded-xl border-0"
             title={
               <Title level={4} className="text-lg font-semibold text-gray-800">
-                Personal Information
+                Contact Information
               </Title>
             }
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div>
-                  <Text className="text-gray-600 block mb-1">Full Name</Text>
-                  <div className="flex items-center">
-                    <FaUser className="text-gray-400 mr-3" />
-                    <Input
-                      value={`${userData?.firstName || ''} ${userData?.lastName || ''}`}
-                      className="bg-gray-50 border-0 rounded-lg p-3"
-                      readOnly
-                    />
-                  </div>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-1">
+                  <label htmlFor="fullName" className="text-base font-medium text-gray-700 block mb-2">
+                    Full Name
+                  </label>
+                  <Input
+                    id="fullName"
+                    prefix={<FaUser className="text-gray-400" />}
+                    value={userData?.fullName || `${userData?.firstName || ''} ${userData?.lastName || ''}`.trim()}
+                    className="p-3 text-base"
+                    readOnly
+                  />
                 </div>
-
-                <div>
-                  <Text className="text-gray-600 block mb-1">Email Address</Text>
-                  <div className="flex items-center">
-                    <FaEnvelope className="text-gray-400 mr-3" />
-                    <Input
-                      value={userData?.email || ''}
-                      className="bg-gray-50 border-0 rounded-lg p-3"
-                      readOnly
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <Text className="text-gray-600 block mb-1">Phone Number</Text>
-                  <div className="flex items-center">
-                    <FaPhone className="text-gray-400 mr-3" />
-                    <Input
-                      value={userData?.phoneNumber || ''}
-                      className="bg-gray-50 border-0 rounded-lg p-3"
-                      readOnly
-                    />
-                  </div>
+                <div className="flex-1">
+                  <label htmlFor="email" className="text-base font-medium text-gray-700 block mb-2">
+                    Email Address
+                  </label>
+                  <Input
+                    id="email"
+                    prefix={<FaEnvelope className="text-gray-400" />}
+                    value={userData?.email || 'Not provided'}
+                    className="p-3 text-base"
+                    readOnly
+                  />
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <div>
-                  <Text className="text-gray-600 block mb-1">Position</Text>
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-1">
+                  <label htmlFor="phone" className="text-base font-medium text-gray-700 block mb-2">
+                    Phone Number
+                  </label>
                   <Input
-                    value={userData?.role || ''}
-                    className="bg-gray-50 border-0 rounded-lg p-3"
+                    id="phone"
+                    prefix={<FaPhone className="text-gray-400" />}
+                    value={userData?.phone || 'Not provided'}
+                    className="p-3 text-base"
                     readOnly
                   />
                 </div>
-
-                <div>
-                  <Text className="text-gray-600 block mb-1">Department</Text>
+                <div className="flex-1">
+                  <label htmlFor="location" className="text-base font-medium text-gray-700 block mb-2">
+                    Location
+                  </label>
                   <Input
-                    value={userData?.department || 'Not specified'}
-                    className="bg-gray-50 border-0 rounded-lg p-3"
-                    readOnly
-                  />
-                </div>
-
-                <div>
-                  <Text className="text-gray-600 block mb-1">Location</Text>
-                  <Input
+                    id="location"
+                    prefix={<FaMapMarkerAlt className="text-gray-400" />}
                     value={userData?.location || 'Not specified'}
-                    className="bg-gray-50 border-0 rounded-lg p-3"
+                    className="p-3 text-base"
                     readOnly
                   />
                 </div>
->>>>>>> f5d0235d4778e13792efc2d1e931734a2b766d8e
               </div>
-            </div>
 
-            <Divider className="my-6" />
+              <Divider className="my-2" />
 
-            <div>
-              <Text className="text-gray-600 block mb-1">Bio</Text>
-              <Input.TextArea
-                value={userData?.bio || 'No bio provided'}
-                className="bg-gray-50 border-0 rounded-lg p-3"
-                rows={4}
-                readOnly
-              />
+              <div>
+                <label htmlFor="bio" className="text-base font-medium text-gray-700 block mb-2">
+                  Bio
+                </label>
+                <Input.TextArea
+                  id="bio"
+                  value={userData?.bio || 'No bio provided'}
+                  className="bg-gray-50 border-gray-200 rounded-lg p-3"
+                  rows={4}
+                  readOnly
+                />
+              </div>
             </div>
           </Card>
         </div>
@@ -227,12 +191,12 @@ const Profile = () => {
             </Title>
           }
         >
-          <Space direction="vertical" size="middle">
+          <Space direction="vertical" size="middle" className="w-full">
             <div className="flex justify-between items-center">
               <Text>Password</Text>
               <Button 
                 type="link" 
-                onClick={() => {/* Handle password change */}}
+                onClick={() => navigate('/dashboard/change-password')}
                 className="text-blue-600 hover:text-blue-800"
               >
                 Change Password
@@ -258,7 +222,7 @@ const Profile = () => {
             </Title>
           }
         >
-          <Space direction="vertical" size="middle">
+          <Space direction="vertical" size="middle" className="w-full">
             <div className="flex justify-between items-center">
               <Text>Profile Visibility</Text>
               <Text className="text-gray-600">Public</Text>

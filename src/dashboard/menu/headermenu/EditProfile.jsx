@@ -35,18 +35,8 @@ const EditProfile = () => {
 
       // Update form fields dynamically
       form.setFieldsValue({
-<<<<<<< HEAD
         name: profile?.data?.attributes.fullName || "",
         email: profile?.data?.attributes.email || "",
-=======
-        firstName: userData?.firstName || "",
-        lastName: userData?.lastName || "",
-        email: userData?.email || "",
-        role: userData?.role || "",
-        department: userData?.department || "",
-        location: userData?.location || "",
-        bio: userData?.bio || ""
->>>>>>> f5d0235d4778e13792efc2d1e931734a2b766d8e
       });
     }
   }, [profile, form]);
@@ -62,16 +52,7 @@ const EditProfile = () => {
 
   const handleUpdateProfile = async (values) => {
     const formData = new FormData();
-<<<<<<< HEAD
     formData.append("fullName", values?.name);
-=======
-    formData.append("firstName", values.firstName);
-    formData.append("lastName", values.lastName);
-    formData.append("role", values.role);
-    formData.append("department", values.department);
-    formData.append("location", values.location);
-    formData.append("bio", values.bio);
->>>>>>> f5d0235d4778e13792efc2d1e931734a2b766d8e
     formData.append("phoneNumber", phoneNumber);
     
     if (fileList[0]?.originFileObj) {

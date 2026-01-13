@@ -1,15 +1,13 @@
  
 
-function App() {
- 
+import { Outlet } from 'react-router-dom';
 
+function App() {
   return (
-    <div>
-      <h1 className=" font-bold underline">
-      Hello worldddddddddd!
-    </h1>
+    <div className="App">
+      <Outlet />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

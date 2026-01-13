@@ -1,55 +1,27 @@
- 
-
-import { NavLink, useNavigate } from "react-router-dom";
-import logo from '../../public/image/logo.png'
-import logo1 from '../../public/image/logo1.png'
+import { NavLink } from "react-router-dom";
+import logo from "../../public/image/logo.png";
+import logo1 from "../../public/image/logo1.png";
 import { FaDollarSign, FaSackDollar, FaUsers } from "react-icons/fa6";
- 
-import {BiSolidDashboard } from "react-icons/bi";
- 
-import { RiFeedbackLine } from "react-icons/ri";
- 
-import Swal from "sweetalert2";
+import { BiSolidDashboard } from "react-icons/bi";
 import { MdOutlineRateReview } from "react-icons/md";
 import { CiSettings } from "react-icons/ci";
- 
 
 const Sidebar = () => {
-
-  const navigate = useNavigate();
-
-  const handleLogOut = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to log out from here!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, log out!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-
-        Swal.fire({
-          title: "Logged Out!",
-          text: "User has been logged out successfully.",
-          icon: "success",
-          timer: 2000
-        });
-        navigate('/');
-      }
-    });
-  };
-
   return (
     <div className="lg:w-[250px] xl:w-[300px] md:w-[200px] sm:w-[120px] w-[120px] flex flex-col justify-between bg-primaryBg h-full min-h-screen rounded-md">
       <div>
         <div className="p-[10px] grid justify-items-stretch  sm:p-[16px]">
-          <img className="h-24 rounded-lg justify-self-center" src={logo} alt="Logo" />
-          <img className=" rounded-lg justify-self-center" src={logo1} alt="Logo" />
-         
+          <img
+            className="h-24 rounded-lg justify-self-center"
+            src={logo}
+            alt="Logo"
+          />
+          <img
+            className=" rounded-lg justify-self-center"
+            src={logo1}
+            alt="Logo"
+          />
+
           {/* <hr className="w-full mt-4 text-[#54D496] hidden sm:block" /> */}
         </div>
         <div className="ml-5 mt-8">
@@ -62,7 +34,7 @@ const Sidebar = () => {
                   : "flex text-[white] cursor-pointer items-center text-[18px] font-medium p-[10px] m-[6px] rounded-lg"
               }
             >
-              <BiSolidDashboard className="h-7 w-7 lg:h-5 lg:w-5"/>
+              <BiSolidDashboard className="h-7 w-7 lg:h-5 lg:w-5" />
               <span className="hidden ml-2 sm:block">Dashboard</span>
             </NavLink>
 
@@ -78,9 +50,6 @@ const Sidebar = () => {
               <span className="hidden ml-2 sm:block">Users</span>
             </NavLink>
 
-
-      
-          
             <NavLink
               to="subscription"
               className={({ isActive }) =>
@@ -89,11 +58,10 @@ const Sidebar = () => {
                   : "flex text-[white] p-[10px] m-[6px] cursor-pointer items-center text-[18px] font-medium   rounded-lg"
               }
             >
-              <FaDollarSign className="h-7 w-7 lg:h-5 lg:w-5"/>
+              <FaDollarSign className="h-7 w-7 lg:h-5 lg:w-5" />
               <span className="hidden ml-2 sm:block">Subscription</span>
             </NavLink>
 
-            
             <NavLink
               to="feedback"
               className={({ isActive }) =>
@@ -102,7 +70,7 @@ const Sidebar = () => {
                   : "flex text-[white] cursor-pointer items-center text-[18px] font-medium p-[10px]  m-[6px] rounded-lg"
               }
             >
-              <MdOutlineRateReview className="h-7 w-7 lg:h-5 lg:w-5"/>
+              <MdOutlineRateReview className="h-7 w-7 lg:h-5 lg:w-5" />
               <span className="hidden ml-2 sm:block">Feed Back</span>
             </NavLink>
 
@@ -114,7 +82,7 @@ const Sidebar = () => {
                   : "flex text-[white] cursor-pointer items-center text-[18px] font-medium p-[10px]  m-[6px] rounded-lg"
               }
             >
-              <FaSackDollar className="h-7 w-7 lg:h-5 lg:w-5"/>
+              <FaSackDollar className="h-7 w-7 lg:h-5 lg:w-5" />
               <span className="hidden ml-2 sm:block">Earning</span>
             </NavLink>
 

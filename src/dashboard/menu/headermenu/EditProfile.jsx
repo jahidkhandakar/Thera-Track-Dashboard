@@ -47,7 +47,7 @@ const EditProfile = () => {
 
       // Update form fields dynamically
       form.setFieldsValue({
-        name: profile?.data?.attributes.firstName || "",
+        name: profile?.data?.attributes.fullName || "",
         email: profile?.data?.attributes.email || "",
       });
     }
@@ -70,7 +70,7 @@ const EditProfile = () => {
     console.log(phoneNumber)
     console.log(fileList)
     const formData = new FormData();
-    formData.append("firstName", values?.name);
+    formData.append("fullName", values?.name);
     formData.append("phoneNumber", phoneNumber);
     if (fileList[0]?.originFileObj) {
       formData.append("profileImage", fileList[0]?.originFileObj);

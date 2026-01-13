@@ -37,7 +37,7 @@ const [adminLogin] = useAdminLoginMutation()
         
         try{
             const res = await adminLogin(values).unwrap();
-            // console.log(res);
+            console.log(res);
             if(res?.code == 200){
                 toast.success(res?.message)
                  localStorage.setItem('user',JSON.stringify(res?.data?.attributes))

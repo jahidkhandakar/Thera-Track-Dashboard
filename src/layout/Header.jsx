@@ -106,7 +106,7 @@ const menu = (
      <div className="text-white">
       <p className="text-header text-whiteText font-medium">Welcome !</p>
       {/* <h1>{profile?.data?.attributes?.name}</h1> */}
-      <h1 className="text-whiteText">{admin?.data?.attributes.firstName}</h1>
+      <h1 className="text-[#dcddad] text-[20px] font-semibold">{admin?.data?.attributes.fullName}</h1>
      </div>
 
       <div className="flex gap-5">
@@ -134,7 +134,7 @@ const menu = (
     <a className="flex items-center text-white cursor-pointer text-whiteText">
       <Avatar src={url + admin?.data?.attributes.profileImage} className="mr-2 h-[52px] w-[52px]" />
       {/* <Avatar src={url + profile?.data?.attributes?.image} className="mr-2 h-[52px] w-[52px]" /> */}
-      {admin?.data?.attributes.firstName} <DownOutlined className="ml-1" />
+      {admin?.data?.attributes.fullName} <DownOutlined className="ml-1" />
     </a>
   </Dropdown>
         </div>

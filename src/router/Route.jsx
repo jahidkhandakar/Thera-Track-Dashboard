@@ -29,6 +29,8 @@ import Earning from "../dashboard/menu/sidebarMenu/Earning";
 import PrivacyPolicyy from "../settings/PrivacyPolicyy";
 import TermsAndConditions from "../settings/TermsCondition";
 import SupportPage from "../settings/Supportt";
+import EULADocument from "../settings/EULADocument";
+import PrivateRoute from "./PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -61,10 +63,14 @@ export const router = createBrowserRouter([
         path: "support",
         element: < SupportPage/>
     },
+    {
+        path: "documents",
+        element: < EULADocument/>
+    },
 
     {
         path: "dashboard",
-        element: <Main></Main>,
+        element: <PrivateRoute><Main></Main></PrivateRoute>,
         children: [
             {
                 path: "home",

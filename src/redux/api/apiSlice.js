@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.threatrack.net/api/v1",
+      baseUrl: `${import.meta.env.VITE_API_URL}/api/v1`,
     // baseUrl: "https://rakib8080.sobhoy.com/api/v1",
     prepareHeaders: (headers, { getState }) => {
       const token = localStorage.getItem("token");

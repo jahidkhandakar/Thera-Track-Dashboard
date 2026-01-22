@@ -5,39 +5,42 @@ import OTPInput from 'react-otp-input';
 
 import { Button } from 'antd';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
+import toast, { Toaster } from 'react-hot-toast';
+import { useVerifyEmailMutation } from '../redux/features/auth/verifyEmail';
  
  
 
 const VerifyOtp = () => {
-    // const location = useLocation()
-    // const queryParams = new URLSearchParams(location.search)
-    // const [error, setError] = useState('')
-    // const email = queryParams.get('email')
+    const location = useLocation()
+    const queryParams = new URLSearchParams(location.search)
+    const [error, setError] = useState('')
+    const email = queryParams.get('email')
     const [otp, setOtp] = useState('');
      const navigate = useNavigate()
-//  const [verifyOtp, {isLoading}] = useVerifyEmailMutation()
+ const [verifyOtp, {isLoading}] = useVerifyEmailMutation()
 
-    //  const verifyData = {
-    //     oneTimeCode : otp,
-    //        email: email 
-    //  }
+     const verifyData = {
+        oneTimeCode : otp,
+           email: email 
+     }
 
     const sendOtp = async() => { 
         console.log(otp);
-        navigate(`/updatepassword`)
-        // try{
-        //     const res = await verifyOtp(verifyData).unwrap()
-        //     if(res?.code == 200 ){
-        //         toast.success(res?.message)
-        //         setTimeout(() => {
-        //             navigate(`/updatepassword?email=${email}`)
-        //         }, 1000)
-        //     }
-        // }catch(error){
-        //     console.log(error);
-        //     setError(error?.data?.message)
+   
+        try{
+            const res = await verifyOtp(verifyData).unwrap()
+            console.log(res)
+            if(res?.code == 200 ){
+                toast.success(res?.message)
+                setTimeout(() => {
+                    navigate(`/updatepassword?email=${email}`)
+                }, 1000)
+            }
+        }catch(error){
+            console.log(error);
+            setError(error?.data?.message)
             
-        // }
+        }
         
 
     
@@ -45,7 +48,7 @@ const VerifyOtp = () => {
 
     return (
         <div className='w-full max-w-[1296px] shadow-xl mt-12 sm:mt-24 mx-auto rounded-[8px] p-4 sm:p-10'>
-            {/* <Toaster position='top-center' reverseOrder = {false} /> */}
+            <Toaster position='top-center' reverseOrder = {false} />
             
             <div className="flex flex-col sm:flex-row md:justify-around justify-between items-center gap-4 sm:gap-10">
                 <div className='w-full sm:w-[480px] flex justify-center sm:justify-start'>
@@ -91,9 +94,10 @@ const VerifyOtp = () => {
                             <small className='text-[14px] sm:text-[16px] font-medium text-[#00BF63] cursor-pointer'>Resend</small>
                         </div>
                     </div>
-                        {/* <p className="text-red-500 font-medium">{error}</p> */}
+                        <p className="text-red-500 font-medium">{error}</p>
                      
                         <Button  onClick={sendOtp} 
+                        isLoading = {isLoading}
                          className="block w-full h-[52px] px-2 py-4 mt-2 !text-[#FFFF] !bg-primaryBg">
                             Verify
                         </Button>

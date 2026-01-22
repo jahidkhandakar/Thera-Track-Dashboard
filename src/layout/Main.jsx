@@ -8,7 +8,7 @@ import Header from "./Header";
 const Main = () => {
     return (
         <div>
-             <div className="flex p-4 min-h-screen">
+   <div className="flex p-4 min-h-screen">
       <div className="fixed z-30 w-[200px] left-3"> 
        <Sidebar />
       </div> 

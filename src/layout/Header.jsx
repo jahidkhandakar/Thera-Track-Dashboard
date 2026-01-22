@@ -5,9 +5,10 @@ import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined } from "@ant-design/icon
 import { useState } from "react";
 import { useGetProfileQuery } from "../redux/features/auth/profile/getProfile";
 import url from "../redux/api/baseUrl";
-import { useChangePasswordMutation } from "../redux/features/auth/changePassword";
+ 
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
+import { useChangePasswordMutation } from "../redux/features/auth/changePassword";
 
 const Header = ({ isSidebarOpen, toggleSidebar }) => {
   const navigate = useNavigate();
@@ -137,7 +138,7 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
             onFinish={changePassword}
           >
             <Form.Item
-              name="oldPassword"
+              name="currentPassword"
               label="Old Password"
               rules={[{ required: true, message: "Please enter your old password!" }]}
             >

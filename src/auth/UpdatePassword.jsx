@@ -8,6 +8,7 @@ import { MdOutlineArrowBackIos } from 'react-icons/md';
  
  
 import toast, { Toaster } from 'react-hot-toast';
+import { useResetPasswordMutation } from '../redux/features/auth/resetPassword';
 
 const UpdatePassword = () => {
   const [form] = Form.useForm();
@@ -15,9 +16,9 @@ const UpdatePassword = () => {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
-//   const location = useLocation();
-//  const queryParams = new URLSearchParams(location.search)
-//  const email = queryParams.get('email')
+  const location = useLocation();
+ const queryParams = new URLSearchParams(location.search)
+ const email = queryParams.get('email')
 
  
   const handlePasswordVisibility = () => setPasswordVisible(!passwordVisible);
@@ -31,30 +32,33 @@ const UpdatePassword = () => {
     return Promise.resolve();
   };
 
- 
+ const [reset , {isLoading}] = useResetPasswordMutation();
   
 
   const resetPassword = async (values) => {
-    // const { password } = values;
-    // const resetData = {
-    //   password,
-    //   email
-    // }
+    const { password } = values;
+    const resetData = {
+      newPassword:password,
+      confirmPassword: password,
+      email
+    }
+
  console.log(values);
- navigate('/')
+ 
    
-    // try{
-    //   const res = await reset(resetData).unwrap()
-    //   if(res?.code == 200){
-    //     toast.success(res?.message)
-    //     setTimeout(() => {
-    //       navigate('/')
-    //     }, 1000);
-    //   }
-    // }catch(error){
-    //   console.log(error);
+    try{
+      const res = await reset(resetData).unwrap()
+      console.log(res)
+      if(res?.code == 200){
+        toast.success(res?.message)
+        setTimeout(() => {
+          navigate('/')
+        }, 1000);
+      }
+    }catch(error){
+      console.log(error);
       
-    // }
+    }
 
 
     };
@@ -115,7 +119,7 @@ const UpdatePassword = () => {
               />
             </Form.Item>
             <Button 
-            // loading={isLoading}
+            loading={isLoading}
               type="primary"
               htmlType="submit"
              className="block w-full h-[52px] px-2 py-4 mt-2 !text-white !bg-primaryBg"

@@ -15,7 +15,7 @@ const Login = () => {
     const navigate = useNavigate()
    
  
-const [adminLogin] = useAdminLoginMutation()
+const [adminLogin ,{isLoading}] = useAdminLoginMutation()
     const handleCheckboxChange = (e) => {
         setIsChecked(e.target.checked);
         if (e.target.checked) {
@@ -126,6 +126,7 @@ const [adminLogin] = useAdminLoginMutation()
                         <Form.Item>
                             <p className='text-red-500 font-semibold'>{error}</p>
                             <Button
+                                loading = {isLoading}
                                 htmlType="submit"
                                 className="block w-full h-[52px] px-2 py-4 mt-2 !text-[#FFF] !bg-primaryBg"
                             >

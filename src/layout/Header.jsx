@@ -88,13 +88,14 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
   );
 
   return (
-    <div className=" flex justify-between items-center shadow-xl mb-[24px] p-[16px] rounded-md !bg-primaryBg"> 
+    <div className=" flex justify-between items-center shadow-xl mb-[24px] p-[16px] rounded-md !bg-[#2196F3]"> 
      <Toaster />
      <div className="text-white">
       <p className="text-header text-whiteText font-medium">Welcome !</p>
-      {/* <h1>{profile?.data?.attributes?.name}</h1> */}
-      <h1 className="text-[#dcddad] text-[20px] font-semibold">{admin?.data?.attributes.fullName}</h1>
-     </div>
+      
+      <h1 className="text-[#dcddad] text-[20px] font-semibold">{admin?.data?.attributes.fullName}</h1>  
+      </div>   
+  
 
       <div className="flex items-center gap-5">
         {/* Notifications */}
@@ -105,16 +106,16 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
           <Badge style={{ backgroundColor: "red", marginTop: '10px', marginRight: '5px' }}>
             <BellOutlined
               style={{ cursor: "pointer" }}
-              className={`bg-primary w-[52px] h-[52px] text-[#Ffffffff] border-2 border-[#e7e0e0] rounded-full p-2`}
+              className={`bg-primary text-3xl text-[#Ffffffff] p-2 border border-[#e7e0e0] rounded`}
             />
           </Badge>
         </div>
         
         {/* User dropdown */}
-        <div>
+        <div className="border p-1 rounded">
         <Dropdown className="px-2" overlay={menu} trigger={['click']} onVisibleChange={handleMenuVisibility}>
     <a className="flex items-center text-white cursor-pointer text-whiteText">
-      <Avatar src={url + admin?.data?.attributes.profileImage} className="mr-2 h-[52px] w-[52px]" />
+      <Avatar src={url + admin?.data?.attributes.profileImage} className="mr-2 h-[42px] w-[42px]" />
       {/* <Avatar src={url + profile?.data?.attributes?.image} className="mr-2 h-[52px] w-[52px]" /> */}
       {admin?.data?.attributes.fullName} <DownOutlined className="ml-1" />
     </a>
@@ -218,7 +219,7 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
               <Button
                 type="primary"
                 htmlType="submit"
-                className="w-full h-10 py-3 !bg-[#69C0BE] !text-black text-[16px] rounded-md"
+                className="w-full h-10 py-3 !bg-[#2196F3] !text-white text-[16px] rounded-md"
               >
                 Change Password
               </Button>

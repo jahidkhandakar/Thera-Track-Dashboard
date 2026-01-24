@@ -10,7 +10,7 @@ const decodeHtml = (html) => {
   return txt.value;
 };
 
-const TermCondition = () => {
+const TermConditions = () => {
   const [content, setContent] = useState("");
  const {data: termcondition} = useGetTearmsQuery()
 //  console.log(termcondition); 
@@ -45,10 +45,12 @@ const TermCondition = () => {
        
       </div>
       <div className=" text-right mt-16">
-        <button onClick={() => navigate(`/dashboard/settings/edittermcondition`)}  className=" h-[44px] w-[260px] !text-white !bg-primaryBg rounded-[8px]">Edit</button>
+        <button onClick={() => navigate(`/dashboard/settings/edittermcondition`)} 
+          className="h-[44px] w-[260px] !text-white !bg-[#8FCAF8] rounded-[8px]">
+          Edit</button>
       </div>
     </div>
   );
 };
 
-export default TermCondition;
+export default TermConditions;

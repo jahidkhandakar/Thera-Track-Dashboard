@@ -19,7 +19,7 @@ const Subscription = () => {
         <h1 className='text-header'>Subscriptions</h1>
         <button
           onClick={() => navigate('/dashboard/subscription/addsubscription')}
-          className='rounded px-4 py-2 bg-[#2196F3] flex items-center gap-2'
+          className='rounded px-4 py-2 bg-[#2196F3] flex text-white items-center gap-2'
         >
           <span><FaPlus /></span> Add Subscription
         </button>
@@ -27,7 +27,7 @@ const Subscription = () => {
 
       {/* Render subscriptions dynamically */}
       {attributes.length === 0 && <p>No subscriptions available</p>}
-      <div className='grid md:grid-cols-4 grid-cols-1'>
+      <div className='grid md:grid-cols-3 grid-cols-1'>
 
       {attributes.map((item) => (
         <div
@@ -37,21 +37,21 @@ const Subscription = () => {
           {/* Subscription Header */}
           <div className="flex items-center mb-4">
             <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
-              <span>👑</span>
+             <img src="/public/image/sub.png" alt="" />
             </div>
-            <h2 className="ml-3 text-lg font-semibold">{item.duration}</h2>
+            <h2 className="ml-3 text-lg text-[#6AB9F7] font-semibold">{item.duration}</h2>
           </div>
 
           {/* Features */}
           <div className="mb-4">
-            <p className="text-sm text-gray-600">✔ {item.advantage1}</p>
-            <p className="text-sm text-gray-600">✔ {item.advantage2}</p>
-            <p className="text-sm text-gray-600">✔ {item.advantage3}</p>
+            <p className="text-sm text-[#6AB9F7] text-gray-600">✔ {item.advantage1}</p>
+            <p className="text-sm text-[#6AB9F7] text-gray-600">✔ {item.advantage2}</p>
+            <p className="text-sm text-[#6AB9F7] text-gray-600">✔ {item.advantage3}</p>
           </div>
 
           {/* Price and Edit Button */}
           <div className="flex items-center justify-between">
-            <p className="text-xl font-semibold text-blue-600">${item.price.toFixed(2)} / Monthly</p>
+            <p className="text-xl font-semibold text-[#6AB9F7]">${item.price.toFixed(2)} / <span className='text-sm'>Monthly</span></p>
             <button
               // onClick={() => navigate(`/dashboard/subscription/editsubscription/${item._id}`)}
               onClick={() => navigate(`/dashboard/subscription/editsubscription/${item?._id}`)}

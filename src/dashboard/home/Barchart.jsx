@@ -15,7 +15,7 @@ const EarningsChart = () => {
 
   const currentYear = new Date().getFullYear();
   return (
-    <Card className="w-full">
+    <Card className="w-full mt-4">
       <div className="mb-2 text-right">
         <span className="text-sm text-gray-500">{currentYear}</span>
       </div>

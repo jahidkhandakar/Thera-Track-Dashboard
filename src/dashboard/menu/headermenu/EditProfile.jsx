@@ -503,28 +503,7 @@ const EditProfile = () => {
                   </div>
                 </Card>
 
-                <Card 
-                  className="shadow-md rounded-xl border-0 mt-6"
-                  title={
-                    <h2 className="text-lg font-semibold text-gray-800">Account Security</h2>
-                  }
-                >
-                  <Space direction="vertical" size="middle" className="w-full">
-                    <Button 
-                      type="link" 
-                      onClick={() => navigate('/dashboard/changepassword')}
-                      className="text-left p-0 text-blue-600 hover:text-blue-800"
-                    >
-                      Change Password
-                    </Button>
-                    <Button 
-                      type="link" 
-                      className="text-left p-0 text-blue-600 hover:text-blue-800"
-                    >
-                      Two-Factor Authentication
-                    </Button>
-                  </Space>
-                </Card>
+               
               </div>
 
               {/* Personal Information Section */}
@@ -572,33 +551,9 @@ const EditProfile = () => {
                       />
                     </Form.Item>
 
-                    <Form.Item
-                      label="Phone Number"
-                    >
-                      <PhoneInput
-                        placeholder="Enter phone number"
-                        international
-                        value={phoneNumber}
-                        onChange={setPhoneNumber}
-                        className="p-3 rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                        style={{ 
-                          height: "48px", 
-                          border: "1px solid #d9d9d9",
-                          borderRadius: "6px"
-                        }}
-                      />
-                    </Form.Item>
+            
 
-                    <Form.Item
-                      label="Bio"
-                      name="bio"
-                    >
-                      <Input.TextArea
-                        placeholder="Tell us about yourself"
-                        rows={4}
-                        className="p-3 rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                      />
-                    </Form.Item>
+                   
                   </div>
 
                   <div className="flex justify-end gap-4 mt-8">

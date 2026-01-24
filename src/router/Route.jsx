@@ -11,7 +11,7 @@ import EditProfiel from "../dashboard/menu/headermenu/EditProfile";
 
 import DashboardPrivacyPolicy from "../dashboard/menu/privacypolicy/PrivacyPolicy";
 import EditPrivacy from "../dashboard/menu/privacypolicy/EditPrivacy";
-import DashboardTermCondition from "../dashboard/menu/termsCondition/TermCondition";
+ 
 import EditTermCondition from "../dashboard/menu/termsCondition/EditTermCondition";
 
 import ErrorPage from "./ErrorPage";
@@ -33,6 +33,7 @@ import SupportPage from "../settings/Support";
 import EULADocument from "../settings/EULADocument";
 import PrivateRoute from "./PrivateRoute";
 import PrivacyPolicy from "../dashboard/menu/privacypolicy/PrivacyPolicy";
+import TermConditions from "../dashboard/menu/termsCondition/TermConditions";
 
 
 export const router = createBrowserRouter([
@@ -121,7 +122,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:"settings/termcondition",
-                element:<TermCondition />
+                element:<TermConditions />
             },
             {
                 path: "settings/edittermcondition",

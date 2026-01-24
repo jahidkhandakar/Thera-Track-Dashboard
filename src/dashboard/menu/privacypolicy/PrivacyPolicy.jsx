@@ -40,7 +40,7 @@ const PrivacyPolicy = () => {
         <div className="text-right mt-16"> 
           <button 
             onClick={() => navigate(`/dashboard/settings/editprivacypolicy`)} 
-            className="h-[44px] w-[260px] !text-white !bg-primaryBg rounded-[8px]"
+            className="h-[44px] w-[260px] !text-white !bg-[#8FCAF8] rounded-[8px]"
           >
             Edit
           </button>

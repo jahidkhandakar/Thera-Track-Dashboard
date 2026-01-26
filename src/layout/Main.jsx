@@ -8,13 +8,13 @@ import Header from "./Header";
 const Main = () => {
     return (
         <div>
-             <div className="flex p-4 min-h-screen">
+   <div className="flex p-4 min-h-screen">
       <div className="fixed z-30 w-[200px] left-3"> 
        <Sidebar />
       </div> 
       <div className="flex flex-col flex-1 overflow-hidden">
         
-        <div className=" fixed xl:ml-[310px] lg:ml-[250px] md:ml-[200px] sm:ml-[120px] ml-[120px] w-[75%] mx-auto z-30  lg:w-[calc(98%-300px)]">
+        <div className=" fixed xl:ml-[310px] lg:ml-[200px] md:ml-[200px] sm:ml-[120px] ml-[120px] w-[75%] mx-auto z-30  lg:w-[calc(98%-300px)]">
          <Header />
         </div>
 

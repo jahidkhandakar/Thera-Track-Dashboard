@@ -42,7 +42,7 @@ const About = () => {
  
       </div>
       <div className=" text-right mt-16">
-        <Button  onClick={() => navigate(`/dashboard/settings/editabout`)}  className=" h-[44px] w-[260px] !text-white !bg-primaryBg rounded-[8px]">Edit</Button>
+        <Button  onClick={() => navigate(`/dashboard/settings/editabout`)}  className="h-[44px] w-[260px] !text-white !bg-[#8FCAF8] rounded-[8px]">Edit</Button>
       </div>
     </div>
   );

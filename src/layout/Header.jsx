@@ -5,8 +5,10 @@ import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined } from "@ant-design/icon
 import { useState } from "react";
 import { useGetProfileQuery } from "../redux/features/auth/profile/getProfile";
 import url from "../redux/api/baseUrl";
-import { useChangePasswordMutation } from "../redux/features/auth/changePassword";
+ 
 import toast, { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
+import { useChangePasswordMutation } from "../redux/features/auth/changePassword";
 
 const Header = ({ isSidebarOpen, toggleSidebar }) => {
   const navigate = useNavigate();
@@ -16,9 +18,30 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
 
   const { data: admin } = useGetProfileQuery();
 
-  const handleLogOut = () => {
-    // Implementation remains the same
-    // ... (existing logout logic)
+   const handleLogOut = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      
+      text: "You won't be able to log out from here!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+
+        Swal.fire({
+          title: "Logged Out!",
+          text: "User has been logged out successfully.",
+          icon: "success",
+          timer: 2000
+        });
+        navigate('/');
+      }
+    });
   };
 
   const [passwordChange] = useChangePasswordMutation();
@@ -57,29 +80,22 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
       </Menu.Item>
       <Menu.Item className="hover:!bg-[#193664]" key="3">
         <p onClick={() => {
-          // Add your logout logic here
-          // handleLogOut();
+         
+         handleLogOut();
         }} className="hover:!bg-[#193664] hover:!text-white">Logout</p>
       </Menu.Item>
     </Menu>
   );
 
   return (
-    <div className="flex justify-between items-center shadow-xl mb-[24px] p-[16px] rounded-md !bg-primaryBg">
-      <Toaster />
+    <div className=" flex justify-between items-center shadow-xl mb-[24px] p-[16px] rounded-md !bg-[#2196F3]"> 
+     <Toaster />
+     <div className="text-white">
+      <p className="text-header text-whiteText font-medium">Welcome !</p>
       
-      {/* Mobile menu button */}
-      <button 
-        onClick={toggleSidebar}
-        className="md:hidden text-white p-2 rounded-lg hover:bg-gray-700"
-      >
-        <MenuOutlined className="text-xl" />
-      </button>
-      
-      <div className="text-white">
-        <p className="text-header text-whiteText font-medium">Welcome !</p>
-        <h1 className="text-whiteText">{admin?.data?.attributes.firstName}</h1>
-      </div>
+      <h1 className="text-[#dcddad] text-[20px] font-semibold">{admin?.data?.attributes.fullName}</h1>  
+      </div>   
+  
 
       <div className="flex items-center gap-5">
         {/* Notifications */}
@@ -90,31 +106,20 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
           <Badge style={{ backgroundColor: "red", marginTop: '10px', marginRight: '5px' }}>
             <BellOutlined
               style={{ cursor: "pointer" }}
-              className={`bg-primary w-[52px] h-[52px] text-[#Ffffffff] border-2 border-[#e7e0e0] rounded-full p-2`}
+              className={`bg-primary text-3xl text-[#Ffffffff] p-2 border border-[#e7e0e0] rounded`}
             />
           </Badge>
         </div>
         
         {/* User dropdown */}
-        <div>
-          <Dropdown 
-            className="px-2" 
-            overlay={menu} 
-            trigger={['click']} 
-            onVisibleChange={handleMenuVisibility}
-          >
-            <a className="flex items-center text-white cursor-pointer text-whiteText">
-              <Avatar 
-                src={url + admin?.data?.attributes.profileImage} 
-                className="mr-2 h-[52px] w-[52px]" 
-                size="large"
-              />
-              <span className="hidden md:inline-block">
-                {admin?.data?.attributes.firstName} 
-              </span>
-              <DownOutlined className="ml-1 text-sm" />
-            </a>
-          </Dropdown>
+        <div className="border p-1 rounded">
+        <Dropdown className="px-2" overlay={menu} trigger={['click']} onVisibleChange={handleMenuVisibility}>
+    <a className="flex items-center text-white cursor-pointer text-whiteText">
+      <Avatar src={url + admin?.data?.attributes.profileImage} className="mr-2 h-[42px] w-[42px]" />
+      {/* <Avatar src={url + profile?.data?.attributes?.image} className="mr-2 h-[52px] w-[52px]" /> */}
+      {admin?.data?.attributes.fullName} <DownOutlined className="ml-1" />
+    </a>
+  </Dropdown>
         </div>
       </div>
 
@@ -134,7 +139,7 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
             onFinish={changePassword}
           >
             <Form.Item
-              name="oldPassword"
+              name="currentPassword"
               label="Old Password"
               rules={[{ required: true, message: "Please enter your old password!" }]}
             >
@@ -214,7 +219,7 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
               <Button
                 type="primary"
                 htmlType="submit"
-                className="w-full h-10 py-3 !bg-[#69C0BE] !text-black text-[16px] rounded-md"
+                className="w-full h-10 py-3 !bg-[#2196F3] !text-white text-[16px] rounded-md"
               >
                 Change Password
               </Button>

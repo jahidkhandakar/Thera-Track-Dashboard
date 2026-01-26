@@ -1,21 +1,164 @@
+// import { Button, Checkbox, Form, Input } from 'antd';
+// import signin from '../../public/image/signin.png'
+// import React, { useState } from 'react';
+// import { Link, useNavigate } from 'react-router-dom';
+// import { HiOutlineMailOpen } from 'react-icons/hi';
+// import { BiLock } from 'react-icons/bi';
+// import { useAdminLoginMutation } from '../redux/features/auth/login';
+// import toast, { Toaster } from 'react-hot-toast';
+ 
+
+// const Login = () => {
+//     const [checkboxError, setCheckboxError] = useState('');
+//     const [isChecked, setIsChecked] = useState(false);
+//     const [error, setError] = useState(" ");
+//     const navigate = useNavigate()
+   
+ 
+// const [adminLogin ,{isLoading}] = useAdminLoginMutation()
+//     const handleCheckboxChange = (e) => {
+//         setIsChecked(e.target.checked);
+//         if (e.target.checked) {
+//             setCheckboxError('');
+//         }
+//     };
+
+//     const onFinish = async(values) => {
+
+//         if (!isChecked) {
+//             setCheckboxError('You must agree to the terms');
+//             return;
+//         }
+//         console.log(values);
+   
+
+//         // // Include the fcmToken in the submitted values
+   
+        
+//         try{
+//             const res = await adminLogin(values).unwrap();
+//             console.log(res);
+//             if(res?.code == 200){
+//                 toast.success(res?.message)
+//                  localStorage.setItem('user',JSON.stringify(res?.data?.attributes))
+//                  localStorage.setItem('token', res?.data?.attributes?.tokens?.accessToken)
+
+                
+//             }
+//             setTimeout(() => {
+                
+//                 navigate('/dashboard/home')
+//             }, 1000);
+            
+//         }catch(error){
+//             console.log(error);
+//             setError(error?.data?.message)
+            
+//         }
+       
+
+//     };
+
+//     return (
+//         <div className="mt-12 h-auto md:h-[680px] shadow-xl w-[80%] md:w-[1096px] mx-auto bg-white rounded-[8px]">
+//         <Toaster />
+//             <div className="flex flex-col-reverse md:flex-row justify-around gap-4 px-6 md:px-10 mt-4 md:mt-8 py-4">
+//                 <div className="h-[200px] hidden md:block md:h-[488px] mt-4 md:mt-[100px]">
+//                     <img src={signin} alt="Signin" className="w-full h-full object-cover" />
+//                 </div>
+//                 <div className="mt-[20px] md:w-1/2">
+//                     <h1 className="mt-4 md:mt-7 text-left text-[#222222] font-medium text-xl md:text-2xl">
+//                         Hello, Welcome!
+//                     </h1>
+//                     <p className="font-poppins text-left w-full text-[14px] md:text-[16px] font-normal mt-2">
+//                         Please Enter Your Details Below to Continue
+//                     </p>
+//                     <Form
+//                         name="normal_login"
+//                         layout="vertical"
+//                         initialValues={{ remember: true }}
+//                         onFinish={onFinish}
+//                     >
+//                         <Form.Item
+//                             name="email"
+//                             label={<span className="text-[16px] mt-5 font-medium">Email</span>}
+//                             rules={[
+//                                 { required: true, message: "Please input your email!" }, 
+//                             ]}
+//                         >
+//                             <Input
+//                                 size="large"
+//                                 placeholder="Enter Your Email"
+//                                 prefix={<HiOutlineMailOpen className="mr-2 bg-white text-black rounded-full p-[6px]" size={28} color="red" />}
+//                                 style={{ height: "52px", background: "#E6F9EF", outline: "none", marginBottom: "20px", border: '1px solid green' }}
+//                             />
+//                         </Form.Item>
+
+//                         <Form.Item
+//                             name="password"
+//                             label={<span className="text-[16px] font-medium">Password</span>}
+//                             rules={[{ required: true, message: "Please input your password!" }]}
+//                         >
+//                             <Input.Password
+//                                 size="large"
+//                                 placeholder="Enter Your Password"
+//                                 prefix={<BiLock className="mr-2 bg-white rounded-full p-[6px]" size={28} color="red" />}
+//                                 style={{ background: "#E6F9EF", height: "52px", outline: "none", marginBottom: "20px", border: '1px solid green' }}
+//                             />
+//                         </Form.Item>
+
+//                         <div className="flex justify-between items-center">
+//                             <Form.Item>
+//                                 <Checkbox className="text-black" checked={isChecked} onChange={handleCheckboxChange}>
+//                                     Remember me
+//                                 </Checkbox>
+//                                 {checkboxError && <p className="text-red-500 font-medium">{checkboxError}</p>}
+//                             </Form.Item>
+//                             <div className="mb-4 flex justify-between items-center">
+//                                 <Link to="/forgotpassword">
+//                                     <p className="cursor-pointer text-[14px] font-medium text-[#00BF63]">
+//                                         Forgot password?
+//                                     </p>
+//                                 </Link>
+//                             </div>
+//                         </div>
+
+//                         <Form.Item>
+//                             <p className='text-red-500 font-semibold'>{error}</p>
+//                             <Button
+//                                 loading = {isLoading}
+//                                 htmlType="submit"
+//                                 className="block w-full h-[52px] px-2 py-4 mt-2 !text-[#FFF] !bg-primaryBg"
+//                             >
+//                                 Log in
+//                             </Button>
+//                         </Form.Item>
+//                     </Form>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default Login;
+
+
 import { Button, Checkbox, Form, Input } from 'antd';
-import signin from '../../public/image/signin.png'
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { HiOutlineMailOpen } from 'react-icons/hi';
 import { BiLock } from 'react-icons/bi';
 import { useAdminLoginMutation } from '../redux/features/auth/login';
 import toast, { Toaster } from 'react-hot-toast';
- 
 
 const Login = () => {
     const [checkboxError, setCheckboxError] = useState('');
     const [isChecked, setIsChecked] = useState(false);
     const [error, setError] = useState(" ");
-    const navigate = useNavigate()
-   
- 
-const [adminLogin] = useAdminLoginMutation()
+    const navigate = useNavigate();
+
+    const [adminLogin, {isLoading}] = useAdminLoginMutation();
+
     const handleCheckboxChange = (e) => {
         setIsChecked(e.target.checked);
         if (e.target.checked) {
@@ -24,116 +167,120 @@ const [adminLogin] = useAdminLoginMutation()
     };
 
     const onFinish = async(values) => {
-
         if (!isChecked) {
             setCheckboxError('You must agree to the terms');
             return;
         }
         console.log(values);
-   
 
-        // // Include the fcmToken in the submitted values
-   
-        
         try{
             const res = await adminLogin(values).unwrap();
-            // console.log(res);
+            console.log(res);
             if(res?.code == 200){
-                toast.success(res?.message)
-                 localStorage.setItem('user',JSON.stringify(res?.data?.attributes))
-                 localStorage.setItem('token', res?.data?.attributes?.tokens?.accessToken)
-
-                
+                toast.success(res?.message);
+                localStorage.setItem('user', JSON.stringify(res?.data?.attributes));
+                localStorage.setItem('token', res?.data?.attributes?.tokens?.accessToken);
             }
             setTimeout(() => {
-                
-                navigate('/dashboard/home')
+                navigate('/dashboard/home');
             }, 1000);
-            
-        }catch(error){
+        } catch(error) {
             console.log(error);
-            setError(error?.data?.message)
-            
+            setError(error?.data?.message);
         }
-       
-
     };
 
     return (
-        <div className="mt-12 h-auto md:h-[680px] shadow-xl w-[80%] md:w-[1096px] mx-auto bg-white rounded-[8px]">
-        <Toaster />
-            <div className="flex flex-col-reverse md:flex-row justify-around gap-4 px-6 md:px-10 mt-4 md:mt-8 py-4">
-                <div className="h-[200px] hidden md:block md:h-[488px] mt-4 md:mt-[100px]">
-                    <img src={signin} alt="Signin" className="w-full h-full object-cover" />
-                </div>
-                <div className="mt-[20px] md:w-1/2">
-                    <h1 className="mt-4 md:mt-7 text-left text-[#222222] font-medium text-xl md:text-2xl">
-                        Hello, Welcome!
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-purple-400/10 to-blue-200 px-4 py-8">
+            <Toaster />
+            <div className="w-full max-w-lg bg-white rounded-2xl shadow-lg border border-[#2196F3] p-8">
+                <div className="mb-8">
+                    <h1 className="!text-[32px] font-bold text-gray-900 mb-2">
+                        Welcome Back
                     </h1>
-                    <p className="font-poppins text-left w-full text-[14px] md:text-[16px] font-normal mt-2">
+                    <p className="text-gray-600 text-sm">
                         Please Enter Your Details Below to Continue
                     </p>
-                    <Form
-                        name="normal_login"
-                        layout="vertical"
-                        initialValues={{ remember: true }}
-                        onFinish={onFinish}
-                    >
-                        <Form.Item
-                            name="email"
-                            label={<span className="text-[16px] mt-5 font-medium">Email</span>}
-                            rules={[
-                                { required: true, message: "Please input your email!" }, 
-                            ]}
-                        >
-                            <Input
-                                size="large"
-                                placeholder="Enter Your Email"
-                                prefix={<HiOutlineMailOpen className="mr-2 bg-white text-black rounded-full p-[6px]" size={28} color="red" />}
-                                style={{ height: "52px", background: "#E6F9EF", outline: "none", marginBottom: "20px", border: '1px solid green' }}
-                            />
-                        </Form.Item>
-
-                        <Form.Item
-                            name="password"
-                            label={<span className="text-[16px] font-medium">Password</span>}
-                            rules={[{ required: true, message: "Please input your password!" }]}
-                        >
-                            <Input.Password
-                                size="large"
-                                placeholder="Enter Your Password"
-                                prefix={<BiLock className="mr-2 bg-white rounded-full p-[6px]" size={28} color="red" />}
-                                style={{ background: "#E6F9EF", height: "52px", outline: "none", marginBottom: "20px", border: '1px solid green' }}
-                            />
-                        </Form.Item>
-
-                        <div className="flex justify-between items-center">
-                            <Form.Item>
-                                <Checkbox className="text-black" checked={isChecked} onChange={handleCheckboxChange}>
-                                    Remember me
-                                </Checkbox>
-                                {checkboxError && <p className="text-red-500 font-medium">{checkboxError}</p>}
-                            </Form.Item>
-                            <div className="mb-4 flex justify-between items-center">
-                                <Link to="/forgotpassword">
-                                    <p className="cursor-pointer text-[14px] font-medium text-[#00BF63]">
-                                        Forgot password?
-                                    </p>
-                                </Link>
-                            </div>
-                        </div>
-
-                        <Form.Item>
-                            <p className='text-red-500 font-semibold'>{error}</p>
-                            <Button
-                                htmlType="submit"
-                                className="block w-full h-[52px] px-2 py-4 mt-2 !text-[#FFF] !bg-primaryBg"
-                            >
-                                Log in
-                            </Button>
-                        </Form.Item>
-                    </Form>
                 </div>
+
+                <Form
+                    name="normal_login"
+                    layout="vertical"
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
+                >
+                    <Form.Item
+                        name="email"
+                        label={<span className="text-gray-700 font-medium">Email</span>}
+                        rules={[
+                            { required: true, message: "Please input your email!" }, 
+                        ]}
+                    >
+                        <Input
+                            size="large"
+                            placeholder="Email"
+                            style={{ 
+                                height: "48px", 
+                                borderRadius: "8px",
+                                border: '1px solid #E5E7EB'
+                            }}
+                        />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="password"
+                        label={<span className="text-gray-700 font-medium">Password</span>}
+                        rules={[{ required: true, message: "Please input your password!" }]}
+                    >
+                        <Input.Password
+                            size="large"
+                            placeholder="Password"
+                            style={{ 
+                                height: "48px",
+                                borderRadius: "8px",
+                                border: '1px solid #E5E7EB'
+                            }}
+                        />
+                    </Form.Item>
+
+                    <div className="flex justify-between items-center mb-6">
+                        <Form.Item className="mb-0">
+                            <Checkbox 
+                                className="text-gray-700" 
+                                checked={isChecked} 
+                                onChange={handleCheckboxChange}
+                            >
+                                Remember me
+                            </Checkbox>
+                            {checkboxError && <p className="text-red-500 text-xs mt-1">{checkboxError}</p>}
+                        </Form.Item>
+                        <Link to="/forgotpassword">
+                            <p className="cursor-pointer text-sm font-medium text-blue-600 hover:text-blue-700">
+                                Forgot password?
+                            </p>
+                        </Link>
+                    </div>
+
+                    {error && error.trim() !== "" && (
+                        <p className='text-red-500 text-sm mb-4'>{error}</p>
+                    )}
+
+                    <Form.Item className="mb-0">
+                        <Button
+                            loading={isLoading}
+                            htmlType="submit"
+                            className="w-full h-12 text-base font-medium"
+                            type="primary"
+                            style={{
+                                background: '#3B82F6',
+                                borderRadius: '8px',
+                                border: 'none'
+                            }}
+                        >
+                            Login
+                        </Button>
+                    </Form.Item>
+                </Form>
             </div>
         </div>
     );

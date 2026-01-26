@@ -4,11 +4,8 @@ import PublicLayout from "../layout/PublicLayout";
 const SupportPage = () => {
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log('Form Values:', values);
-    // Show success message
-    message.success('Your message has been sent successfully!');
-    // Reset form after submission
+  const onFinish = () => {
+    message.success("Your message has been sent successfully!");
     form.resetFields();
   };
 
@@ -16,7 +13,9 @@ const SupportPage = () => {
     <PublicLayout>
       <div className="p-6 max-w-2xl mx-auto">
         <div className="bg-white p-8 rounded-xl ">
-          <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Support</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+            Support
+          </h1>
 
           <Form
             form={form}
@@ -28,7 +27,7 @@ const SupportPage = () => {
             <Form.Item
               name="name"
               label="Name"
-              rules={[{ required: true, message: 'Please enter your name!' }]}
+              rules={[{ required: true, message: "Please enter your name!" }]}
             >
               <Input placeholder="Enter your name" size="large" />
             </Form.Item>
@@ -37,8 +36,8 @@ const SupportPage = () => {
               name="email"
               label="Email"
               rules={[
-                { required: true, message: 'Please enter your email!' },
-                { type: 'email', message: 'Please enter a valid email!' }
+                { required: true, message: "Please enter your email!" },
+                { type: "email", message: "Please enter a valid email!" },
               ]}
             >
               <Input placeholder="Enter your email" size="large" />
@@ -47,7 +46,9 @@ const SupportPage = () => {
             <Form.Item
               name="message"
               label="Message"
-              rules={[{ required: true, message: 'Please enter your message!' }]}
+              rules={[
+                { required: true, message: "Please enter your message!" },
+              ]}
             >
               <Input.TextArea
                 rows={6}

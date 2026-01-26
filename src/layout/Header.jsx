@@ -69,8 +69,6 @@ const Header = ({ toggleMobileMenu }) => {
       </Menu.Item>
     </Menu>
   );
-
-  console.log("Admin", admin);
   return (
     <div className=" flex justify-between items-center p-3 md:p-5 rounded-md !bg-[#2196F3]">
       <Toaster />

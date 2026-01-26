@@ -1,7 +1,20 @@
-import React, { useState, useMemo } from 'react';
-import { Card, List, Avatar, Tag, Typography, Space, Badge, Pagination } from 'antd';
-import { BellOutlined, CrownOutlined, DollarOutlined, CalendarOutlined } from '@ant-design/icons';
-import { usePaymentQuery } from '../../../redux/features/otherApi/payment';
+import { useState, useMemo } from "react";
+import {
+  Card,
+  List,
+  Avatar,
+  Tag,
+  Typography,
+  Space,
+  Pagination,
+} from "antd";
+import {
+  BellOutlined,
+  CrownOutlined,
+  DollarOutlined,
+  CalendarOutlined,
+} from "@ant-design/icons";
+import { usePaymentQuery } from "../../../redux/features/otherApi/payment";
 
 const { Title, Text } = Typography;
 
@@ -9,17 +22,19 @@ const NotificationPage = () => {
   const { data: payments } = usePaymentQuery();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  
+
   // Extract and sort subscriptions from payments
   const sortedSubscriptions = useMemo(() => {
     if (!payments?.data?.attributes) return [];
-    
-    const subscriptions = payments.data.attributes.map(payment => ({
+
+    const subscriptions = payments.data.attributes.map((payment) => ({
       id: payment.subscriptionId?._id,
-      name: payment.subscriptionId?.advantage1 || 'Premium Subscription',
+      name: payment.subscriptionId?.advantage1 || "Premium Subscription",
       duration: payment.subscriptionId?.duration,
       price: payment.subscriptionId?.price,
-      userName: payment.userId?.fullName || `${payment.userId?.firstName || ''} ${payment.userId?.lastName || ''}`.trim(),
+      userName:
+        payment.userId?.fullName ||
+        `${payment.userId?.firstName || ""} ${payment.userId?.lastName || ""}`.trim(),
       userEmail: payment.userId?.email,
       createdAt: payment.createdAt,
       avatar: payment.userId?.profileImage,
@@ -30,7 +45,9 @@ const NotificationPage = () => {
     }));
 
     // Sort by creation date (newest first)
-    return subscriptions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    return subscriptions.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+    );
   }, [payments]);
 
   // Pagination logic
@@ -44,9 +61,9 @@ const NotificationPage = () => {
   };
 
   const getNotificationIcon = () => (
-    <Avatar 
-      icon={<CrownOutlined />} 
-      style={{ backgroundColor: '#1890ff' }}
+    <Avatar
+      icon={<CrownOutlined />}
+      style={{ backgroundColor: "#1890ff" }}
       size="large"
     />
   );
@@ -55,8 +72,8 @@ const NotificationPage = () => {
     const now = new Date();
     const created = new Date(date);
     const diffInHours = Math.floor((now - created) / (1000 * 60 * 60));
-    
-    if (diffInHours < 1) return 'Just now';
+
+    if (diffInHours < 1) return "Just now";
     if (diffInHours < 24) return `${diffInHours}h ago`;
     const diffInDays = Math.floor(diffInHours / 24);
     if (diffInDays < 30) return `${diffInDays}d ago`;
@@ -65,30 +82,29 @@ const NotificationPage = () => {
   };
 
   const getTotalRevenue = () => {
-    return sortedSubscriptions.reduce((sum, sub) => sum + (sub.totalAmount || sub.price || 0), 0);
+    return sortedSubscriptions.reduce(
+      (sum, sub) => sum + (sub.totalAmount || sub.price || 0),
+      0,
+    );
   };
 
   const getUniqueUsers = () => {
-    return new Set(sortedSubscriptions.map(sub => sub.userEmail)).size;
+    return new Set(sortedSubscriptions.map((sub) => sub.userEmail)).size;
   };
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <div className="max-w-4xl mx-auto">
+      <div className="w-full mx-auto">
         <Card className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-3">
               <BellOutlined className="text-2xl text-blue-600" />
-              <Title level={2} className="mb-0">Payment Notifications</Title>
+              <Title level={2} className="mb-0">
+                Notifications
+              </Title>
             </div>
-            <Badge count={totalItems} showZero>
-              <BellOutlined className="text-xl text-gray-400" />
-            </Badge>
           </div>
-          
-          <Text className="text-gray-600">
-            Recent payment activities and subscription updates (Showing {startIndex + 1}-{Math.min(endIndex, totalItems)} of {totalItems})
-          </Text>
+          <p className="text-lg text-gray-600">You have {sortedSubscriptions.length} notifications</p>
         </Card>
 
         <Card>
@@ -102,13 +118,13 @@ const NotificationPage = () => {
                   title={
                     <div className="flex items-center justify-between">
                       <Space>
-                        <Text strong className="text-lg">{subscription.name}</Text>
+                        <Text strong className="text-lg">
+                          {subscription.name}
+                        </Text>
                         <Tag color="gold" icon={<CrownOutlined />}>
                           {subscription.duration}
                         </Tag>
-                        <Tag color="blue">
-                          #{startIndex + index + 1}
-                        </Tag>
+                        <Tag color="blue">#{startIndex + index + 1}</Tag>
                       </Space>
                       <Text className="text-gray-500 text-sm">
                         {getTimeAgo(subscription.createdAt)}
@@ -121,7 +137,10 @@ const NotificationPage = () => {
                         <Space>
                           <DollarOutlined className="text-green-500" />
                           <Text strong className="text-green-600">
-                            {subscription.currency} ${(subscription.totalAmount || subscription.price)?.toFixed(2)}
+                            {subscription.currency} $
+                            {(
+                              subscription.totalAmount || subscription.price
+                            )?.toFixed(2)}
                           </Text>
                         </Space>
                         <Space>
@@ -129,14 +148,17 @@ const NotificationPage = () => {
                           <Text>{subscription.duration}</Text>
                         </Space>
                       </div>
-                      
+
                       <div className="bg-blue-50 p-3 rounded-lg mt-3">
                         <Text className="text-blue-800">
-                          <strong>{subscription.userName || 'Unknown User'}</strong> ({subscription.userEmail}) 
-                          has subscribed to {subscription.name}
+                          <strong>
+                            {subscription.userName || "Unknown User"}
+                          </strong>{" "}
+                          ({subscription.userEmail}) has subscribed to{" "}
+                          {subscription.name}
                         </Text>
                       </div>
-                      
+
                       <div className="mt-2 text-xs text-gray-500 flex justify-between">
                         <span>Payment ID: {subscription.paymentId}</span>
                         <span>Stripe ID: {subscription.stripPaymentId}</span>
@@ -150,12 +172,14 @@ const NotificationPage = () => {
               emptyText: (
                 <div className="text-center py-8">
                   <BellOutlined className="text-4xl text-gray-300 mb-4" />
-                  <Text className="text-gray-500">No payment notifications</Text>
+                  <Text className="text-gray-500">
+                    No payment notifications
+                  </Text>
                 </div>
-              )
+              ),
             }}
           />
-          
+
           {totalItems > itemsPerPage && (
             <div className="flex justify-center mt-6">
               <Pagination
@@ -165,7 +189,7 @@ const NotificationPage = () => {
                 onChange={handlePageChange}
                 showSizeChanger={false}
                 showQuickJumper
-                showTotal={(total, range) => 
+                showTotal={(total, range) =>
                   `${range[0]}-${range[1]} of ${total} notifications`
                 }
               />
@@ -182,14 +206,14 @@ const NotificationPage = () => {
                 </Text>
                 <Text className="text-gray-600">Total Payments</Text>
               </div>
-              
+
               <div className="text-center p-4 bg-green-50 rounded-lg">
                 <Text className="block text-2xl font-bold text-green-600">
                   ${getTotalRevenue().toFixed(2)}
                 </Text>
                 <Text className="text-gray-600">Total Revenue</Text>
               </div>
-              
+
               <div className="text-center p-4 bg-purple-50 rounded-lg">
                 <Text className="block text-2xl font-bold text-purple-600">
                   {getUniqueUsers()}

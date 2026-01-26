@@ -3,14 +3,11 @@ import { Button, Modal, Space, Table } from "antd";
 import { useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 import { useAllUsersQuery } from "../../../redux/features/otherApi/allUsers";
-import styles from "./style.module.css";
 
 const User = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-
   const { data: users, isLoading } = useAllUsersQuery();
-  console.log(users);
 
   // Safe access to user list
   const dataSource = users?.data?.attributes || [];
@@ -79,32 +76,22 @@ const User = () => {
               `${range[0]}-${range[1]} of ${total} items`,
             defaultPageSize: 10,
             showSizeChanger: false,
+            position: ["center"],
             itemRender: (current, type, originalElement) => {
               if (type === "prev") {
-                return (
-                  <Button className={styles.paginationButton}>Back</Button>
-                );
+                return <Button>Back</Button>;
               }
               if (type === "next") {
-                return (
-                  <Button className={styles.paginationButton}>Next</Button>
-                );
+                return <Button>Next</Button>;
               }
               return originalElement;
             },
-            className: styles.paginationCenter,
           }}
           loading={isLoading}
           columns={columns}
           dataSource={dataSource}
           rowKey={(record) => record._id} // Use _id as unique key
-          className={styles.customTable}
           scroll={{ x: "max-content" }}
-          components={{
-            header: {
-              cell: (props) => <th {...props} className={styles.tableHeader} />,
-            },
-          }}
         />
       </div>
 

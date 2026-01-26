@@ -1,26 +1,21 @@
-import { Card, Table, Tag, Typography } from 'antd';
-import { usePaymentQuery } from '../../../redux/features/otherApi/payment';
-// import { usePaymentQuery } from '../../../redux/features/otherApi/payment';
-// import { usePaymentQuery } from './../../../redux/features/otherApi/payment';
-
+import { Card, Table, Tag, Typography } from "antd";
+import { usePaymentQuery } from "../../../redux/features/otherApi/payment";
 const { Title } = Typography;
 
 const Earning = () => {
   const { data: earning } = usePaymentQuery();
-  console.log(earning);
-
   const columns = [
     {
-      title: 'Date',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
+      title: "Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
       render: (date) => new Date(date).toLocaleDateString(),
       sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
     },
     {
-      title: 'User',
-      dataIndex: ['userId', 'fullName'],
-      key: 'user',
+      title: "User",
+      dataIndex: ["userId", "fullName"],
+      key: "user",
       render: (fullName, record) => (
         <div>
           <div className="font-medium">{fullName}</div>
@@ -29,20 +24,22 @@ const Earning = () => {
       ),
     },
     {
-      title: 'Subscription',
-      dataIndex: ['subscriptionId', 'duration'],
-      key: 'subscription',
+      title: "Subscription",
+      dataIndex: ["subscriptionId", "duration"],
+      key: "subscription",
       render: (duration, record) => (
         <div>
           <div className="font-medium">{duration}</div>
-          <div className="text-xs text-gray-500">${record.subscriptionId?.price}</div>
+          <div className="text-xs text-gray-500">
+            ${record.subscriptionId?.price}
+          </div>
         </div>
       ),
     },
     {
-      title: 'Payment ID',
-      dataIndex: 'stripPaymentId',
-      key: 'stripPaymentId',
+      title: "Payment ID",
+      dataIndex: "stripPaymentId",
+      key: "stripPaymentId",
       render: (id) => (
         <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded">
           {id?.substring(0, 20)}...
@@ -50,15 +47,15 @@ const Earning = () => {
       ),
     },
     {
-      title: 'Currency',
-      dataIndex: 'currency',
-      key: 'currency',
+      title: "Currency",
+      dataIndex: "currency",
+      key: "currency",
       render: (currency) => <Tag color="blue">{currency}</Tag>,
     },
     {
-      title: 'Amount',
-      dataIndex: 'totalAmount',
-      key: 'totalAmount',
+      title: "Amount",
+      dataIndex: "totalAmount",
+      key: "totalAmount",
       render: (amount) => (
         <span className="font-semibold text-green-600">
           ${amount?.toFixed(2)}
@@ -67,8 +64,8 @@ const Earning = () => {
       sorter: (a, b) => a.totalAmount - b.totalAmount,
     },
     {
-      title: 'Status',
-      key: 'status',
+      title: "Status",
+      key: "status",
       render: () => <Tag color="green">Completed</Tag>,
     },
   ];
@@ -80,9 +77,7 @@ const Earning = () => {
       <Card className="shadow-none md:shadow-sm">
         <div className="mb-6">
           <Title level={2}>Earnings & Payments</Title>
-          <p className="text-gray-600">
-            Total Payments: {tableData.length}
-          </p>
+          <p className="text-gray-600">Total Payments: {tableData.length}</p>
         </div>
 
         <Table
@@ -96,7 +91,7 @@ const Earning = () => {
             showTotal: (total, range) =>
               `${range[0]}-${range[1]} of ${total} payments`,
           }}
-          scroll={{ x: 'max-content' }}
+          scroll={{ x: "max-content" }}
           loading={!earning}
         />
       </Card>

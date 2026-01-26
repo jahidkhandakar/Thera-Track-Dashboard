@@ -3,7 +3,6 @@ import { Button, Modal, Space, Table } from "antd";
 import { useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 import { useAllUsersQuery } from "../../redux/features/otherApi/allUsers";
-import styles from "./../menu/sidebarMenu/style.module.css";
 
 const RecentUser = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -83,29 +82,18 @@ const RecentUser = () => {
             showSizeChanger: false,
             itemRender: (current, type, originalElement) => {
               if (type === "prev") {
-                return (
-                  <Button className={styles.paginationButton}>Back</Button>
-                );
+                return <Button>Back</Button>;
               }
               if (type === "next") {
-                return (
-                  <Button className={styles.paginationButton}>Next</Button>
-                );
+                return <Button>Next</Button>;
               }
               return originalElement;
             },
-            className: styles.paginationCenter,
           }}
           columns={columns}
           dataSource={dataSource}
-          rowKey={(record) => record._id} // Use _id as unique key
-          className={styles.customTable}
+          rowKey={(record) => record._id}
           scroll={{ x: "max-content" }}
-          components={{
-            header: {
-              cell: (props) => <th {...props} className={styles.tableHeader} />,
-            },
-          }}
         />
       </div>
 

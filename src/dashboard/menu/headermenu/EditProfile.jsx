@@ -22,7 +22,6 @@ const EditProfile = () => {
   useEffect(() => {
     if (profile) {
       const userData = profile?.data?.attributes;
-      console.log(userData);
 
       // Set phone number - your data likely has 'phone' field, not 'phoneNumber'
       setPhoneNumber(userData?.phone || "");

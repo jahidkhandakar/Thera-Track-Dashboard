@@ -1,140 +1,24 @@
- 
+import {
+  ArrowLeftOutlined,
+  DollarOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Spin,
+  Typography,
+} from "antd";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-
-// import React, { useEffect } from 'react';
-// import { Form, Input, Button, Space } from 'antd';
-// import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-// import { MdOutlineArrowBackIosNew } from 'react-icons/md';
-// import { useNavigate, useParams } from 'react-router-dom';
-
-// const EditSubscription = () => {
-//   const navigate = useNavigate();
-//   const { id } = useParams(); // Assuming you are passing the subscription id for editing
-
-//   // Dummy data for editing (In real scenario, fetch data from API)
-//   const subscriptionData = {
-//     packageName: 'Basic Plan',
-//     packageAmount: '$4.99',
-//     packageExpiration: '1 month',
-//     features: ['Unlimited Chart', 'Analytics Access'],
-//   };
-
-//   // Setting initial form values when component mounts
-//   useEffect(() => {
-//     // You would fetch the actual data from your API based on `id`
-//     form.setFieldsValue({
-//       packageName: subscriptionData.packageName,
-//       packageAmount: subscriptionData.packageAmount,
-//       packageExpiration: subscriptionData.packageExpiration,
-//       features: subscriptionData.features,
-//     });
-//   }, [id]);
-
-//   const [form] = Form.useForm();
-
-//   const onFinish = (values) => {
-//     console.log('Edited Subscription values:', values);
-//     // Make an API call to save the edited subscription data
-//     // navigate('/dashboard/subscription');
-//   };
-
-//   return (
-//     <div className="mt-8">
-//       <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-//         <span className="cursor-pointer">
-//           <MdOutlineArrowBackIosNew onClick={() => navigate('/dashboard/subscription')} />
-//         </span>
-//         Edit Subscription
-//       </h2>
-
-//       <div className="p-6 mt-6 w-[50%] mx-auto bg-white rounded-lg ">
-//         <Form
-//           form={form}
-//           name="edit_subscription"
-//           onFinish={onFinish}
-//           layout="vertical"
-//         >
-//           <Form.Item
-//             name="packageName"
-//             label="Package Name"
-//             rules={[{ required: true, message: 'Please input the package name!' }]}
-//           >
-//             <Input placeholder="Basic Plan" />
-//           </Form.Item>
-          
-//           <Form.Item
-//             name="packageAmount"
-//             label="Package Amount"
-//             rules={[{ required: true, message: 'Please input the package amount!' }]}
-//           >
-//             <Input placeholder="$ 4.99" />
-//           </Form.Item>
-          
-//           <Form.Item
-//             name="packageExpiration"
-//             label="Package Expiration"
-//             rules={[{ required: true, message: 'Please input the package expiration!' }]}
-//           >
-//             <Input placeholder="1 month" />
-//           </Form.Item>
-
-//           <Form.List
-//             name="features"
-//             initialValue={subscriptionData.features}
-//           >
-//             {(fields, { add, remove }) => (
-//               <>
-//                 {fields.map(({ key, name, fieldKey, ...restField }) => (
-//                   <Space key={key} align="baseline" className="flex w-full items-center">
-//                     <Form.Item
-//                       {...restField}
-//                       name={[name, 'feature']}
-//                       fieldKey={[fieldKey, 'feature']}
-//                       rules={[{ required: true, message: 'Missing feature' }]}
-//                       className=""
-//                     >
-//                       <Input placeholder="Enter feature" />
-//                     </Form.Item>
-//                     <Form.Item>
-//                       <MinusCircleOutlined className="text-[18px]" onClick={() => remove(name)} />
-//                     </Form.Item>
-//                   </Space>
-//                 ))}
-//                 <Form.Item>
-//                   <Button
-//                     type="dashed"
-//                     onClick={() => add()}
-//                     className="w-full flex items-center justify-center"
-//                   >
-//                     <PlusOutlined /> Add new feature
-//                   </Button>
-//                 </Form.Item>
-//               </>
-//             )}
-//           </Form.List>
-
-//           <Form.Item>
-//             <Button htmlType="submit" className="w-full !bg-[#193664] !text-white">
-//               Update Subscription
-//             </Button>
-//           </Form.Item>
-//         </Form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default EditSubscription;
-
-
-import { ArrowLeftOutlined, DollarOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Card, Form, Input, InputNumber, Select, Spin, Typography } from 'antd';
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
- 
-import toast, { Toaster } from 'react-hot-toast';
-import { useEditSubscriptionMutation } from '../../../redux/features/otherApi/editSubscription';
-import { useSingleSubscriptionQuery } from '../../../redux/features/otherApi/getSingleSubscription';
+import toast, { Toaster } from "react-hot-toast";
+import { useEditSubscriptionMutation } from "../../../redux/features/otherApi/editSubscription";
+import { useSingleSubscriptionQuery } from "../../../redux/features/otherApi/getSingleSubscription";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -145,15 +29,14 @@ const EditSubscription = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
 
-  const durationOptions = [
-    '01 Month', 
-    '06 Month',
-    '12 Month',
-  ];
+  const durationOptions = ["01 Month", "06 Month", "12 Month"];
 
   // Fetch subscription data
-  const { data: subscriptionData, isLoading: fetchingData, error: fetchError } = useSingleSubscriptionQuery(id);
-  console.log(subscriptionData)
+  const {
+    data: subscriptionData,
+    isLoading: fetchingData,
+    error: fetchError,
+  } = useSingleSubscriptionQuery(id);
 
   const [updateSubscription] = useEditSubscriptionMutation();
 
@@ -164,9 +47,9 @@ const EditSubscription = () => {
       form.setFieldsValue({
         duration: subscription.duration,
         price: subscription.price,
-        advantage1: subscription.advantage1 || '',
-        advantage2: subscription.advantage2 || '',
-        advantage3: subscription.advantage3 || '',
+        advantage1: subscription.advantage1 || "",
+        advantage2: subscription.advantage2 || "",
+        advantage3: subscription.advantage3 || "",
       });
     }
   }, [subscriptionData, form]);
@@ -174,8 +57,8 @@ const EditSubscription = () => {
   // Handle fetch error
   useEffect(() => {
     if (fetchError) {
-      toast.error('Failed to load subscription data');
-      navigate('/dashboard/subscription');
+      toast.error("Failed to load subscription data");
+      navigate("/dashboard/subscription");
     }
   }, [fetchError, navigate]);
 
@@ -185,30 +68,35 @@ const EditSubscription = () => {
     try {
       const processedValues = {
         ...values,
-        advantage1: values.advantage1 || '',
-        advantage2: values.advantage2 || '',
-        advantage3: values.advantage3 || '',
+        advantage1: values.advantage1 || "",
+        advantage2: values.advantage2 || "",
+        advantage3: values.advantage3 || "",
       };
-      console.log(processedValues)
-      const res = await updateSubscription({ id, data: processedValues }).unwrap();
-      console.log(res);
-      
+      const res = await updateSubscription({
+        id,
+        data: processedValues,
+      }).unwrap();
+
       if (res?.code == 200) {
-        toast.success(res?.message || 'Subscription updated successfully!');
+        toast.success(res?.message || "Subscription updated successfully!");
         setTimeout(() => {
-          navigate('/dashboard/subscription');
+          navigate("/dashboard/subscription");
         }, 1000);
       }
     } catch (error) {
-      toast.error(error?.data?.message || error?.message || 'Failed to update subscription');
-      console.error('Error:', error);
+      toast.error(
+        error?.data?.message ||
+          error?.message ||
+          "Failed to update subscription",
+      );
+      console.error("Error:", error);
     } finally {
       setLoading(false);
     }
   };
 
   const handleBack = () => {
-    navigate('/dashboard/subscription');
+    navigate("/dashboard/subscription");
   };
 
   // Show loading spinner while fetching data
@@ -231,8 +119,8 @@ const EditSubscription = () => {
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <Button 
-            icon={<ArrowLeftOutlined />} 
+          <Button
+            icon={<ArrowLeftOutlined />}
             onClick={handleBack}
             className="mb-4"
             type="text"
@@ -257,23 +145,23 @@ const EditSubscription = () => {
             requiredMark={false}
             className="space-y-4"
             initialValues={{
-              advantage1: '',
-              advantage2: '',
-              advantage3: '',
+              advantage1: "",
+              advantage2: "",
+              advantage3: "",
             }}
           >
             {/* Duration Selection */}
             <Form.Item
               label={<span className="text-base font-medium">Duration</span>}
               name="duration"
-              rules={[{ required: true, message: 'Please select duration' }]}
+              rules={[{ required: true, message: "Please select duration" }]}
             >
               <Select
                 placeholder="Select subscription duration"
                 size="large"
                 className="w-full"
               >
-                {durationOptions.map(duration => (
+                {durationOptions.map((duration) => (
                   <Option key={duration} value={duration}>
                     {duration}
                   </Option>
@@ -286,8 +174,12 @@ const EditSubscription = () => {
               label={<span className="text-base font-medium">Price (USD)</span>}
               name="price"
               rules={[
-                { required: true, message: 'Please enter price' },
-                { type: 'number', min: 0.01, message: 'Price must be greater than 0' }
+                { required: true, message: "Please enter price" },
+                {
+                  type: "number",
+                  min: 0.01,
+                  message: "Price must be greater than 0",
+                },
               ]}
             >
               <InputNumber
@@ -303,12 +195,16 @@ const EditSubscription = () => {
 
             {/* Advantages */}
             <div className="space-y-4">
-              <Text className="text-base font-medium block">Subscription Benefits</Text>
-              
+              <Text className="text-base font-medium block">
+                Subscription Benefits
+              </Text>
+
               <Form.Item
                 label="Advantage 1"
                 name="advantage1"
-                rules={[{ required: true, message: 'Please enter first advantage' }]}
+                rules={[
+                  { required: true, message: "Please enter first advantage" },
+                ]}
               >
                 <Input
                   placeholder="e.g., Access to premium content"
@@ -317,10 +213,7 @@ const EditSubscription = () => {
                 />
               </Form.Item>
 
-              <Form.Item
-                label="Advantage 2"
-                name="advantage2"
-              >
+              <Form.Item label="Advantage 2" name="advantage2">
                 <Input
                   placeholder="e.g., Priority customer support"
                   size="large"
@@ -328,10 +221,7 @@ const EditSubscription = () => {
                 />
               </Form.Item>
 
-              <Form.Item
-                label="Advantage 3"
-                name="advantage3"
-              >
+              <Form.Item label="Advantage 3" name="advantage3">
                 <Input
                   placeholder="e.g., Free monthly webinar"
                   size="large"

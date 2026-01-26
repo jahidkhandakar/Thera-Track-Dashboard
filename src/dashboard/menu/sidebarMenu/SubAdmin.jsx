@@ -4,7 +4,6 @@ import { useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useAllSubAdminsQuery } from "../../../redux/features/otherApi/subAdmin";
-import styles from "./style.module.css";
 
 const SubAdmin = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -84,36 +83,26 @@ const SubAdmin = () => {
         <Table
           pagination={{
             total: dataSource.length,
+            position: ["bottomCenter"],
             showTotal: (total, range) =>
               `${range[0]}-${range[1]} of ${total} items`,
             defaultPageSize: 10,
             showSizeChanger: false,
             itemRender: (current, type, originalElement) => {
               if (type === "prev") {
-                return (
-                  <Button className={styles.paginationButton}>Back</Button>
-                );
+                return <Button>Back</Button>;
               }
               if (type === "next") {
-                return (
-                  <Button className={styles.paginationButton}>Next</Button>
-                );
+                return <Button>Next</Button>;
               }
               return originalElement;
             },
-            className: styles.paginationCenter,
           }}
           loading={isLoading}
           columns={columns}
           dataSource={dataSource}
           rowKey={(record) => record._id}
-          className={styles.customTable}
           scroll={{ x: "max-content" }}
-          components={{
-            header: {
-              cell: (props) => <th {...props} className={styles.tableHeader} />,
-            },
-          }}
         />
       </div>
 

@@ -1,17 +1,23 @@
-import React from 'react';
-import { Card } from 'antd';
-import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
-import { useEarningStatusQuery } from '../../redux/features/otherApi/earningStatus';
+import { Card } from "antd";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
+import { useEarningStatusQuery } from "../../redux/features/otherApi/earningStatus";
 
 const EarningsChart = () => {
   const { data: earnigns } = useEarningStatusQuery();
-  console.log(earnigns);
-  
+
   // Transform your API data for the chart
-  const chartData = earnigns?.data?.attributes?.map(item => ({
-    month: item.month.slice(0, 3),
-    totalAmountSum: parseFloat(item.totalAmountSum.toFixed(2))
-  })) || [];
+  const chartData =
+    earnigns?.data?.attributes?.map((item) => ({
+      month: item.month.slice(0, 3),
+      totalAmountSum: parseFloat(item.totalAmountSum.toFixed(2)),
+    })) || [];
 
   const currentYear = new Date().getFullYear();
   return (
@@ -24,23 +30,15 @@ const EarningsChart = () => {
           <AreaChart data={chartData}>
             <defs>
               <linearGradient id="colorEarnings" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.1}/>
+                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.1} />
               </linearGradient>
             </defs>
-            <XAxis 
-              dataKey="month" 
-              axisLine={false}
-              tickLine={false}
-            />
-            <YAxis 
-              axisLine={false}
-              tickLine={false}
-              hide
-            />
-            <Tooltip 
-              formatter={(value) => [`${value.toFixed(2)}`, 'Earnings']}
-              labelStyle={{ color: '#666' }}
+            <XAxis dataKey="month" axisLine={false} tickLine={false} />
+            <YAxis axisLine={false} tickLine={false} hide />
+            <Tooltip
+              formatter={(value) => [`${value.toFixed(2)}`, "Earnings"]}
+              labelStyle={{ color: "#666" }}
             />
             <Area
               type="monotone"

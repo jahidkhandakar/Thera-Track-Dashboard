@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetTearmsQuery } from "../../../redux/features/setting/settingSlice";
- 
- 
+
 const decodeHtml = (html) => {
   const txt = document.createElement("textarea");
   txt.innerHTML = html;
@@ -12,42 +11,35 @@ const decodeHtml = (html) => {
 
 const TermConditions = () => {
   const [content, setContent] = useState("");
- const {data: termcondition} = useGetTearmsQuery()
-//  console.log(termcondition); 
-  const navigate = useNavigate(); 
-//   console.log(termcondition?.data?.attributes?.docs[0]._id);
-  
+  const { data: termcondition } = useGetTearmsQuery();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (termcondition?.data?.attributes) {
       // Decode the HTML content before setting it
-      const decodedContent = decodeHtml(termcondition?.data?.attributes?.termsConditions);
+      const decodedContent = decodeHtml(
+        termcondition?.data?.attributes?.termsConditions,
+      );
       setContent(decodedContent);
     }
   }, [termcondition]);
 
-
- 
-
-
   return (
-    
     <div className=" mt-8 mx-6">
       <Link to="/dashboard/settings" className="flex items-center gap-2">
         <FaCircleArrowLeft className=" text-primaryBg w-8 h-8" />
         <p className=" font-semibold text-[30px]">Terms & Condition</p>
       </Link>
-      <div className='mt-4'>
-        {/* <p dangerouslySetInnerHTML={{ __html: termCondition?.data?.attributes[0]?.content }}> 
-        </p> */}
-          <div dangerouslySetInnerHTML={{ __html: content }} />
-          {/* <p>termcomditions</p> */}
-       
+      <div className="mt-4">
+        <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
       <div className=" text-right mt-16">
-        <button onClick={() => navigate(`/dashboard/settings/edittermcondition`)} 
-          className="h-[44px] w-[260px] !text-white !bg-[#8FCAF8] rounded-[8px]">
-          Edit</button>
+        <button
+          onClick={() => navigate(`/dashboard/settings/edittermcondition`)}
+          className="h-[44px] w-[260px] !text-white !bg-[#8FCAF8] rounded-[8px]"
+        >
+          Edit
+        </button>
       </div>
     </div>
   );

@@ -4,11 +4,10 @@ import { useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 import { useGetFeedbackQuery } from "../../../redux/features/otherApi/feedback";
 import users from "./../../../../public/image/users.jpg";
-import styles from "./style.module.css";
 
 const Feedback = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedFeedback,setSelectedFeedback] = useState(null);
+  const [selectedFeedback, setSelectedFeedback] = useState(null);
   const [searchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -122,7 +121,6 @@ const Feedback = () => {
     setCurrentPage(page);
   };
 
-
   return (
     <div className="">
       <div className="rounded-t-lg mt-[24px]">
@@ -137,6 +135,7 @@ const Feedback = () => {
         <Table
           pagination={{
             total: filteredData.length,
+            position: ["bottomCenter"],
             showTotal: (total, range) =>
               `${range[0]}-${range[1]} of ${total} items`,
             defaultPageSize: 10,
@@ -147,18 +146,13 @@ const Feedback = () => {
 
             itemRender: (current, type, originalElement) => {
               if (type === "prev") {
-                return (
-                  <Button className={styles.paginationButton}>Back</Button>
-                );
+                return <Button>Back</Button>;
               }
               if (type === "next") {
-                return (
-                  <Button className={styles.paginationButton}>Next</Button>
-                );
+                return <Button>Next</Button>;
               }
               return originalElement;
             },
-            className: styles.paginationCenter,
           }}
           columns={columns}
           dataSource={filteredData}
@@ -247,27 +241,6 @@ const Feedback = () => {
               </div>
             </div>
           )}
-
-          <div className="flex items-center gap-4 px-[20px] pb-[20px]">
-            <button
-              className="px-4 py-2 bg-slate-100 border-2 hover:bg-slate-200 rounded-md w-[50%] transition-colors"
-              onClick={() => {
-                // Implement download functionality
-                console.log("Download feedback", selectedFeedback);
-              }}
-            >
-              Download
-            </button>
-            <button
-              className="px-4 py-2 bg-[#193664] hover:bg-[#2a4d7a] text-white rounded-md w-[50%] transition-colors"
-              onClick={() => {
-                // Implement print functionality
-                window.print();
-              }}
-            >
-              Print
-            </button>
-          </div>
         </div>
       </Modal>
     </div>

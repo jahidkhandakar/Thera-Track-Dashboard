@@ -14,12 +14,8 @@ const ForgotPassword = () => {
   const [forgotpassword, { isLoading }] = useForgotPasswordMutation();
 
   const handleForgotPassword = async (values) => {
-    console.log("Received values:", values);
-
     try {
       const res = await forgotpassword(values).unwrap();
-      console.log(res);
-
       if (res?.code == 200) {
         toast.success(res?.message);
         setTimeout(() => {
@@ -27,7 +23,6 @@ const ForgotPassword = () => {
         }, 1000);
       }
     } catch (error) {
-      console.log(error);
       setError(error?.data?.message);
     }
   };

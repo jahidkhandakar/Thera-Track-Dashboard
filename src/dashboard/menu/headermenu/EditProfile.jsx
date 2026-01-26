@@ -5,7 +5,6 @@ import toast, { Toaster } from "react-hot-toast";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import "react-phone-number-input/style.css";
 import { useNavigate } from "react-router-dom";
-import defaultUserImage from "../../../../public/image/randomuser.jpg";
 import url from "../../../redux/api/baseUrl";
 import { useUpdateProfileMutation } from "../../../redux/features/auth/profile/editProfile";
 import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
@@ -14,7 +13,7 @@ const EditProfile = () => {
   const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [fileList, setFileList] = useState([]);
-  const [imageUrl, setImageUrl] = useState(defaultUserImage);
+  const [imageUrl, setImageUrl] = useState("");
   const [form] = Form.useForm();
 
   const { data: profile, isLoading, isError } = useGetProfileQuery();
@@ -30,7 +29,7 @@ const EditProfile = () => {
 
       const profileImageUrl = userData?.profileImage
         ? url + userData?.profileImage
-        : defaultUserImage;
+        : "https://via.placeholder.com/150";
 
       setImageUrl(profileImageUrl);
 
@@ -56,7 +55,7 @@ const EditProfile = () => {
   const handleUpdateProfile = async (values) => {
     const formData = new FormData();
     formData.append("fullName", values?.fullName);
-    formData.append("phone", phoneNumber); // Use 'phone' instead of 'phoneNumber'
+    formData.append("phone", phoneNumber);
 
     if (fileList[0]?.originFileObj) {
       formData.append("profileImage", fileList[0]?.originFileObj);
@@ -64,7 +63,6 @@ const EditProfile = () => {
 
     try {
       const res = await updateProfile(formData).unwrap();
-      console.log(res);
 
       if (res?.code === 200) {
         toast.success(res?.message);
@@ -153,7 +151,7 @@ const EditProfile = () => {
                         maxCount={1}
                       >
                         <Button
-                          className="w-full flex items-center justify-center gap-2 py-3"
+                          className="w-full flex mx-auto items-center justify-center gap-2 py-3"
                           icon={<UploadOutlined />}
                         >
                           Change Picture

@@ -9,9 +9,7 @@ import Main from "../layout/Main";
 import ForgotPassword from "./../auth/ForgotPassword";
 import UpdatePassword from "./../auth/UpdatePassword";
 import VerifyOtp from "./../auth/VerifyOtp";
-
 import EditTermCondition from "../dashboard/menu/termsCondition/EditTermCondition";
-
 import About from "../dashboard/menu/about/About";
 import EditAbout from "../dashboard/menu/about/EditAbout";
 import AddSubAdmin from "../dashboard/menu/sidebarMenu/AddSubAdmin";

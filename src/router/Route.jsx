@@ -1,36 +1,39 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../home/Home";
-import ForgotPassword from "./../auth/ForgotPassword";
-import VerifyOtp from "./../auth/VerifyOtp";
-import UpdatePassword from "./../auth/UpdatePassword";
-import Main from "../layout/Main";
 import DashboardHome from "../dashboard/home/DashboardHome";
+import EditProfiel from "../dashboard/menu/headermenu/EditProfile";
 import Notification from "../dashboard/menu/headermenu/Notification";
 import Profile from "../dashboard/menu/headermenu/Profile";
-import EditProfiel from "../dashboard/menu/headermenu/EditProfile";
 import EditPrivacy from "../dashboard/menu/privacypolicy/EditPrivacy";
+import Home from "../home/Home";
+import Main from "../layout/Main";
+import ForgotPassword from "./../auth/ForgotPassword";
+import UpdatePassword from "./../auth/UpdatePassword";
+import VerifyOtp from "./../auth/VerifyOtp";
  
 import EditTermCondition from "../dashboard/menu/termsCondition/EditTermCondition";
 
-import ErrorPage from "./ErrorPage";
 import About from "../dashboard/menu/about/About";
 import EditAbout from "../dashboard/menu/about/EditAbout";
-import Subscription from "../dashboard/menu/subscription/Subscription";
+import AddSubAdmin from "../dashboard/menu/sidebarMenu/AddSubAdmin";
+import Earning from "../dashboard/menu/sidebarMenu/Earning";
+import EditSubAdmin from "../dashboard/menu/sidebarMenu/EditSubAdmin";
+import Feedback from "../dashboard/menu/sidebarMenu/Feedback";
+import FeedbackDetails from "../dashboard/menu/sidebarMenu/FeedbackDetails";
+import Settings from "../dashboard/menu/sidebarMenu/Settings";
+import SubAdmin from "../dashboard/menu/sidebarMenu/SubAdmin";
+import User from "../dashboard/menu/sidebarMenu/User";
 import Addsubscripton from "../dashboard/menu/subscription/Addsubscripton";
 import Editsubscription from "../dashboard/menu/subscription/Editsubscription";
-import User from "../dashboard/menu/sidebarMenu/User";
-import Feedback from "../dashboard/menu/sidebarMenu/Feedback";
+import Subscription from "../dashboard/menu/subscription/Subscription";
 import PrivacyPolicyy from "../settings/PrivacyPolicyy";
-import Settings from "../dashboard/menu/sidebarMenu/Settings";
-import FeedbackDetails from "../dashboard/menu/sidebarMenu/FeedbackDetails";
-import Earning from "../dashboard/menu/sidebarMenu/Earning";
+import ErrorPage from "./ErrorPage";
  
-import TermsAndConditions from "../settings/TermsCondition";
-import SupportPage from "../settings/Support";
-import EULADocument from "../settings/EULADocument";
-import PrivateRoute from "./PrivateRoute";
 import PrivacyPolicy from "../dashboard/menu/privacypolicy/PrivacyPolicy";
 import TermConditions from "../dashboard/menu/termsCondition/TermConditions";
+import EULADocument from "../settings/EULADocument";
+import SupportPage from "../settings/Support";
+import TermsAndConditions from "../settings/TermsCondition";
+import PrivateRoute from "./PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -104,6 +107,18 @@ export const router = createBrowserRouter([
             {
                 path: 'earning',
                 element:<Earning />
+            },
+            {
+                path:'subadmin',
+                element: <SubAdmin />
+            },
+            {
+                path:'subadmin/add',
+                element: <AddSubAdmin />
+            },
+            {
+                path:'subadmin/edit/:id',
+                element: <EditSubAdmin />
             },
             {
                 path: 'settings',

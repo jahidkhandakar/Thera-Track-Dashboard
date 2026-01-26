@@ -1,29 +1,46 @@
-import { Outlet } from "react-router-dom"; 
- 
- 
-import Sidebar from "./Sidebar";
+import { Drawer } from "antd";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
- 
- 
-const Main = () => {
-    return (
-        <div>
-   <div className="flex p-4 min-h-screen">
-      <div className="fixed z-30 w-[200px] left-3"> 
-       <Sidebar />
-      </div> 
-      <div className="flex flex-col flex-1 overflow-hidden">
-        
-        <div className=" fixed xl:ml-[310px] lg:ml-[200px] md:ml-[200px] sm:ml-[120px] ml-[120px] w-[75%] mx-auto z-30  lg:w-[calc(98%-300px)]">
-         <Header />
-        </div>
+import Sidebar from "./Sidebar";
 
-        <div className="overflow-y-auto ml-8 h-full flex-1 pt-[80px] lg:pl-[280px] md:pl-[220px] sm:pl-[160px] pl-[120px]">
-          <Outlet />
-        </div>
-      </div>
-       
-    </div>
+const Main = () => {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    return (
+        <div className="flex min-h-screen bg-gray-50">
+            {/* Sidebar for Desktop */}
+            <div className="hidden lg:block w-[280px] fixed h-full p-4 z-40"> 
+                <Sidebar />
+            </div> 
+
+            {/* Sidebar for Mobile (Drawer) */}
+            <Drawer
+                placement="left"
+                onClose={() => setIsMobileMenuOpen(false)}
+                open={isMobileMenuOpen}
+                bodyStyle={{ padding: 0, backgroundColor: "#8FCAF8" }}
+                width={280}
+                closable={false}
+            >
+                <Sidebar closeDrawer={() => setIsMobileMenuOpen(false)} />
+            </Drawer>
+
+            <div className="flex flex-col flex-1 lg:ml-[280px]">
+                {/* Header */}
+                <div className="sticky top-0 z-30 p-4">
+                    <Header toggleMobileMenu={toggleMobileMenu} />
+                </div>
+
+                {/* Main Content */}
+                <main className="flex-1 p-4 lg:p-8 overflow-y-auto">
+                    <Outlet />
+                </main>
+            </div>
         </div>
     );
 };

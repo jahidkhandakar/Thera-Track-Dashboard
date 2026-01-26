@@ -1,9 +1,9 @@
-import { Button, Modal, Space, Table } from "antd";
-import { BsInfoCircle } from "react-icons/bs";
-import { useState } from "react";
 import { CloseOutlined } from "@ant-design/icons";
-import styles from "./style.module.css";
+import { Button, Modal, Space, Table } from "antd";
+import { useState } from "react";
+import { BsInfoCircle } from "react-icons/bs";
 import { useAllUsersQuery } from "../../../redux/features/otherApi/allUsers";
+import styles from "./style.module.css";
 
 const User = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -101,6 +101,7 @@ const User = () => {
           dataSource={dataSource}
           rowKey={(record) => record._id} // Use _id as unique key
           className={styles.customTable}
+          scroll={{ x: 'max-content' }}
           components={{
             header: {
               cell: (props) => <th {...props} className={styles.tableHeader} />,

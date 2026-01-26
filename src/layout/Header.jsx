@@ -1,20 +1,18 @@
-import { Link, useNavigate } from "react-router-dom";
-import { Menu, Dropdown, Avatar, Badge, Button, Modal, Form, Input } from 'antd';
-import { DownOutlined, BellOutlined, MenuOutlined } from '@ant-design/icons';
-import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined } from "@ant-design/icons";
+import { BellOutlined, DownOutlined, EyeInvisibleOutlined, EyeTwoTone, LockOutlined, MenuOutlined } from '@ant-design/icons';
+import { Avatar, Badge, Button, Dropdown, Form, Input, Menu, Modal } from 'antd';
 import { useState } from "react";
-import { useGetProfileQuery } from "../redux/features/auth/profile/getProfile";
+import { Link, useNavigate } from "react-router-dom";
 import url from "../redux/api/baseUrl";
+import { useGetProfileQuery } from "../redux/features/auth/profile/getProfile";
  
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useChangePasswordMutation } from "../redux/features/auth/changePassword";
 
-const Header = ({ isSidebarOpen, toggleSidebar }) => {
+const Header = ({ toggleMobileMenu }) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
-  const [error, setError] = useState('');
 
   const { data: admin } = useGetProfileQuery();
 
@@ -47,7 +45,7 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
   const [passwordChange] = useChangePasswordMutation();
   
   const changePassword = async (values) => {
-    const { confirmPassword, ...ChangePassword } = values;
+    const { ...ChangePassword } = values;
     console.log("Form values: ", ChangePassword);
 
     try {
@@ -62,7 +60,7 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
       }, 1000);
     } catch (error) {
       console.log(error.data);
-      setError(error?.data?.message);
+      toast.error(error?.data?.message || "Failed to change password");
     }
   };
 
@@ -90,11 +88,19 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
   return (
     <div className=" flex justify-between items-center shadow-xl mb-[24px] p-[16px] rounded-md !bg-[#2196F3]"> 
      <Toaster />
-     <div className="text-white">
-      <p className="text-header text-whiteText font-medium">Welcome !</p>
-      
-      <h1 className="text-[#dcddad] text-[20px] font-semibold">{admin?.data?.attributes.fullName}</h1>  
-      </div>   
+     <div className="flex items-center gap-4">
+       <Button 
+         type="text" 
+         icon={<MenuOutlined className="text-white text-xl" />} 
+         onClick={toggleMobileMenu} 
+         className="lg:hidden"
+       />
+       <div className="text-white">
+        <p className="text-header text-whiteText font-medium">Welcome !</p>
+        
+        <h1 className="text-[#dcddad] text-[20px] font-semibold">{admin?.data?.attributes.fullName}</h1>  
+       </div>   
+     </div>
   
 
       <div className="flex items-center gap-5">

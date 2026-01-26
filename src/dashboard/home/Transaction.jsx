@@ -1,12 +1,12 @@
-import { Button, DatePicker, Input, Modal, Space, Table } from "antd";
-import { BsInfoCircle } from "react-icons/bs";
-import { useState } from "react";
 import { CloseOutlined } from "@ant-design/icons";
-import styles from './../menu/sidebarMenu/style.module.css';
+import { Button, Modal, Space, Table } from "antd";
+import { useState } from "react";
+import { BsInfoCircle } from "react-icons/bs";
 import { useAllUsersQuery } from "../../redux/features/otherApi/allUsers";
+import styles from './../menu/sidebarMenu/style.module.css';
  
 
-const { Search } = Input;
+
 
 const Transaction = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -67,14 +67,7 @@ const Transaction = () => {
     setIsModalOpen(true);
   };
 
-  const onSearch = (value) => {
-    console.log("Search value:", value);
-    // Implement search/filter logic here if needed
-  };
 
-  const onChange = (date, dateString) => {
-    console.log("Selected Date:", date, dateString);
-  };
 
   if (isLoading) return <p>Loading users...</p>;
   if (error) return <p>Failed to load users.</p>;
@@ -109,6 +102,7 @@ const Transaction = () => {
           dataSource={dataSource}
           rowKey={(record) => record._id} // Use _id as unique key
           className={styles.customTable}
+          scroll={{ x: 'max-content' }}
           components={{
             header: {
               cell: (props) => <th {...props} className={styles.tableHeader} />,

@@ -1,0 +1,175 @@
+import { CloseOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { Button, Modal, Space, Table } from "antd";
+import { useState } from "react";
+import { BsInfoCircle } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { useAllSubAdminsQuery } from "../../../redux/features/otherApi/subAdmin";
+import styles from "./style.module.css";
+
+const SubAdmin = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const navigate = useNavigate();
+
+  const { data: subAdmins, isLoading, error } = useAllSubAdminsQuery();
+
+  // Safe access to sub-admin list
+  const dataSource = subAdmins?.data?.attributes || [];
+
+  const columns = [
+    {
+      title: "#SI",
+      key: "si",
+      render: (_, __, index) => index + 1,
+    },
+    {
+      title: "Name",
+      dataIndex: "fullName",
+      key: "fullName",
+      render: (text) => <p className="font-medium">{text || "N/A"}</p>,
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      render: (text) => <p>{text || "N/A"}</p>,
+    },
+    {
+      title: "Phone",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
+      render: (text) => <p>{text || "N/A"}</p>,
+    },
+    {
+      title: "Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (text) => <p>{text ? text.split("T")[0] : "N/A"}</p>,
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <BsInfoCircle
+            onClick={() => handleView(record)}
+            size={18}
+            className="text-[#2196F3] cursor-pointer"
+          />
+          <EditOutlined
+            onClick={() => navigate(`edit/${record._id}`)}
+            className="text-[green] cursor-pointer text-lg"
+          />
+        </Space>
+      ),
+    },
+  ];
+
+  const handleView = (user) => {
+    setSelectedUser(user);
+    setIsModalOpen(true);
+  };
+
+  if (isLoading) return <p>Loading sub-admins...</p>;
+  if (error) return <p>Failed to load sub-admins.</p>;
+
+  return (
+    <div>
+      <div className="rounded-t-lg mt-[24px]">
+        <div className="flex py-[22px] justify-between items-center">
+          <p className="text-header">Sub Admins</p>
+          <Button 
+            type="primary" 
+            icon={<PlusOutlined />} 
+            onClick={() => navigate('add')}
+            className="bg-[#2196F3]"
+          >
+            Add Sub Admin
+          </Button>
+        </div>
+
+        <Table
+          pagination={{
+            total: dataSource.length,
+            showTotal: (total, range) =>
+              `${range[0]}-${range[1]} of ${total} items`,
+            defaultPageSize: 10,
+            showSizeChanger: false,
+            itemRender: (current, type, originalElement) => {
+              if (type === "prev") {
+                return (
+                  <Button className={styles.paginationButton}>Back</Button>
+                );
+              }
+              if (type === "next") {
+                return (
+                  <Button className={styles.paginationButton}>Next</Button>
+                );
+              }
+              return originalElement;
+            },
+            className: styles.paginationCenter,
+          }}
+          columns={columns}
+          dataSource={dataSource}
+          rowKey={(record) => record._id}
+          className={styles.customTable}
+          scroll={{ x: 'max-content' }}
+          components={{
+            header: {
+              cell: (props) => <th {...props} className={styles.tableHeader} />,
+            },
+          }}
+        />
+      </div>
+
+      <Modal
+        open={isModalOpen}
+        onOk={() => setIsModalOpen(false)}
+        onCancel={() => setIsModalOpen(false)}
+        footer={null}
+        closeIcon={
+          <CloseOutlined
+            style={{
+              color: "white",
+              backgroundColor: "#de0a26",
+              borderRadius: "10%",
+              padding: "10px",
+            }}
+          />
+        }
+      >
+        <div>
+          <div className="flex justify-center py-4 items-center gap-2 flex-col border-b border-b-gray-300">
+            <h1 className="text-xl font-medium">Sub Admin Details</h1>
+          </div>
+          <div className="p-[20px]">
+            <div className="flex justify-between border-b py-[16px]">
+              <p>Full Name:</p>
+              <p>{selectedUser?.fullName || "N/A"}</p>
+            </div>
+
+            <div className="flex justify-between border-b py-[16px]">
+              <p>Email:</p>
+              <p>{selectedUser?.email || "N/A"}</p>
+            </div>
+            <div className="flex justify-between border-b py-[16px]">
+              <p>Phone:</p>
+              <p>{selectedUser?.phoneNumber || "N/A"}</p>
+            </div>
+            <div className="flex justify-between border-b py-[16px]">
+              <p>Date:</p>
+              <p>
+                {selectedUser?.createdAt
+                  ? selectedUser.createdAt.split("T")[0]
+                  : "N/A"}
+              </p>
+            </div>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
+};
+
+export default SubAdmin;

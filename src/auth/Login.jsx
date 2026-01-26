@@ -1,30 +1,14 @@
 import { Button, Checkbox, Form, Input } from "antd";
-import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useAdminLoginMutation } from "../redux/features/auth/login";
 
 const Login = () => {
-  const [checkboxError, setCheckboxError] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
-  const [error, setError] = useState(" ");
   const navigate = useNavigate();
 
   const [adminLogin, { isLoading }] = useAdminLoginMutation();
 
-  const handleCheckboxChange = (e) => {
-    setIsChecked(e.target.checked);
-    if (e.target.checked) {
-      setCheckboxError("");
-    }
-  };
-
   const onFinish = async (values) => {
-    if (!isChecked) {
-      setCheckboxError("You must agree to the terms");
-      return;
-    }
-
     try {
       const res = await adminLogin(values).unwrap();
       if (res?.code == 200) {
@@ -39,7 +23,7 @@ const Login = () => {
         navigate("/dashboard/home");
       }, 1000);
     } catch (error) {
-      setError(error?.data?.message);
+      toast.error(error?.data?.message || "Login failed");
     }
   };
 
@@ -96,16 +80,7 @@ const Login = () => {
 
           <div className="flex justify-between items-center mb-6">
             <Form.Item className="mb-0">
-              <Checkbox
-                className="text-gray-700"
-                checked={isChecked}
-                onChange={handleCheckboxChange}
-              >
-                Remember me
-              </Checkbox>
-              {checkboxError && (
-                <p className="text-red-500 text-xs mt-1">{checkboxError}</p>
-              )}
+              <Checkbox className="text-gray-700">Remember me</Checkbox>
             </Form.Item>
             <Link to="/forgotpassword">
               <p className="cursor-pointer text-sm font-medium text-blue-600 hover:text-blue-700">
@@ -113,10 +88,6 @@ const Login = () => {
               </p>
             </Link>
           </div>
-
-          {error && error.trim() !== "" && (
-            <p className="text-red-500 text-sm mb-4">{error}</p>
-          )}
 
           <Form.Item className="mb-0">
             <Button

@@ -3,31 +3,51 @@ import { BiSolidDashboard } from "react-icons/bi";
 import { CiSettings } from "react-icons/ci";
 import { FaDollarSign, FaSackDollar, FaUsers } from "react-icons/fa6";
 import { MdOutlineRateReview } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../public/image/logo.png";
 import logo1 from "../../public/image/logo1.png";
+import { IoLogOutOutline } from "react-icons/io5";
+import { Button } from "antd";
+import Swal from "sweetalert2";
 
 const Sidebar = ({ closeDrawer }) => {
+  const navigate = useNavigate();
   const handleLinkClick = () => {
     if (closeDrawer) {
       closeDrawer();
     }
   };
+  const handleLogOut = () => {
+    Swal.fire({
+      title: "Are you sure?",
 
+      text: "You won't be able to log out from here!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        Swal.fire({
+          title: "Logged Out!",
+          text: "User has been logged out successfully.",
+          icon: "success",
+          timer: 2000,
+        });
+        navigate("/");
+      }
+    });
+  };
   return (
     <div className="flex flex-col justify-between bg-[#8FCAF8] h-full rounded-md  overflow-y-auto">
       <div>
         <div className="p-6 flex flex-col items-center">
-          <img
-            className="rounded-lg mb-2"
-            src={logo}
-            alt="Logo"
-          />
-          <img
-            className="rounded-lg h-8"
-            src={logo1}
-            alt="Logo Text"
-          />
+          <img className="rounded-lg mb-2" src={logo} alt="Logo" />
+          <img className="rounded-lg h-8" src={logo1} alt="Logo Text" />
         </div>
         <div className="mt-4 px-2">
           <ul className="space-y-1">
@@ -122,6 +142,13 @@ const Sidebar = ({ closeDrawer }) => {
               <span>Settings</span>
             </NavLink>
           </ul>
+          <Button
+            onClick={() => handleLogOut()}
+            className="w-full mt-16 border px-5 py-2 h-12 rounded mx-auto"
+          >
+            <IoLogOutOutline className="size-5" />
+            Logout
+          </Button>
         </div>
       </div>
     </div>

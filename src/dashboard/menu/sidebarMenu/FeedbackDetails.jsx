@@ -42,9 +42,9 @@
 // export default FeedbackDetails;
 
 
-import { Button, Card, Avatar, Tag, Divider } from "antd";
-import { ArrowLeftOutlined, DownloadOutlined, PrinterOutlined } from "@ant-design/icons";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { ArrowLeftOutlined, DownloadOutlined } from "@ant-design/icons";
+import { Avatar, Button, Card, Divider, Tag } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useGetFeedbackQuery } from "../../../redux/features/otherApi/feedback";
 import users from './../../../../public/image/users.jpg';
 
@@ -90,9 +90,7 @@ Message: ${selectedFeedback?.message || 'No message provided'}
     window.URL.revokeObjectURL(url);
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
+
 
   if (isLoading) {
     return (
@@ -122,7 +120,7 @@ Message: ${selectedFeedback?.message || 'No message provided'}
   }
 
   return (
-    <div className="  mx-auto p-6 mt-12">
+    <div className="mx-auto p-4 md:p-6 mt-4 md:mt-12">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">

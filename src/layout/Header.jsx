@@ -87,24 +87,24 @@ const Header = ({ toggleMobileMenu }) => {
   );
 
   return (
-    <div className=" flex justify-between items-center p-5 rounded-md !bg-[#2196F3]"> 
+    <div className=" flex justify-between items-center p-3 md:p-5 rounded-md !bg-[#2196F3]"> 
      <Toaster />
-     <div className="flex items-center gap-4">
+     <div className="flex items-center gap-2 md:gap-4">
        <Button 
          type="text" 
          icon={<MenuOutlined className="text-white text-xl" />} 
          onClick={toggleMobileMenu} 
          className="lg:hidden"
        />
-       <div className="text-white">
-        <p className="text-header text-whiteText font-medium">Welcome !</p>
+       <div className="text-white hidden sm:block">
+        <p className="text-header text-whiteText font-medium text-xs md:text-base">Welcome !</p>
         
-        <h1 className="text-[#dcddad] text-[20px] font-semibold">{admin?.data?.attributes.fullName}</h1>  
+        <h1 className="text-[#dcddad] text-sm md:text-[20px] font-semibold">{admin?.data?.attributes.fullName}</h1>  
        </div>   
      </div>
   
 
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-3 md:gap-5">
         {/* Notifications */}
         <div
           onClick={() => navigate("/dashboard/notification")}
@@ -113,18 +113,18 @@ const Header = ({ toggleMobileMenu }) => {
           <Badge style={{ backgroundColor: "red", marginTop: '10px', marginRight: '5px' }}>
             <BellOutlined
               style={{ cursor: "pointer" }}
-              className={`bg-primary text-3xl text-[#Ffffffff] p-2 border border-[#e7e0e0] rounded`}
+              className={`bg-primary text-2xl md:text-3xl text-[#Ffffffff] p-1.5 md:p-2 border border-[#e7e0e0] rounded`}
             />
           </Badge>
         </div>
         
         {/* User dropdown */}
         <div className="border p-1 rounded">
-        <Dropdown className="px-2" overlay={menu} trigger={['click']} onVisibleChange={handleMenuVisibility}>
+        <Dropdown className="px-1 md:px-2" overlay={menu} trigger={['click']} onVisibleChange={handleMenuVisibility}>
     <a className="flex items-center text-white cursor-pointer text-whiteText">
-      <Avatar src={url + admin?.data?.attributes.profileImage} className="mr-2 h-[42px] w-[42px]" />
-      {/* <Avatar src={url + profile?.data?.attributes?.image} className="mr-2 h-[52px] w-[52px]" /> */}
-      {admin?.data?.attributes.fullName} <DownOutlined className="ml-1" />
+      <Avatar src={url + admin?.data?.attributes.profileImage} className="mr-0 md:mr-2 h-[32px] w-[32px] md:h-[42px] md:w-[42px]" />
+      <span className="hidden md:inline">{admin?.data?.attributes.fullName}</span>
+      <DownOutlined className="ml-1 text-xs" />
     </a>
   </Dropdown>
         </div>

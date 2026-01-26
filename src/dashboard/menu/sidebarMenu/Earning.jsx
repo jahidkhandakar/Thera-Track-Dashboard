@@ -76,8 +76,8 @@ const Earning = () => {
   const tableData = earning?.data?.attributes || [];
 
   return (
-    <div className="mt-12 p-6">
-      <Card>
+    <div className="mt-4 md:mt-12 p-3 md:p-6">
+      <Card className="shadow-none md:shadow-sm">
         <div className="mb-6">
           <Title level={2}>Earnings & Payments</Title>
           <p className="text-gray-600">

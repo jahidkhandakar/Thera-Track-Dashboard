@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaPlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import { useSubscriptionQuery } from '../../../redux/features/otherApi/subscription';
@@ -27,35 +26,42 @@ const Subscription = () => {
 
       {/* Render subscriptions dynamically */}
       {attributes.length === 0 && <p>No subscriptions available</p>}
-      <div className='grid md:grid-cols-3 grid-cols-1'>
-
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
       {attributes.map((item) => (
         <div
           key={item._id}
-          className="w-full max-w-xs p-4 bg-white border border-blue-300 rounded-lg shadow-md my-4"
+          className="w-full p-6 bg-white border border-blue-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow"
         >
           {/* Subscription Header */}
-          <div className="flex items-center mb-4">
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
-             <img src="/public/image/sub.png" alt="" />
+          <div className="flex items-center mb-6">
+            <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center shrink-0">
+             <img src="/image/sub.png" className="w-6 h-6" alt="" />
             </div>
-            <h2 className="ml-3 text-lg text-[#6AB9F7] font-semibold">{item.duration}</h2>
+            <h2 className="ml-4 text-xl text-[#2196F3] font-bold">{item.duration}</h2>
           </div>
 
           {/* Features */}
-          <div className="mb-4">
-            <p className="text-sm text-[#6AB9F7] text-gray-600">✔ {item.advantage1}</p>
-            <p className="text-sm text-[#6AB9F7] text-gray-600">✔ {item.advantage2}</p>
-            <p className="text-sm text-[#6AB9F7] text-gray-600">✔ {item.advantage3}</p>
+          <div className="space-y-3 mb-8 min-h-[100px]">
+            <p className="text-sm text-gray-600 flex items-start gap-2">
+              <span className="text-blue-500 font-bold shrink-0">✔</span> {item.advantage1}
+            </p>
+            <p className="text-sm text-gray-600 flex items-start gap-2">
+              <span className="text-blue-500 font-bold shrink-0">✔</span> {item.advantage2}
+            </p>
+            <p className="text-sm text-gray-600 flex items-start gap-2">
+              <span className="text-blue-500 font-bold shrink-0">✔</span> {item.advantage3}
+            </p>
           </div>
 
           {/* Price and Edit Button */}
-          <div className="flex items-center justify-between">
-            <p className="text-xl font-semibold text-[#6AB9F7]">${item.price.toFixed(2)} / <span className='text-sm'>Monthly</span></p>
+          <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+            <div>
+              <p className="text-2xl font-bold text-[#2196F3]">${item.price.toFixed(2)}</p>
+              <p className="text-xs text-gray-400 font-medium tracking-wide uppercase mt-1">Monthly</p>
+            </div>
             <button
-              // onClick={() => navigate(`/dashboard/subscription/editsubscription/${item._id}`)}
               onClick={() => navigate(`/dashboard/subscription/editsubscription/${item?._id}`)}
-              className="px-4 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-400 transition duration-200"
+              className="px-6 py-2.5 bg-[#2196F3] text-white text-sm font-semibold rounded-xl hover:bg-blue-600 transition-colors shadow-sm"
             >
               Edit
             </button>

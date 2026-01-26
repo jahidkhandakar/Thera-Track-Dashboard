@@ -66,8 +66,8 @@
 
 
 import React from 'react';
-import { HiOutlineCurrencyDollar } from 'react-icons/hi';
 import { FaUsers } from 'react-icons/fa6';
+import { HiOutlineCurrencyDollar } from 'react-icons/hi';
 import { useStatusQuery } from '../../redux/features/otherApi/status';
 
 const Card = () => {
@@ -99,19 +99,17 @@ const Card = () => {
         {cards.map((card, index) => (
           <div
             key={index}
-            className=" rounded-2xl bg-gradient-to-bl from-[#74bbf5] to-[#e7e9eb] shadow-sm border border-[#2196F3] p-6 hover:shadow-md transition-shadow"
+            className=" rounded-2xl bg-gradient-to-bl from-[#74bbf5] to-[#e7e9eb] shadow-sm border border-[#2196F3] p-4 md:p-6 hover:shadow-md transition-shadow"
           >
-            <div className="flex items-start gap-9 mb-4">
-              <div className={`bg-[#2196F3] rounded-lg p-3 flex items-center justify-center`}>
-                {card.icon}
+            <div className="flex items-start gap-4 md:gap-9 mb-4">
+              <div className={`bg-[#2196F3] rounded-lg p-2 md:p-3 flex items-center justify-center shrink-0`}>
+                {React.cloneElement(card.icon, { className: "w-5 h-5 md:w-6 md:h-6 text-white" })}
               </div>
-              <h3 className="text-gray-700 text-[32px] font-semibold">{card.title}</h3>
+              <h3 className="text-gray-700 text-lg md:text-[32px] font-semibold truncate">{card.title}</h3>
             </div>
 
             <div className="flex items-end justify-between">
-              <h2 className="text-4xl font-bold text-gray-900">{card.value}</h2>
-              
-              
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900">{card.value}</h2>
             </div>
           </div>
         ))}

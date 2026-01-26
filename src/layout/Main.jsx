@@ -12,7 +12,7 @@ const Main = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Sidebar for Desktop */}
       <div className="hidden lg:block w-[280px] fixed h-full p-4 z-40">
         <Sidebar />

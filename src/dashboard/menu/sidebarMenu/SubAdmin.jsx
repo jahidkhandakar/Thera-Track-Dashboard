@@ -143,23 +143,23 @@ const SubAdmin = () => {
           <div className="flex justify-center py-4 items-center gap-2 flex-col border-b border-b-gray-300">
             <h1 className="text-xl font-medium">Sub Admin Details</h1>
           </div>
-          <div className="p-[20px]">
-            <div className="flex justify-between border-b py-[16px]">
-              <p>Full Name:</p>
-              <p>{selectedUser?.fullName || "N/A"}</p>
+          <div className="p-4 md:p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:justify-between border-b pb-3 gap-1">
+              <p className="text-gray-500 text-sm">Full Name:</p>
+              <p className="font-medium">{selectedUser?.fullName || "N/A"}</p>
             </div>
 
-            <div className="flex justify-between border-b py-[16px]">
-              <p>Email:</p>
-              <p>{selectedUser?.email || "N/A"}</p>
+            <div className="flex flex-col sm:flex-row sm:justify-between border-b pb-3 gap-1">
+              <p className="text-gray-500 text-sm">Email:</p>
+              <p className="font-medium break-all">{selectedUser?.email || "N/A"}</p>
             </div>
-            <div className="flex justify-between border-b py-[16px]">
-              <p>Phone:</p>
-              <p>{selectedUser?.phoneNumber || "N/A"}</p>
+            <div className="flex flex-col sm:flex-row sm:justify-between border-b pb-3 gap-1">
+              <p className="text-gray-500 text-sm">Phone:</p>
+              <p className="font-medium">{selectedUser?.phoneNumber || "N/A"}</p>
             </div>
-            <div className="flex justify-between border-b py-[16px]">
-              <p>Date:</p>
-              <p>
+            <div className="flex flex-col sm:flex-row sm:justify-between pt-3 gap-1">
+              <p className="text-gray-500 text-sm">Date:</p>
+              <p className="font-medium">
                 {selectedUser?.createdAt
                   ? selectedUser.createdAt.split("T")[0]
                   : "N/A"}

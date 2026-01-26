@@ -1,15 +1,5 @@
-import {
-  BellOutlined,
-  DownOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
-import {
-  Avatar,
-  Badge,
-  Button,
-  Dropdown,
-  Menu,
-} from "antd";
+import { BellOutlined, DownOutlined, MenuOutlined } from "@ant-design/icons";
+import { Avatar, Badge, Button, Dropdown, Menu } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import url from "../redux/api/baseUrl";

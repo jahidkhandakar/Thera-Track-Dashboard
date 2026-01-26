@@ -6,7 +6,6 @@ import { useStatusQuery } from '../../redux/features/otherApi/status';
 
 const Card = () => {
   const { data: status } = useStatusQuery();
-  console.log(status?.data?.attributes);
 
   const cards = [
     {
@@ -19,6 +18,12 @@ const Card = () => {
     {
       title: 'Total User',
       value: status?.data?.attributes?.userCount || '0',
+      icon: <FaUsers className="w-6 h-6 text-white" />,
+      bgColor: 'bg-blue-500',
+    },
+    {
+      title: 'Total Sub Admin',
+      value: status?.data?.attributes?.subAdminCount || '0',
       icon: <FaUsers className="w-6 h-6 text-white" />,
       bgColor: 'bg-blue-500',
     },

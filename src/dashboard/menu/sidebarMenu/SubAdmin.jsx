@@ -11,7 +11,7 @@ const SubAdmin = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const navigate = useNavigate();
 
-  const { data: subAdmins, isLoading, error } = useAllSubAdminsQuery();
+  const { data: subAdmins, isLoading } = useAllSubAdminsQuery();
 
   // Safe access to sub-admin list
   const dataSource = subAdmins?.data?.attributes || [];
@@ -66,14 +66,11 @@ const SubAdmin = () => {
     setIsModalOpen(true);
   };
 
-  if (isLoading) return <p>Loading sub-admins...</p>;
-  if (error) return <p>Failed to load sub-admins.</p>;
-
   return (
     <div>
       <div className="rounded-t-lg mt-[24px]">
         <div className="flex py-[22px] justify-between items-center">
-          <p className="text-header">Sub Admins</p>
+          <h1 className="text-xl font-semibold">Sub Admins</h1>
           <Button
             type="primary"
             icon={<PlusOutlined />}
@@ -106,6 +103,7 @@ const SubAdmin = () => {
             },
             className: styles.paginationCenter,
           }}
+          loading={isLoading}
           columns={columns}
           dataSource={dataSource}
           rowKey={(record) => record._id}

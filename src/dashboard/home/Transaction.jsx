@@ -5,7 +5,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { useAllUsersQuery } from "../../redux/features/otherApi/allUsers";
 import styles from "./../menu/sidebarMenu/style.module.css";
 
-const Transaction = () => {
+const RecentUser = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -22,8 +22,8 @@ const Transaction = () => {
     },
     {
       title: "User Name",
-      dataIndex: "firstName",
-      key: "firstName",
+      dataIndex: "fullName",
+      key: "fullName",
       render: (text) => <p className="font-medium">{text || "N/A"}</p>,
     },
     {
@@ -71,7 +71,7 @@ const Transaction = () => {
     <div>
       <div className="rounded-t-lg">
         <div className="flex py-[22px] justify-between items-center">
-          <p className="text-header">Recent User</p>
+          <h1 className="text-xl font-semibold">Recent User</h1>
         </div>
 
         <Table
@@ -114,6 +114,7 @@ const Transaction = () => {
         onOk={() => setIsModalOpen(false)}
         onCancel={() => setIsModalOpen(false)}
         footer={null}
+        centered
         closeIcon={
           <CloseOutlined
             style={{
@@ -164,4 +165,4 @@ const Transaction = () => {
   );
 };
 
-export default Transaction;
+export default RecentUser;

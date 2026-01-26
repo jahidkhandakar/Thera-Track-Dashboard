@@ -1,14 +1,11 @@
-
 import { CloseOutlined } from "@ant-design/icons";
 import { Button, Modal, Space, Table } from "antd";
 import { useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useGetFeedbackQuery } from "../../../redux/features/otherApi/feedback";
-import users from './../../../../public/image/users.jpg';
-import styles from './style.module.css';
-
-
+import users from "./../../../../public/image/users.jpg";
+import styles from "./style.module.css";
 
 const Feedback = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,28 +13,30 @@ const Feedback = () => {
   const [searchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
-  
-  const { data: feedbackResponse, isLoading, error } = useGetFeedbackQuery();
-  
+
+  const { data: feedbackResponse, isLoading } = useGetFeedbackQuery();
+
   // Extract feedback data from API response
   // Handle different possible API response structures
   const feedbackData = Array.isArray(feedbackResponse?.data)
     ? feedbackResponse.data
     : Array.isArray(feedbackResponse?.data?.feedbacks)
-    ? feedbackResponse.data.feedbacks
-    : Array.isArray(feedbackResponse)
-    ? feedbackResponse
-    : [];
-
-  console.log('Feedback Response:', feedbackResponse);
-  console.log('Feedback Data:', feedbackData);
+      ? feedbackResponse.data.feedbacks
+      : Array.isArray(feedbackResponse)
+        ? feedbackResponse
+        : [];
 
   // Filter feedback based on search text
   const filteredData = Array.isArray(feedbackData)
-    ? feedbackData.filter(item =>
-        item?.userId?.fullName?.toLowerCase().includes(searchText.toLowerCase()) ||
-        item?.userId?.email?.toLowerCase().includes(searchText.toLowerCase()) ||
-        item?.message?.toLowerCase().includes(searchText.toLowerCase())
+    ? feedbackData.filter(
+        (item) =>
+          item?.userId?.fullName
+            ?.toLowerCase()
+            .includes(searchText.toLowerCase()) ||
+          item?.userId?.email
+            ?.toLowerCase()
+            .includes(searchText.toLowerCase()) ||
+          item?.message?.toLowerCase().includes(searchText.toLowerCase()),
       )
     : [];
 
@@ -46,7 +45,7 @@ const Feedback = () => {
       title: "#SI",
       dataIndex: "si",
       key: "si",
-      render: (text, _, index) => ((currentPage - 1) * 10) + index + 1,
+      render: (text, _, index) => (currentPage - 1) * 10 + index + 1,
     },
     {
       title: "User Name",
@@ -69,9 +68,7 @@ const Feedback = () => {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      render: (_, record) => (
-        <p>{record?.userId?.email || "N/A"}</p>
-      )
+      render: (_, record) => <p>{record?.userId?.email || "N/A"}</p>,
     },
     {
       title: "Message",
@@ -81,15 +78,13 @@ const Feedback = () => {
         <p className="max-w-[200px] truncate" title={record?.message}>
           {record?.message || "N/A"}
         </p>
-      )
+      ),
     },
     {
       title: "Emoji",
       dataIndex: "emoji",
       key: "emoji",
-      render: (_, record) => (
-        <p>{record?.emoji || "N/A"}</p>
-      )
+      render: (_, record) => <p>{record?.emoji || "N/A"}</p>,
     },
     {
       title: "Date",
@@ -97,26 +92,25 @@ const Feedback = () => {
       dataIndex: "date",
       render: (_, record) => (
         <p>
-          {record?.createdAt 
-            ? new Date(record.createdAt).toLocaleDateString('en-GB', {
-                day: '2-digit',
-                month: '2-digit', 
-                year: '2-digit'
+          {record?.createdAt
+            ? new Date(record.createdAt).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "2-digit",
               })
-            : "N/A"
-          }
+            : "N/A"}
         </p>
-      )
+      ),
     },
     {
       title: "Action",
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <BsInfoCircle 
+          <BsInfoCircle
             onClick={() => handleViewDetails(record)}
-            size={18} 
-            className="text-[#193664] cursor-pointer hover:text-blue-600" 
+            size={18}
+            className="text-[#193664] cursor-pointer hover:text-blue-600"
           />
         </Space>
       ),
@@ -124,66 +118,45 @@ const Feedback = () => {
   ];
 
   const handleViewDetails = (feedback) => {
-    console.log(feedback?._id);
-    navigate('details', { state: { id: feedback?._id } });
+    navigate("details", { state: { id: feedback?._id } });
   };
-  
-
-
 
   const handleChangePage = (page) => {
     setCurrentPage(page);
   };
-
-  if (isLoading) {
-    return <div className="text-center py-8">Loading feedback...</div>;
-  }
-
-  if (error) {
-    return <div className="text-center py-8 text-red-500">Error loading feedback data</div>;
-  }
 
   return (
     <div className="">
       <div className="rounded-t-lg mt-[24px]">
         <div className="flex py-[22px] justify-between items-center">
           <div>
-            <p className="text-header">Feedback ({filteredData.length})</p>
+            <p className="text-xl font-semibold">
+              Feedback ({filteredData.length})
+            </p>
           </div>
-
-          {/* <div className="flex gap-2">
-            <Space direction="vertical">
-              <DatePicker onChange={onChange} placeholder="Filter by date" />
-            </Space>
-            <Search 
-              style={{
-                width: "250px",
-              }} 
-              placeholder="Search by name, email or message" 
-              onSearch={onSearch}
-              onChange={(e) => onSearch(e.target.value)}
-              value={searchText}
-              enterButton 
-            />
-          </div> */}
-          
         </div>
-        
+
         <Table
           pagination={{
             total: filteredData.length,
-            showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+            showTotal: (total, range) =>
+              `${range[0]}-${range[1]} of ${total} items`,
             defaultPageSize: 10,
             current: currentPage,
             onChange: handleChangePage,
             showSizeChanger: true,
             showQuickJumper: true,
+
             itemRender: (current, type, originalElement) => {
-              if (type === 'prev') {
-                return <Button className={styles.paginationButton}>Back</Button>;
+              if (type === "prev") {
+                return (
+                  <Button className={styles.paginationButton}>Back</Button>
+                );
               }
-              if (type === 'next') {
-                return <Button className={styles.paginationButton}>Next</Button>;
+              if (type === "next") {
+                return (
+                  <Button className={styles.paginationButton}>Next</Button>
+                );
               }
               return originalElement;
             },
@@ -193,7 +166,7 @@ const Feedback = () => {
           dataSource={filteredData}
           rowKey="_id"
           loading={isLoading}
-          scroll={{ x: 'max-content' }}
+          scroll={{ x: "max-content" }}
         />
       </div>
 
@@ -211,78 +184,83 @@ const Feedback = () => {
               backgroundColor: "#de0a26",
               borderRadius: "50%",
               padding: "8px",
-              fontSize: "12px"
+              fontSize: "12px",
             }}
           />
         }
       >
         <div>
           <div className="flex justify-center items-center gap-2 flex-col border-b border-b-gray-300">
-            <p className="text-[26px] mb-[16px] font-medium">Feedback Details</p>
+            <p className="text-[26px] mb-[16px] font-medium">
+              Feedback Details
+            </p>
           </div>
-          
+
           {selectedFeedback && (
             <div className="p-[20px]">
               <div className="flex justify-between border-b py-[16px]">
                 <p className="font-medium">Full Name:</p>
                 <p>{selectedFeedback?.userId?.fullName || "N/A"}</p>
               </div>
-              
+
               <div className="flex justify-between border-b py-[16px]">
                 <p className="font-medium">Email:</p>
                 <p>{selectedFeedback?.userId?.email || "N/A"}</p>
               </div>
-              
+
               <div className="flex justify-between border-b py-[16px]">
                 <p className="font-medium">Phone:</p>
                 <p>{selectedFeedback?.userId?.phoneNumber || "N/A"}</p>
               </div>
-              
+
               <div className="flex justify-between border-b py-[16px]">
                 <p className="font-medium">Date:</p>
                 <p>
-                  {selectedFeedback?.createdAt 
-                    ? new Date(selectedFeedback.createdAt).toLocaleDateString('en-GB')
-                    : "N/A"
-                  }
+                  {selectedFeedback?.createdAt
+                    ? new Date(selectedFeedback.createdAt).toLocaleDateString(
+                        "en-GB",
+                      )
+                    : "N/A"}
                 </p>
               </div>
-              
+
               <div className="flex justify-between border-b py-[16px]">
                 <p className="font-medium">Country:</p>
                 <p>{selectedFeedback?.userId?.country || "N/A"}</p>
               </div>
-              
+
               <div className="flex justify-between border-b py-[16px]">
                 <p className="font-medium">City:</p>
                 <p>{selectedFeedback?.userId?.city || "N/A"}</p>
               </div>
-              
+
               <div className="flex justify-between border-b py-[16px]">
                 <p className="font-medium">Emoji:</p>
                 <p className="text-xl">{selectedFeedback?.emoji || "N/A"}</p>
               </div>
-              
+
               <div className="flex flex-col gap-2 pt-[16px]">
                 <p className="font-medium">Message:</p>
                 <div className="px-[15px] py-[10px] bg-gray-50 rounded-lg min-h-[60px]">
-                  <p className="whitespace-pre-wrap">{selectedFeedback?.message || "No message provided"}</p>
+                  <p className="whitespace-pre-wrap">
+                    {selectedFeedback?.message || "No message provided"}
+                  </p>
                 </div>
               </div>
             </div>
           )}
-          
+
           <div className="flex items-center gap-4 px-[20px] pb-[20px]">
-            <button 
+            <button
               className="px-4 py-2 bg-slate-100 border-2 hover:bg-slate-200 rounded-md w-[50%] transition-colors"
               onClick={() => {
                 // Implement download functionality
-                console.log('Download feedback', selectedFeedback);
+                console.log("Download feedback", selectedFeedback);
               }}
             >
               Download
             </button>
-            <button 
+            <button
               className="px-4 py-2 bg-[#193664] hover:bg-[#2a4d7a] text-white rounded-md w-[50%] transition-colors"
               onClick={() => {
                 // Implement print functionality

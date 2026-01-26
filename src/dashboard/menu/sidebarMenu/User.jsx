@@ -9,7 +9,7 @@ const User = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const { data: users, isLoading, error } = useAllUsersQuery();
+  const { data: users, isLoading } = useAllUsersQuery();
   console.log(users);
 
   // Safe access to user list
@@ -65,14 +65,11 @@ const User = () => {
     setIsModalOpen(true);
   };
 
-  if (isLoading) return <p>Loading users...</p>;
-  if (error) return <p>Failed to load users.</p>;
-
   return (
     <div>
       <div className="rounded-t-lg mt-[24px]">
         <div className="flex py-[22px] justify-between items-center">
-          <p className="text-header">Users</p>
+          <p className="text-xl font-semibold">Users</p>
         </div>
 
         <Table
@@ -97,11 +94,12 @@ const User = () => {
             },
             className: styles.paginationCenter,
           }}
+          loading={isLoading}
           columns={columns}
           dataSource={dataSource}
           rowKey={(record) => record._id} // Use _id as unique key
           className={styles.customTable}
-          scroll={{ x: 'max-content' }}
+          scroll={{ x: "max-content" }}
           components={{
             header: {
               cell: (props) => <th {...props} className={styles.tableHeader} />,
@@ -115,6 +113,7 @@ const User = () => {
         onOk={() => setIsModalOpen(false)}
         onCancel={() => setIsModalOpen(false)}
         footer={null}
+        centered
         closeIcon={
           <CloseOutlined
             style={{
@@ -128,7 +127,7 @@ const User = () => {
       >
         <div>
           <div className="flex justify-center py-4 items-center gap-2 flex-col border-b border-b-gray-300">
-            <h1 className="text-xl font-medium">Agency Details</h1>
+            <h1 className="text-xl font-medium">User Details</h1>
           </div>
           <div className="p-4 md:p-6 space-y-4">
             <div className="flex flex-col sm:flex-row sm:justify-between border-b pb-3 gap-1">
@@ -138,11 +137,15 @@ const User = () => {
 
             <div className="flex flex-col sm:flex-row sm:justify-between border-b pb-3 gap-1">
               <p className="text-gray-500 text-sm">Email:</p>
-              <p className="font-medium break-all">{selectedUser?.email || "N/A"}</p>
+              <p className="font-medium break-all">
+                {selectedUser?.email || "N/A"}
+              </p>
             </div>
             <div className="flex flex-col sm:flex-row sm:justify-between border-b pb-3 gap-1">
               <p className="text-gray-500 text-sm">Phone:</p>
-              <p className="font-medium">{selectedUser?.phoneNumber || "N/A"}</p>
+              <p className="font-medium">
+                {selectedUser?.phoneNumber || "N/A"}
+              </p>
             </div>
             <div className="flex flex-col sm:flex-row sm:justify-between border-b pb-3 gap-1">
               <p className="text-gray-500 text-sm">Date:</p>
@@ -150,12 +153,6 @@ const User = () => {
                 {selectedUser?.createdAt
                   ? selectedUser.createdAt.split("T")[0]
                   : "N/A"}
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row sm:justify-between pt-3 gap-1">
-              <p className="text-gray-500 text-sm">Address:</p>
-              <p className="font-medium">
-                {selectedUser?.country || "N/A"}
               </p>
             </div>
           </div>

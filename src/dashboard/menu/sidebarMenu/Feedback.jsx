@@ -2,26 +2,22 @@ import { CloseOutlined } from "@ant-design/icons";
 import { Button, Modal, Space, Table } from "antd";
 import { useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 import { useGetFeedbackQuery } from "../../../redux/features/otherApi/feedback";
 import users from "./../../../../public/image/users.jpg";
 import styles from "./style.module.css";
 
 const Feedback = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedFeedback] = useState(null);
+  const [selectedFeedback,setSelectedFeedback] = useState(null);
   const [searchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const navigate = useNavigate();
 
   const { data: feedbackResponse, isLoading } = useGetFeedbackQuery();
 
-  // Extract feedback data from API response
-  // Handle different possible API response structures
   const feedbackData = Array.isArray(feedbackResponse?.data)
     ? feedbackResponse.data
-    : Array.isArray(feedbackResponse?.data?.feedbacks)
-      ? feedbackResponse.data.feedbacks
+    : Array.isArray(feedbackResponse?.data?.attributes)
+      ? feedbackResponse?.data.attributes
       : Array.isArray(feedbackResponse)
         ? feedbackResponse
         : [];
@@ -118,12 +114,14 @@ const Feedback = () => {
   ];
 
   const handleViewDetails = (feedback) => {
-    navigate("details", { state: { id: feedback?._id } });
+    setSelectedFeedback(feedback);
+    setIsModalOpen(true);
   };
 
   const handleChangePage = (page) => {
     setCurrentPage(page);
   };
+
 
   return (
     <div className="">

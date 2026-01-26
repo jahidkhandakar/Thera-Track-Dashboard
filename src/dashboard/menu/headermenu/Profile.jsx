@@ -2,9 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Edit, User, Mail, User as UserIcon } from "lucide-react";
 import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
 import url from "../../../redux/api/baseUrl";
-import { Button, Card, Form, Input, Modal } from "antd";
-} from "@ant-design/icons";
-import { useState } from "react";
+import { Button, Card } from "antd";
 import { Toaster } from "react-hot-toast";
 
 const Profile = () => {

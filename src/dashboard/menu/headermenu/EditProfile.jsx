@@ -1,7 +1,7 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Card, Form, Input, Spin, Upload } from "antd";
 import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import "react-phone-number-input/style.css";
 import { useNavigate } from "react-router-dom";
@@ -90,7 +90,7 @@ const EditProfile = () => {
 
   return (
     <div className="p-4 md:p-6">
-      <Toaster />
+
 
       <div className="flex items-center mb-8">
         <Button

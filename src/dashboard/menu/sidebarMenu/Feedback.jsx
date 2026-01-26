@@ -122,9 +122,9 @@ const Feedback = () => {
   };
 
   return (
-    <div className="">
-      <div className="rounded-t-lg mt-[24px]">
-        <div className="flex py-[22px] justify-between items-center">
+    <div className="w-full mx-auto bg-white rounded-xl">
+      <div className="rounded-t-lg mt-[24px] ">
+        <div className="flex py-[22px] justify-between items-center p-5">
           <div>
             <p className="text-xl font-semibold">
               Feedback ({filteredData.length})

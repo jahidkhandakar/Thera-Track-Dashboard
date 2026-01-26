@@ -1,7 +1,7 @@
 import { ArrowLeftOutlined, LockOutlined, MailOutlined, PhoneOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Card, Form, Input, Typography } from 'antd';
 import { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useAddSubAdminMutation } from '../../../redux/features/otherApi/subAdmin';
 
@@ -36,7 +36,7 @@ const AddSubAdmin = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <Toaster />
+
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
           <Button 

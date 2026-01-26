@@ -25,8 +25,8 @@ const TermConditions = () => {
   }, [termcondition]);
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <div className="w-full bg-gray-50 min-h-screen">
+      <div className="w-full mx-auto bg-white rounded-xl p-8">
         <div className="flex items-center gap-4 border-b border-gray-200 pb-6 mb-6">
           <Link
             to="/dashboard/settings"

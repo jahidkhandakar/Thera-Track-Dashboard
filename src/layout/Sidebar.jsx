@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { BiSolidDashboard } from "react-icons/bi";
 import { CiSettings } from "react-icons/ci";
-import { FaDollarSign, FaSackDollar, FaUsers } from "react-icons/fa6";
+import { FaDollarSign, FaSackDollar } from "react-icons/fa6";
 import { MdOutlineRateReview } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../public/image/logo.png";
@@ -9,6 +9,7 @@ import logo1 from "../../public/image/logo1.png";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Button } from "antd";
 import Swal from "sweetalert2";
+import { User2, Users } from "lucide-react";
 
 const Sidebar = ({ closeDrawer }) => {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ const Sidebar = ({ closeDrawer }) => {
                   : "flex text-[#2196F3] cursor-pointer items-center text-[15px] font-medium p-4 hover:bg-blue-50 transition-colors rounded-lg"
               }
             >
-              <FaUsers className="h-5 w-5 mr-3" />
+              <User2 className="h-5 w-5 mr-3" />
               <span>Users</span>
             </NavLink>
 
@@ -86,7 +87,7 @@ const Sidebar = ({ closeDrawer }) => {
                   : "flex text-[#2196F3] cursor-pointer items-center text-[15px] font-medium p-4 hover:bg-blue-50 transition-colors rounded-lg"
               }
             >
-              <FaUsers className="h-5 w-5 mr-3" />
+              <Users className="h-5 w-5 mr-3" />
               <span>Sub Admins</span>
             </NavLink>
 

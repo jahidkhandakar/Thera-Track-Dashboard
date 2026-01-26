@@ -66,9 +66,9 @@ const SubAdmin = () => {
   };
 
   return (
-    <div>
-      <div className="rounded-t-lg mt-[24px]">
-        <div className="flex py-[22px] justify-between items-center">
+    <div className="w-full mx-auto bg-white rounded-xl">
+      <div className="rounded-t-lg mt-[24px] ">
+        <div className="flex py-[22px] justify-between items-center p-5">
           <h1 className="text-xl font-semibold">Sub Admins</h1>
           <Button
             type="primary"
@@ -105,7 +105,6 @@ const SubAdmin = () => {
           scroll={{ x: "max-content" }}
         />
       </div>
-
       <Modal
         open={isModalOpen}
         onOk={() => setIsModalOpen(false)}

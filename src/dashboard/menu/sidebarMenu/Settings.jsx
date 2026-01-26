@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Settings = () => {
   const navigate = useNavigate();
   return (
-    <div className="mt-4 md:mt-8 mx-2 md:mx-6">
+    <div className="w-full mt-4 md:mt-8 bg-white p-6 rounded-lg">
       <h1 className="font-semibold text-2xl md:text-[30px]">Settings</h1>
       <div className="space-y-4 md:space-y-8 mt-6">
         {/* Privacy policy */}

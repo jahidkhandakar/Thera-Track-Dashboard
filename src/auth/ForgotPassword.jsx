@@ -2,7 +2,7 @@
 
 import { Button, Form, Input } from "antd";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useForgotPasswordMutation } from "../redux/features/auth/forgotPassword";
@@ -29,8 +29,6 @@ const ForgotPassword = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-purple-400/10 to-blue-200 px-4 py-8">
-      <Toaster position="top-center" reverseOrder={false} />
-
       <div className="w-full max-w-lg bg-white rounded-2xl  border !border-[#2196F3] p-8">
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-4">

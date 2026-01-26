@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Button } from "antd";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import OTPInput from "react-otp-input";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -37,7 +37,7 @@ const VerifyOtp = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-purple-400/10 to-blue-200  px-4 py-8">
-      <Toaster position="top-center" reverseOrder={false} />
+      
 
       <div className="w-full max-w-lg bg-white rounded-2xl border border-[#2196F3] p-8">
         <div className="mb-8">

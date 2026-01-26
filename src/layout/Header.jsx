@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import url from "../redux/api/baseUrl";
 import { useGetProfileQuery } from "../redux/features/auth/profile/getProfile";
 
-import { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 
 // eslint-disable-next-line react/prop-types
@@ -71,7 +70,7 @@ const Header = ({ toggleMobileMenu }) => {
   );
   return (
     <div className=" flex justify-between items-center p-3 md:p-5 rounded-md !bg-[#2196F3]">
-      <Toaster />
+
       <div className="flex items-center gap-2 md:gap-4">
         <Button
           type="text"

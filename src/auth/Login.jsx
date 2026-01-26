@@ -1,5 +1,5 @@
 import { Button, Checkbox, Form, Input } from "antd";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useAdminLoginMutation } from "../redux/features/auth/login";
 
@@ -29,7 +29,6 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-purple-400/10 to-blue-200 px-4 py-8">
-      <Toaster />
       <div className="w-full max-w-lg bg-white rounded-2xl  border border-[#2196F3] p-8">
         <div className="mb-8">
           <h1 className="!text-[32px] font-bold text-gray-900 mb-2">

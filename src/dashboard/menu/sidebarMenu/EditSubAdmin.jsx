@@ -1,7 +1,7 @@
 import { ArrowLeftOutlined, MailOutlined, PhoneOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Card, Form, Input, Skeleton, Typography } from 'antd';
 import { useEffect, useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEditSubAdminMutation, useGetSingleSubAdminQuery } from '../../../redux/features/otherApi/subAdmin';
 
@@ -57,7 +57,7 @@ const EditSubAdmin = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <Toaster />
+
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
           <Button 

@@ -1,20 +1,20 @@
 import {
-  ArrowLeftOutlined,
-  CrownOutlined,
-  DollarOutlined,
+    ArrowLeftOutlined,
+    CrownOutlined,
+    DollarOutlined,
 } from "@ant-design/icons";
 import {
-  Button,
-  Card,
-  Form,
-  Input,
-  InputNumber,
-  message,
-  Select,
-  Typography,
+    Button,
+    Card,
+    Form,
+    Input,
+    InputNumber,
+    message,
+    Select,
+    Typography,
 } from "antd";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAddSubscriptionMutation } from "../../../redux/features/otherApi/addSubscription";
 
@@ -62,7 +62,7 @@ const AddSubscription = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <Toaster />
+
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="mb-6">

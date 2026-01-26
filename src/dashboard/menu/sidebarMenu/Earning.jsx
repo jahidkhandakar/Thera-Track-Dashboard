@@ -1,4 +1,4 @@
-import { Card, Table, Tag, Typography } from "antd";
+import { Table, Tag, Typography } from "antd";
 import { usePaymentQuery } from "../../../redux/features/otherApi/payment";
 const { Title } = Typography;
 
@@ -73,9 +73,9 @@ const Earning = () => {
   const tableData = earning?.data?.attributes || [];
 
   return (
-    <div className="mt-4 md:mt-12 p-3 md:p-6">
-      <Card className="shadow-none md:shadow-sm">
-        <div className="mb-6">
+    <div className="w-full mx-auto bg-white rounded-xl">
+      <div className="rounded-t-lg mt-[24px] ">
+        <div className="flex py-[22px] justify-between items-center p-5">
           <Title level={2}>Earnings & Payments</Title>
           <p className="text-gray-600">Total Payments: {tableData.length}</p>
         </div>
@@ -94,7 +94,7 @@ const Earning = () => {
           scroll={{ x: "max-content" }}
           loading={!earning}
         />
-      </Card>
+      </div>
     </div>
   );
 };

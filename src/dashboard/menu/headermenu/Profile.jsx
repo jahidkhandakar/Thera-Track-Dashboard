@@ -1,6 +1,5 @@
 import { Button, Card } from "antd";
 import { Edit, Mail, User, User as UserIcon } from "lucide-react";
-import { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import url from "../../../redux/api/baseUrl";
 import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
@@ -20,7 +19,6 @@ const Profile = () => {
 
   return (
     <div className="p-4 md:p-6 max-w-6xl mx-auto">
-      <Toaster />
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
         <div>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
@@ -28,13 +26,14 @@ const Profile = () => {
           </h2>
           <p className="text-gray-600">Manage your personal information</p>
         </div>
-        <button
+        <Button
+          size="large"
           onClick={() => navigate(`/dashboard/editprofile`)}
-          className="mt-4 md:mt-0 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+          className="h-10 bg-blue-400 text-white flex items-center gap-2 rounded-lg hover:bg-blue-500"
         >
           <Edit size={16} />
           <span>Edit Profile</span>
-        </button>
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -70,14 +69,7 @@ const Profile = () => {
                   Account Security
                 </h2>
               }
-            >
-              <Button
-                type="link"
-                className="text-left p-0 text-blue-600 hover:text-blue-800"
-              >
-                Change Password
-              </Button>
-            </Card>
+            ></Card>
           </div>
         </div>
         {/* Contact Information Card */}

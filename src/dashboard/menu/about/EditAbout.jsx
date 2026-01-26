@@ -1,13 +1,13 @@
-import { useState, useRef, useEffect } from "react";
-import JoditEditor from "jodit-react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaCircleArrowLeft } from "react-icons/fa6";
 import { Button, Form } from "antd";
+import JoditEditor from "jodit-react";
+import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import { FaCircleArrowLeft } from "react-icons/fa6";
+import { Link, useNavigate } from "react-router-dom";
 import {
   useGetAboutQuery,
   useUpdateAboutMutation,
 } from "../../../redux/features/setting/settingSlice";
-import toast, { Toaster } from "react-hot-toast";
 
 const decodeHtml = (html) => {
   const txt = document.createElement("textarea");
@@ -46,15 +46,15 @@ const EditAbout = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <Toaster position="top-center" reverseOrder={false} />
-      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <div className="w-full bg-gray-50 min-h-screen">
+      
+      <div className="w-full mx-auto bg-white rounded-xl p-8">
         <div className="flex items-center gap-4 border-b border-gray-200 pb-6 mb-6">
           <Link
             to="/dashboard/settings/about"
             className="flex items-center hover:bg-gray-100 p-2 rounded-full transition-colors"
           >
-            <FaCircleArrowLeft className="text-[#2196F3] w-8 h-8" />
+            <FaCircleArrowLeft className="text-blue-400 w-8 h-8" />
           </Link>
           <h1 className="font-bold text-3xl text-gray-800">Edit About Us</h1>
         </div>

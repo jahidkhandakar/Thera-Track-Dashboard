@@ -35,7 +35,7 @@ import PrivateRoute from "./PrivateRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home></Home>,
+    element: <Home />,
     errorElement: <ErrorPage />,
   },
   {
@@ -71,7 +71,7 @@ export const router = createBrowserRouter([
     path: "dashboard",
     element: (
       <PrivateRoute>
-        <Main></Main>
+        <Main />
       </PrivateRoute>
     ),
     children: [

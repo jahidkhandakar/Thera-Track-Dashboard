@@ -46,41 +46,47 @@ const EditAbout = () => {
   };
 
   return (
-    <div className="mt-8 mx-6">
+    <div className="p-6 bg-gray-50 min-h-screen">
       <Toaster position="top-center" reverseOrder={false} />
-      <Link to="/dashboard/settings/about" className="flex items-center gap-2">
-        <FaCircleArrowLeft className=" !text-primaryBg w-8 h-8" />
-        <p className=" font-semibold text-[30px]">Edit About</p>
-      </Link>
-      <Form
-        labelCol={{ span: 22 }}
-        wrapperCol={{ span: 40 }}
-        layout="vertical"
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={handleEditTermCondition}
-      >
-        <div className="mt-6">
-          <JoditEditor
-            ref={editor}
-            value={content}
-            onChange={(newContent) => {
-              setContent(newContent);
-            }}
-          />
+      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+        <div className="flex items-center gap-4 border-b border-gray-200 pb-6 mb-6">
+          <Link
+            to="/dashboard/settings/about"
+            className="flex items-center hover:bg-gray-100 p-2 rounded-full transition-colors"
+          >
+            <FaCircleArrowLeft className="text-[#2196F3] w-8 h-8" />
+          </Link>
+          <h1 className="font-bold text-3xl text-gray-800">Edit About Us</h1>
         </div>
-        <div className="text-right mt-6">
-          <Form.Item>
-            <Button
-              htmlType="submit"
-              className="h-[44px] w-[260px] !text-white !bg-[#8FCAF8] rounded-[8px]"
-            >
-              Update AboutUs
-            </Button>
-          </Form.Item>
-        </div>
-      </Form>
+
+        <Form
+          layout="vertical"
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={handleEditTermCondition}
+        >
+          <div className="mt-6 border rounded-lg overflow-hidden shadow-sm">
+            <JoditEditor
+              ref={editor}
+              value={content}
+              onChange={(newContent) => {
+                setContent(newContent);
+              }}
+            />
+          </div>
+          <div className="mt-8 flex justify-end">
+            <Form.Item className="mb-0">
+              <Button
+                htmlType="submit"
+                className="h-12 px-8 text-lg font-medium bg-[#2196F3] hover:bg-blue-600 rounded-lg shadow-md transition-all text-white border-none"
+              >
+                Update Content
+              </Button>
+            </Form.Item>
+          </div>
+        </Form>
+      </div>
     </div>
   );
 };

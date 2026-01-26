@@ -9,6 +9,8 @@ const PrivateRoute = ({ children }) => {
   const { data: mySelf } = useGetProfileQuery();
   const loggedInUser = mySelf?.data?.attributes;
 
+  console.log("LoggedInUser", mySelf);
+
   if (loggedInUser) {
     return children;
   }

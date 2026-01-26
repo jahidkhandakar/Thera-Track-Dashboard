@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import { Edit, User, Mail, User as UserIcon } from "lucide-react";
-import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
-import url from "../../../redux/api/baseUrl";
 import { Button, Card } from "antd";
+import { Edit, Mail, User, User as UserIcon } from "lucide-react";
 import { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import url from "../../../redux/api/baseUrl";
+import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ const Profile = () => {
               <p className="text-gray-600">{userData?.role || "User"}</p>
             </div>
             <Card
-              className="shadow-md rounded-xl border-0 mt-6"
+              className=" rounded-xl border-0 mt-6"
               title={
                 <h2 className="text-lg font-semibold text-gray-800">
                   Account Security
@@ -73,7 +73,6 @@ const Profile = () => {
             >
               <Button
                 type="link"
-                onClick={() => setIsModalOpen(true)}
                 className="text-left p-0 text-blue-600 hover:text-blue-800"
               >
                 Change Password

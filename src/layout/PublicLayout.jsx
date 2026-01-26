@@ -5,7 +5,7 @@ import logo1 from "../../public/image/logo1.png";
 const PublicLayout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-[#193664] flex flex-col md:flex-row justify-between items-center p-4 shadow-md">
+      <header className="bg-[#193664] flex flex-col md:flex-row justify-between items-center p-4 ">
         <div className="flex items-center gap-3 mb-4 md:mb-0">
           <img src={logo} alt="Logo" className="h-10 w-auto" />
           <img src={logo1} alt="Logo" className="h-8 w-auto" />

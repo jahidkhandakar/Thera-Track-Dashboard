@@ -77,7 +77,7 @@ const EditSubAdmin = () => {
           </Text>
         </div>
 
-        <Card className="shadow-lg">
+        <Card className="">
           <Form
             form={form}
             layout="vertical"

@@ -1,4 +1,4 @@
-import { Form, Input, Button, message } from "antd";
+import { Button, Form, Input, message } from "antd";
 import PublicLayout from "../layout/PublicLayout";
 
 const SupportPage = () => {
@@ -15,7 +15,7 @@ const SupportPage = () => {
   return (
     <PublicLayout>
       <div className="p-6 max-w-2xl mx-auto">
-        <div className="bg-white p-8 rounded-xl shadow-lg">
+        <div className="bg-white p-8 rounded-xl ">
           <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Support</h1>
 
           <Form

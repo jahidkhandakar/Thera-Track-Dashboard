@@ -1,19 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
-import { useState } from "react";
 import {
-  FileText,
-  AlertTriangle,
-  Shield,
-  Users,
-  CreditCard,
-  Lock,
-  Scale,
-  Mail,
-  ExternalLink,
-  ChevronDown,
-  ChevronUp,
+    AlertTriangle,
+    ChevronDown,
+    ChevronUp,
+    CreditCard,
+    ExternalLink,
+    FileText,
+    Lock,
+    Mail,
+    Scale,
+    Shield,
+    Users,
 } from "lucide-react";
+import { useState } from "react";
 
 const EULADocument = () => {
   const [expandedSections, setExpandedSections] = useState({});
@@ -35,7 +35,7 @@ const EULADocument = () => {
     const isExpanded = expandedSections[id] ?? defaultExpanded;
 
     return (
-      <div className="mb-6 border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
+      <div className="mb-6 border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm hover: transition-shadow">
         <button
           onClick={() => toggleSection(id)}
           className="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-purple-50 to-indigo-50 hover:from-purple-100 hover:to-indigo-100 transition-colors"
@@ -104,7 +104,7 @@ const EULADocument = () => {
 
       {/* Important Notice */}
       <div className="max-w-4xl mx-auto px-6 -mt-8 mb-8">
-        <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-2xl p-6 shadow-xl">
+        <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-2xl p-6 ">
           <div className="flex items-start gap-4">
             <AlertTriangle className="w-8 h-8 flex-shrink-0 mt-1" />
             <div>
@@ -760,7 +760,7 @@ const EULADocument = () => {
         </Section>
 
         {/* Section 18: Acknowledgment */}
-        <div className="mt-8 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-2xl p-8 shadow-xl">
+        <div className="mt-8 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-2xl p-8 ">
           <h2 className="text-2xl font-bold mb-4">18. ACKNOWLEDGMENT</h2>
           <p className="leading-relaxed text-lg">
             BY DOWNLOADING, INSTALLING, OR USING THE CHEEKY CHARTING APP, YOU

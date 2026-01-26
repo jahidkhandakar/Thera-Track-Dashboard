@@ -6,7 +6,7 @@ const PrivacyPolicyy = () => {
   return (
     <PublicLayout>
       <div className="p-6 max-w-6xl mx-auto">
-        <Card className="shadow-lg rounded-xl border-0">
+        <Card className=" rounded-xl border-0">
           <div className="prose max-w-none">
             <h1 className="text-[40px] font-bold text-gray-800 mb-6">
               Privacy Policy for Thera-Track App

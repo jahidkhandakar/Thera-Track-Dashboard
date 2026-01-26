@@ -60,7 +60,7 @@
 //     };
 
 //     return (
-//         <div className="mt-12 h-auto md:h-[680px] shadow-xl w-[80%] md:w-[1096px] mx-auto bg-white rounded-[8px]">
+//         <div className="mt-12 h-auto md:h-[680px]  w-[80%] md:w-[1096px] mx-auto bg-white rounded-[8px]">
 //         <Toaster />
 //             <div className="flex flex-col-reverse md:flex-row justify-around gap-4 px-6 md:px-10 mt-4 md:mt-8 py-4">
 //                 <div className="h-[200px] hidden md:block md:h-[488px] mt-4 md:mt-[100px]">
@@ -144,12 +144,10 @@
 
 
 import { Button, Checkbox, Form, Input } from 'antd';
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { HiOutlineMailOpen } from 'react-icons/hi';
-import { BiLock } from 'react-icons/bi';
-import { useAdminLoginMutation } from '../redux/features/auth/login';
+import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAdminLoginMutation } from '../redux/features/auth/login';
 
 const Login = () => {
     const [checkboxError, setCheckboxError] = useState('');
@@ -193,7 +191,7 @@ const Login = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-purple-400/10 to-blue-200 px-4 py-8">
             <Toaster />
-            <div className="w-full max-w-lg bg-white rounded-2xl shadow-lg border border-[#2196F3] p-8">
+            <div className="w-full max-w-lg bg-white rounded-2xl  border border-[#2196F3] p-8">
                 <div className="mb-8">
                     <h1 className="!text-[32px] font-bold text-gray-900 mb-2">
                         Welcome Back

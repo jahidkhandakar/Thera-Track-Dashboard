@@ -15,7 +15,7 @@ const Sidebar = ({ closeDrawer }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between bg-[#8FCAF8] h-full rounded-md shadow-lg overflow-y-auto">
+    <div className="flex flex-col justify-between bg-[#8FCAF8] h-full rounded-md  overflow-y-auto">
       <div>
         <div className="p-6 flex flex-col items-center">
           <img

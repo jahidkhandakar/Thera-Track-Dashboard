@@ -14,7 +14,7 @@
 //     <div className='mt-8'>
 //    <h2 className="text-xl font-semibold mb-4 flex items-center gap-2"> <span className='cursor-pointer'> <MdOutlineArrowBackIosNew  onClick={() => navigate('/dashboard/subscription')}/> </span> Add Subscription</h2>
 
-//     <div className="p-6 mt-6 w-[50%] mx-auto bg-white rounded-lg shadow-md">
+//     <div className="p-6 mt-6 w-[50%] mx-auto bg-white rounded-lg ">
 //        <Form name="add_subscription" onFinish={onFinish} layout="vertical">
 //         <Form.Item
 //           name="packageName"
@@ -86,12 +86,12 @@
 
 
 
-import React, { useState } from 'react';
-import { Form, Input, Select, Button, Card, Typography, Space, InputNumber, message } from 'antd';
 import { ArrowLeftOutlined, CrownOutlined, DollarOutlined } from '@ant-design/icons';
+import { Button, Card, Form, Input, InputNumber, message, Select, Typography } from 'antd';
+import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useAddSubscriptionMutation } from '../../../redux/features/otherApi/addSubscription';
-import toast, { Toaster } from 'react-hot-toast';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -166,7 +166,7 @@ const [add_subscription] = useAddSubscriptionMutation()
         </div>
 
         {/* Form Card */}
-        <Card className="shadow-lg">
+        <Card className="">
           <Form
             form={form}
             layout="vertical"

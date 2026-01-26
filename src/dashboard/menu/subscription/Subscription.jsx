@@ -1,7 +1,7 @@
+import { Spin } from "antd";
 import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useSubscriptionQuery } from "../../../redux/features/otherApi/subscription";
-import { Spin } from "antd";
 
 const Subscription = () => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const Subscription = () => {
         {attributes.map((item) => (
           <div
             key={item._id}
-            className="w-full p-6 bg-white border border-blue-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow"
+            className="w-full p-6 bg-white border border-blue-200 rounded-2xl shadow-sm hover: transition-shadow"
           >
             {/* Subscription Header */}
             <div className="flex items-center mb-6">

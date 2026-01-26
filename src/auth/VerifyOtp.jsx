@@ -47,7 +47,7 @@
 //     }
 
 //     return (
-//         <div className='w-full max-w-[1296px] shadow-xl mt-12 sm:mt-24 mx-auto rounded-[8px] p-4 sm:p-10'>
+//         <div className='w-full max-w-[1296px]  mt-12 sm:mt-24 mx-auto rounded-[8px] p-4 sm:p-10'>
 //             <Toaster position='top-center' reverseOrder = {false} />
             
 //             <div className="flex flex-col sm:flex-row md:justify-around justify-between items-center gap-4 sm:gap-10">
@@ -111,12 +111,12 @@
 // export default VerifyOtp;
 
 
-import { useLocation, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
-import OTPInput from 'react-otp-input'; 
 import { Button } from 'antd';
-import { MdOutlineArrowBackIos } from 'react-icons/md';
+import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { MdOutlineArrowBackIos } from 'react-icons/md';
+import OTPInput from 'react-otp-input';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useVerifyEmailMutation } from '../redux/features/auth/verifyEmail';
 
 const VerifyOtp = () => {

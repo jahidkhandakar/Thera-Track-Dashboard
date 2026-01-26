@@ -65,7 +65,7 @@
    
 
 //   return (
-//     <div className="mt-20 h-[680px] shadow-xl w-[1096px] mx-auto bg-[#FFFFFF] rounded-[8px]">
+//     <div className="mt-20 h-[680px]  w-[1096px] mx-auto bg-[#FFFFFF] rounded-[8px]">
 //      <Toaster />
 //       <div className="flex justify-around gap-4 px-10 mt-12 py-4">
 //         <div className="h-[488px] mt-[100px]">
@@ -136,12 +136,12 @@
 // export default UpdatePassword;
 
 
-import React, { useState } from 'react';
-import { Form, Input, Button } from 'antd';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { MdOutlineArrowBackIos } from 'react-icons/md';
+import { Button, Form, Input } from 'antd';
+import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { MdOutlineArrowBackIos } from 'react-icons/md';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useResetPasswordMutation } from '../redux/features/auth/resetPassword';
 
 const UpdatePassword = () => {

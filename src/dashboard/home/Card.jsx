@@ -38,7 +38,7 @@ const Card = () => {
         {cards.map((card, index) => (
           <div
             key={index}
-            className="w-full max-w-96 rounded-2xl bg-gradient-to-bl from-[#74bbf5] to-[#e7e9eb] shadow-sm border border-[#2196F3] p-4 md:p-6 hover:shadow-md transition-shadow"
+            className="w-full max-w-96 rounded-2xl bg-gradient-to-bl from-[#74bbf5] to-[#e7e9eb] shadow-sm border border-[#2196F3] p-4 md:p-6 hover: transition-shadow"
           >
             <div className="flex items-start gap-4 md:gap-9 mb-4">
               <div className={`bg-[#2196F3] rounded-lg p-2 md:p-3 flex items-center justify-center shrink-0`}>

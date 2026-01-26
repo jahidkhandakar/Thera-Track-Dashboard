@@ -5,7 +5,7 @@
 //     <div className="p-6 mt-12">
 //         <h1 className="text-2xl font-semibold mb-4">Feedback Details</h1>
  
-//       <div className="flex items-center bg-white shadow-lg p-4 rounded-lg mb-6">
+//       <div className="flex items-center bg-white  p-4 rounded-lg mb-6">
 //         <img
 //           src={user} // Replace with user's image
 //           alt="User"
@@ -23,7 +23,7 @@
 //       </div>
 
 //       {/* Feedback Section */}
-//       <div className="bg-white shadow-lg p-6 rounded-lg">
+//       <div className="bg-white  p-6 rounded-lg">
 //         <div className="flex items-center space-x-2 mb-4">
 //           <span className="text-xl text-yellow-500">😊</span>
 //           <h2 className="text-xl font-semibold">Feed Back Details</h2>

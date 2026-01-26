@@ -47,7 +47,7 @@
 //         Edit Subscription
 //       </h2>
 
-//       <div className="p-6 mt-6 w-[50%] mx-auto bg-white rounded-lg shadow-md">
+//       <div className="p-6 mt-6 w-[50%] mx-auto bg-white rounded-lg ">
 //         <Form
 //           form={form}
 //           name="edit_subscription"
@@ -127,9 +127,9 @@
 // export default EditSubscription;
 
 
-import React, { useState, useEffect } from 'react';
-import { Form, Input, Select, Button, Card, Typography, Space, InputNumber, message, Spin } from 'antd';
-import { ArrowLeftOutlined, EditOutlined, DollarOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, DollarOutlined, EditOutlined } from '@ant-design/icons';
+import { Button, Card, Form, Input, InputNumber, Select, Spin, Typography } from 'antd';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
  
 import toast, { Toaster } from 'react-hot-toast';
@@ -249,7 +249,7 @@ const EditSubscription = () => {
         </div>
 
         {/* Form Card */}
-        <Card className="shadow-lg">
+        <Card className="">
           <Form
             form={form}
             layout="vertical"

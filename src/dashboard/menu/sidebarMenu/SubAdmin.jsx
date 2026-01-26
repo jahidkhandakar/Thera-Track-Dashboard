@@ -1,4 +1,4 @@
-import { CloseOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Modal, Space, Table } from "antd";
 import { useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
@@ -56,10 +56,6 @@ const SubAdmin = () => {
             size={18}
             className="text-[#2196F3] cursor-pointer"
           />
-          <EditOutlined
-            onClick={() => navigate(`edit/${record._id}`)}
-            className="text-[green] cursor-pointer text-lg"
-          />
         </Space>
       ),
     },
@@ -78,10 +74,10 @@ const SubAdmin = () => {
       <div className="rounded-t-lg mt-[24px]">
         <div className="flex py-[22px] justify-between items-center">
           <p className="text-header">Sub Admins</p>
-          <Button 
-            type="primary" 
-            icon={<PlusOutlined />} 
-            onClick={() => navigate('add')}
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => navigate("add")}
             className="bg-[#2196F3]"
           >
             Add Sub Admin
@@ -114,7 +110,7 @@ const SubAdmin = () => {
           dataSource={dataSource}
           rowKey={(record) => record._id}
           className={styles.customTable}
-          scroll={{ x: 'max-content' }}
+          scroll={{ x: "max-content" }}
           components={{
             header: {
               cell: (props) => <th {...props} className={styles.tableHeader} />,
@@ -128,6 +124,7 @@ const SubAdmin = () => {
         onOk={() => setIsModalOpen(false)}
         onCancel={() => setIsModalOpen(false)}
         footer={null}
+        centered
         closeIcon={
           <CloseOutlined
             style={{
@@ -151,11 +148,15 @@ const SubAdmin = () => {
 
             <div className="flex flex-col sm:flex-row sm:justify-between border-b pb-3 gap-1">
               <p className="text-gray-500 text-sm">Email:</p>
-              <p className="font-medium break-all">{selectedUser?.email || "N/A"}</p>
+              <p className="font-medium break-all">
+                {selectedUser?.email || "N/A"}
+              </p>
             </div>
             <div className="flex flex-col sm:flex-row sm:justify-between border-b pb-3 gap-1">
               <p className="text-gray-500 text-sm">Phone:</p>
-              <p className="font-medium">{selectedUser?.phoneNumber || "N/A"}</p>
+              <p className="font-medium">
+                {selectedUser?.phoneNumber || "N/A"}
+              </p>
             </div>
             <div className="flex flex-col sm:flex-row sm:justify-between pt-3 gap-1">
               <p className="text-gray-500 text-sm">Date:</p>

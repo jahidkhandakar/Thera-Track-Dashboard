@@ -104,27 +104,27 @@ const Header = ({ toggleMobileMenu }) => {
      </div>
   
 
-      <div className="flex items-center gap-3 md:gap-5">
+      <div className="flex items-center gap-2 md:gap-5">
         {/* Notifications */}
         <div
           onClick={() => navigate("/dashboard/notification")}
-          className="relative flex items-center"
+          className="relative flex items-center shrink-0"
         >
-          <Badge style={{ backgroundColor: "red", marginTop: '10px', marginRight: '5px' }}>
+          <Badge style={{ backgroundColor: "red", marginTop: '8px', marginRight: '2px' }}>
             <BellOutlined
               style={{ cursor: "pointer" }}
-              className={`bg-primary text-2xl md:text-3xl text-[#Ffffffff] p-1.5 md:p-2 border border-[#e7e0e0] rounded`}
+              className={`bg-primary text-xl md:text-3xl text-[#Ffffffff] p-1.5 md:p-2 border border-[#e7e0e0] rounded`}
             />
           </Badge>
         </div>
         
         {/* User dropdown */}
-        <div className="border p-1 rounded">
+        <div className="border p-1 rounded shrink-0">
         <Dropdown className="px-1 md:px-2" overlay={menu} trigger={['click']} onVisibleChange={handleMenuVisibility}>
     <a className="flex items-center text-white cursor-pointer text-whiteText">
-      <Avatar src={url + admin?.data?.attributes.profileImage} className="mr-0 md:mr-2 h-[32px] w-[32px] md:h-[42px] md:w-[42px]" />
+      <Avatar src={url + admin?.data?.attributes.profileImage} className="mr-0 md:mr-2 h-[28px] w-[28px] md:h-[42px] md:w-[42px]" />
       <span className="hidden md:inline">{admin?.data?.attributes.fullName}</span>
-      <DownOutlined className="ml-1 text-xs" />
+      <DownOutlined className="ml-1 text-[10px] md:text-xs" />
     </a>
   </Dropdown>
         </div>

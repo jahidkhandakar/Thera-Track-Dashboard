@@ -3,10 +3,7 @@ import { Button, Modal, Space, Table } from "antd";
 import { useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 import { useAllUsersQuery } from "../../redux/features/otherApi/allUsers";
-import styles from './../menu/sidebarMenu/style.module.css';
- 
-
-
+import styles from "./../menu/sidebarMenu/style.module.css";
 
 const Transaction = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +12,7 @@ const Transaction = () => {
   const { data: users, isLoading, error } = useAllUsersQuery();
 
   // Safe access to user list
-  const dataSource = users?.data?.attributes?.slice(0,5) || [];
+  const dataSource = users?.data?.attributes?.slice(0, 5) || [];
 
   const columns = [
     {
@@ -67,32 +64,33 @@ const Transaction = () => {
     setIsModalOpen(true);
   };
 
-
-
   if (isLoading) return <p>Loading users...</p>;
   if (error) return <p>Failed to load users.</p>;
 
   return (
     <div>
-      <div className="rounded-t-lg mt-[24px]">
+      <div className="rounded-t-lg">
         <div className="flex py-[22px] justify-between items-center">
           <p className="text-header">Recent User</p>
-
-       
         </div>
 
         <Table
           pagination={{
             total: dataSource.length,
-            showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+            showTotal: (total, range) =>
+              `${range[0]}-${range[1]} of ${total} items`,
             defaultPageSize: 5,
             showSizeChanger: false,
             itemRender: (current, type, originalElement) => {
               if (type === "prev") {
-                return <Button className={styles.paginationButton}>Back</Button>;
+                return (
+                  <Button className={styles.paginationButton}>Back</Button>
+                );
               }
               if (type === "next") {
-                return <Button className={styles.paginationButton}>Next</Button>;
+                return (
+                  <Button className={styles.paginationButton}>Next</Button>
+                );
               }
               return originalElement;
             },
@@ -102,7 +100,7 @@ const Transaction = () => {
           dataSource={dataSource}
           rowKey={(record) => record._id} // Use _id as unique key
           className={styles.customTable}
-          scroll={{ x: 'max-content' }}
+          scroll={{ x: "max-content" }}
           components={{
             header: {
               cell: (props) => <th {...props} className={styles.tableHeader} />,
@@ -147,7 +145,11 @@ const Transaction = () => {
             </div>
             <div className="flex justify-between border-b py-[16px]">
               <p>Date:</p>
-              <p>{selectedUser?.createdAt ? selectedUser.createdAt.split("T")[0] : "N/A"}</p>
+              <p>
+                {selectedUser?.createdAt
+                  ? selectedUser.createdAt.split("T")[0]
+                  : "N/A"}
+              </p>
             </div>
             <div className="flex justify-between items-center pt-[16px]">
               <p>Address:</p>

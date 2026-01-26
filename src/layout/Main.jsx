@@ -12,7 +12,7 @@ const Main = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 overflow-x-hidden">
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
       {/* Sidebar for Desktop */}
       <div className="hidden lg:block w-[280px] fixed h-full p-4 z-40">
         <Sidebar />
@@ -30,14 +30,14 @@ const Main = () => {
         <Sidebar closeDrawer={() => setIsMobileMenuOpen(false)} />
       </Drawer>
 
-      <div className="flex flex-col flex-1 lg:ml-[280px]">
-        {/* Header */}
-        <div className="sticky top-0 z-30 p-4">
+      <div className="flex-1 lg:ml-[280px] h-screen overflow-y-auto relative">
+        {/* Header Container */}
+        <div className="sticky top-0 z-30 p-2 md:p-4 w-full">
           <Header toggleMobileMenu={toggleMobileMenu} />
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 px-4 lg:px-8 overflow-y-auto">
+        <main className="px-2 md:px-4 lg:px-8 pb-10">
           <Outlet />
         </main>
       </div>

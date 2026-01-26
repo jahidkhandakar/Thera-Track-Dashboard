@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { BiSolidDashboard } from "react-icons/bi";
 import { CiSettings } from "react-icons/ci";
 import { FaDollarSign, FaSackDollar, FaUsers } from "react-icons/fa6";

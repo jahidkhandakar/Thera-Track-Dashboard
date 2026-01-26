@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useChangePasswordMutation } from "../redux/features/auth/changePassword";
 
+// eslint-disable-next-line react/prop-types
 const Header = ({ toggleMobileMenu }) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -86,7 +87,7 @@ const Header = ({ toggleMobileMenu }) => {
   );
 
   return (
-    <div className=" flex justify-between items-center shadow-xl mb-[24px] p-[16px] rounded-md !bg-[#2196F3]"> 
+    <div className=" flex justify-between items-center p-5 rounded-md !bg-[#2196F3]"> 
      <Toaster />
      <div className="flex items-center gap-4">
        <Button 

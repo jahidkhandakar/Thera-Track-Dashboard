@@ -1,5 +1,4 @@
-import React from 'react';
-import { Table, Tag, Card, Typography, Space } from 'antd';
+import { Card, Table, Tag, Typography } from 'antd';
 import { usePaymentQuery } from '../../../redux/features/otherApi/payment';
 // import { usePaymentQuery } from '../../../redux/features/otherApi/payment';
 // import { usePaymentQuery } from './../../../redux/features/otherApi/payment';
@@ -97,7 +96,7 @@ const Earning = () => {
             showTotal: (total, range) =>
               `${range[0]}-${range[1]} of ${total} payments`,
           }}
-          scroll={{ x: 800 }}
+          scroll={{ x: 'max-content' }}
           loading={!earning}
         />
       </Card>

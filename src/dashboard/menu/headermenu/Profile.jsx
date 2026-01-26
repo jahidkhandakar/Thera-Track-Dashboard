@@ -3,10 +3,6 @@ import { Edit, User, Mail, User as UserIcon } from "lucide-react";
 import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
 import url from "../../../redux/api/baseUrl";
 import { Button, Card, Form, Input, Modal } from "antd";
-import {
-  EyeInvisibleOutlined,
-  EyeTwoTone,
-  LockOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
@@ -14,9 +10,6 @@ import { Toaster } from "react-hot-toast";
 const Profile = () => {
   const navigate = useNavigate();
   const { data: admin, isLoading } = useGetProfileQuery();
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">

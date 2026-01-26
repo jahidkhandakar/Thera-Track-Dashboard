@@ -28,7 +28,7 @@ const Profile = () => {
   const userData = admin?.data?.attributes;
 
   return (
-    <div className="p-4 md:p-6 max-w-4xl mx-auto">
+    <div className="p-4 md:p-6 max-w-6xl mx-auto">
       <Toaster />
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
         <div>
@@ -49,10 +49,10 @@ const Profile = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Profile Card */}
         <div className="lg:col-span-1">
-          <div className="bg-white shadow-lg rounded-xl p-6">
+          <div className="bg-white  rounded-xl p-6">
             <div className="flex flex-col items-center text-center">
               <div className="relative mb-6">
-                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white ">
                   {userData?.profileImage ? (
                     <img
                       src={url + userData.profileImage}
@@ -92,7 +92,7 @@ const Profile = () => {
         </div>
         {/* Contact Information Card */}
         <div className="lg:col-span-2">
-          <div className="bg-white shadow-lg rounded-xl p-6">
+          <div className="bg-white  rounded-xl p-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-6">
               Personal Information
             </h3>

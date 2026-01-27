@@ -14,24 +14,7 @@ const subAdminApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Users"],
     }),
-    editSubAdmin: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `/user/update-admin/${id}`, // Placeholder URL, update if needed
-        method: "PATCH",
-        body: data,
-      }),
-      invalidatesTags: ["Users"],
-    }),
-    getSingleSubAdmin: builder.query({
-      query: (id) => `/user/${id}`,
-      providesTags: ["Users"],
-    }),
   }),
 });
 
-export const {
-  useAllSubAdminsQuery,
-  useAddSubAdminMutation,
-  useEditSubAdminMutation,
-  useGetSingleSubAdminQuery,
-} = subAdminApi;
+export const { useAllSubAdminsQuery, useAddSubAdminMutation } = subAdminApi;

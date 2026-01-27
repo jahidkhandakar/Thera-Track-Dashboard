@@ -6,12 +6,46 @@ import {
 } from "@ant-design/icons";
 import { Button, Modal, Space, Table } from "antd";
 import { useState } from "react";
-import { useAllUsersQuery } from "../../../redux/features/otherApi/allUsers";
+import Swal from "sweetalert2";
+import {
+  useAllUsersQuery,
+  useUpdateUserStatusMutation,
+} from "../../../redux/features/otherApi/allUsers";
 
 const User = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const { data: users, isLoading } = useAllUsersQuery();
+  const [updateUserStatus] = useUpdateUserStatusMutation();
+
+  const handleStatusChange = (id, action) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You want to ${action} this user?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: `Yes, ${action} it!`,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await updateUserStatus({ id, action }).unwrap();
+          Swal.fire({
+            title: "Success!",
+            text: res.message || `User has been ${action}ed.`,
+            icon: "success",
+          });
+        } catch (error) {
+          Swal.fire({
+            title: "Error!",
+            text: error?.data?.message || "Something went wrong.",
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
 
   // Safe access to user list
   const dataSource = users?.data?.attributes || [];
@@ -56,9 +90,11 @@ const User = () => {
             style={{ fontSize: "18px", color: "#2196F3", cursor: "pointer" }}
           />
           <StopOutlined
+            onClick={() => handleStatusChange(record._id, "block")}
             style={{ fontSize: "18px", color: "#faad14", cursor: "pointer" }}
           />
           <DeleteOutlined
+            onClick={() => handleStatusChange(record._id, "delete")}
             style={{ fontSize: "18px", color: "red", cursor: "pointer" }}
           />
         </Space>

@@ -7,7 +7,9 @@ import {
 import { Button, Modal, Space, Table } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
+import { useUpdateUserStatusMutation } from "../../../redux/features/otherApi/allUsers";
 import { useAllSubAdminsQuery } from "../../../redux/features/otherApi/subAdmin";
 
 const SubAdmin = () => {
@@ -17,7 +19,37 @@ const SubAdmin = () => {
 
   const { data: subAdmins, isLoading } = useAllSubAdminsQuery();
   const { data: user } = useGetProfileQuery();
+  const [updateUserStatus] = useUpdateUserStatusMutation();
   const userRole = user?.data?.attributes?.role;
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete this sub-admin?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await updateUserStatus({ id, action: "delete" }).unwrap();
+          Swal.fire({
+            title: "Deleted!",
+            text: res.message || "Sub-admin has been deleted.",
+            icon: "success",
+          });
+        } catch (error) {
+          Swal.fire({
+            title: "Error!",
+            text: error?.data?.message || "Something went wrong.",
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
 
   // Safe access to sub-admin list
   const dataSource = subAdmins?.data?.attributes || [];
@@ -63,6 +95,7 @@ const SubAdmin = () => {
           />
           {userRole === "admin" && (
             <DeleteOutlined
+              onClick={() => handleDelete(record._id)}
               style={{ fontSize: "18px", color: "red", cursor: "pointer" }}
             />
           )}

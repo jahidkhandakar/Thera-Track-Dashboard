@@ -8,7 +8,7 @@ const allUsers = apiSlice.injectEndpoints({
     }),
     updateUserStatus: builder.mutation({
       query: ({ id, action }) => ({
-        url: `/update-user-status/${id}`,
+        url: `/user/update-user-status/${id}`,
         method: "PATCH",
         body: { action },
       }),

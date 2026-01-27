@@ -14,7 +14,6 @@ import About from "../dashboard/menu/about/About";
 import EditAbout from "../dashboard/menu/about/EditAbout";
 import AddSubAdmin from "../dashboard/menu/sidebarMenu/AddSubAdmin";
 import Earning from "../dashboard/menu/sidebarMenu/Earning";
-import EditSubAdmin from "../dashboard/menu/sidebarMenu/EditSubAdmin";
 import Feedback from "../dashboard/menu/sidebarMenu/Feedback";
 import Settings from "../dashboard/menu/sidebarMenu/Settings";
 import SubAdmin from "../dashboard/menu/sidebarMenu/SubAdmin";
@@ -111,10 +110,6 @@ export const router = createBrowserRouter([
       {
         path: "subadmin/add",
         element: <AddSubAdmin />,
-      },
-      {
-        path: "subadmin/edit/:id",
-        element: <EditSubAdmin />,
       },
       {
         path: "settings",

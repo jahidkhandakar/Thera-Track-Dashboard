@@ -1,4 +1,5 @@
 import {
+  CheckCircleOutlined,
   CloseOutlined,
   DeleteOutlined,
   EyeOutlined,
@@ -75,6 +76,20 @@ const User = () => {
       render: (text) => <p>{text || "N/A"}</p>,
     },
     {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (text) => (
+        <p
+          className={`font-medium ${
+            text === "Blocked" ? "text-red-500" : "text-green-500"
+          }`}
+        >
+          {text || "Active"}
+        </p>
+      ),
+    },
+    {
       title: "Date",
       dataIndex: "createdAt",
       key: "createdAt",
@@ -89,14 +104,27 @@ const User = () => {
             onClick={() => handleView(record)}
             style={{ fontSize: "18px", color: "#2196F3", cursor: "pointer" }}
           />
-          <StopOutlined
-            onClick={() => handleStatusChange(record._id, "block")}
-            style={{ fontSize: "18px", color: "#faad14", cursor: "pointer" }}
-          />
-          <DeleteOutlined
-            onClick={() => handleStatusChange(record._id, "delete")}
-            style={{ fontSize: "18px", color: "red", cursor: "pointer" }}
-          />
+
+          {/* Logic: If blocked or deleted, allow 'active'. Else allow 'block'. */}
+          {(record.status === "Blocked" || record.isDeleted) ? (
+            <CheckCircleOutlined
+              onClick={() => handleStatusChange(record._id, "active")}
+              style={{ fontSize: "18px", color: "#52c41a", cursor: "pointer" }}
+            />
+          ) : (
+            <StopOutlined
+              onClick={() => handleStatusChange(record._id, "block")}
+              style={{ fontSize: "18px", color: "#faad14", cursor: "pointer" }}
+            />
+          )}
+
+          {/* Delete Icon - Hide if already deleted? Or keep it? User said "jodi delete kore" make active. So delete logic exists. */}
+           {!record.isDeleted && (
+             <DeleteOutlined
+              onClick={() => handleStatusChange(record._id, "delete")}
+              style={{ fontSize: "18px", color: "red", cursor: "pointer" }}
+            />
+           )}
         </Space>
       ),
     },

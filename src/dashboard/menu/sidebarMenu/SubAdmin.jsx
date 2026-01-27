@@ -1,4 +1,5 @@
 import {
+  CheckCircleOutlined,
   CloseOutlined,
   DeleteOutlined,
   EyeOutlined,
@@ -22,22 +23,22 @@ const SubAdmin = () => {
   const [updateUserStatus] = useUpdateUserStatusMutation();
   const userRole = user?.data?.attributes?.role;
 
-  const handleDelete = (id) => {
+  const handleStatusChange = (id, action) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You want to delete this sub-admin?",
+      text: `You want to ${action} this user?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: `Yes, ${action} it!`,
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await updateUserStatus({ id, action: "delete" }).unwrap();
+          const res = await updateUserStatus({ id, action }).unwrap();
           Swal.fire({
-            title: "Deleted!",
-            text: res.message || "Sub-admin has been deleted.",
+            title: "Success!",
+            text: res.message || `User has been ${action}ed.`,
             icon: "success",
           });
         } catch (error) {
@@ -79,6 +80,30 @@ const SubAdmin = () => {
       render: (text) => <p>{text || "N/A"}</p>,
     },
     {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (text) => (
+        <p
+          className={
+            text === "Active"
+              ? "text-green-500 font-semibold"
+              : "text-red-500 font-semibold"
+          }
+        >
+          {text || "N/A"}
+        </p>
+      ),
+    },
+    {
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
+      render: (text) => (
+        <p>{text === "sub_admin" ? "Sub Admin" : text || "N/A"}</p>
+      ),
+    },
+    {
       title: "Date",
       dataIndex: "createdAt",
       key: "createdAt",
@@ -93,10 +118,15 @@ const SubAdmin = () => {
             onClick={() => handleView(record)}
             style={{ fontSize: "18px", color: "#2196F3", cursor: "pointer" }}
           />
-          {userRole === "admin" && (
+          {userRole === "admin" && record.status === "Active" ? (
             <DeleteOutlined
-              onClick={() => handleDelete(record._id)}
+              onClick={() => handleStatusChange(record._id, "delete")}
               style={{ fontSize: "18px", color: "red", cursor: "pointer" }}
+            />
+          ) : (
+            <CheckCircleOutlined
+              onClick={() => handleStatusChange(record._id, "active")}
+              style={{ fontSize: "18px", color: "#52c41a", cursor: "pointer" }}
             />
           )}
         </Space>

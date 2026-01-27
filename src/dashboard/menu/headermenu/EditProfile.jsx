@@ -1,4 +1,4 @@
-import { UploadOutlined } from "@ant-design/icons";
+import { FileImageOutlined } from "@ant-design/icons";
 import { Button, Card, Form, Input, Spin, Upload } from "antd";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import url from "../../../redux/api/baseUrl";
 import { useUpdateProfileMutation } from "../../../redux/features/auth/profile/editProfile";
 import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
-
+import userImage from "../../../../public/image/user.jpg";
 const EditProfile = () => {
   const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -28,7 +28,7 @@ const EditProfile = () => {
 
       const profileImageUrl = userData?.profileImage
         ? url + userData?.profileImage
-        : "https://via.placeholder.com/150";
+        : userImage;
 
       setImageUrl(profileImageUrl);
 
@@ -90,8 +90,6 @@ const EditProfile = () => {
 
   return (
     <div className="p-4 md:p-6">
-
-
       <div className="flex items-center mb-8">
         <Button
           type="text"
@@ -148,12 +146,10 @@ const EditProfile = () => {
                         onChange={handleUploadChange}
                         accept="image/*"
                         maxCount={1}
+                        className="flex justify-center items-center"
                       >
-                        <Button
-                          className="w-full flex mx-auto items-center justify-center gap-2 py-3"
-                          icon={<UploadOutlined />}
-                        >
-                          Change Picture
+                        <Button className="w-full flex mx-auto items-center justify-center gap-2 py-3 mb-5">
+                          <FileImageOutlined /> Change Picture
                         </Button>
                       </Upload>
                       <p className="text-gray-500 text-sm mt-2 text-center">
@@ -223,7 +219,7 @@ const EditProfile = () => {
                       htmlType="submit"
                       type="primary"
                       size="large"
-                      className="px-6 py-3 !bg-[#2E7D32] hover:!bg-[#1B5E20] rounded-lg"
+                      className="px-6 py-3  rounded-lg"
                       loading={isUpdating}
                       disabled={isUpdating}
                     >

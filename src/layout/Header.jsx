@@ -1,17 +1,15 @@
-import { BellOutlined, DownOutlined, MenuOutlined } from "@ant-design/icons";
-import { Avatar, Badge, Button, Dropdown, Menu } from "antd";
-import { useState } from "react";
+import { BellOutlined, MenuOutlined } from "@ant-design/icons";
+import { Avatar, Badge, Button, Dropdown } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import url from "../redux/api/baseUrl";
 import { useGetProfileQuery } from "../redux/features/auth/profile/getProfile";
+import user from "../../public/image/user.jpg";
 
 import Swal from "sweetalert2";
 
 // eslint-disable-next-line react/prop-types
 const Header = ({ toggleMobileMenu }) => {
   const navigate = useNavigate();
-  const [menuVisible, setMenuVisible] = useState(false);
-
   const { data: admin } = useGetProfileQuery();
 
   const handleLogOut = () => {
@@ -40,37 +38,26 @@ const Header = ({ toggleMobileMenu }) => {
     });
   };
 
-  const handleMenuVisibility = (visible) => {
-    setMenuVisible(visible);
-  };
-
-  const menu = (
-    <Menu
-      className={`transition ease-in-out duration-300 transform ${menuVisible ? "custom-dropdown-menu-visible" : "custom-dropdown-menu"}`}
-    >
-      <Menu.Item className="hover:!bg-[#193664]" key="1">
-        <Link
-          to="/dashboard/profile"
-          className="hover:!bg-[#193664] hover:!text-white"
-        >
-          Profile
-        </Link>
-      </Menu.Item>
-      <Menu.Item className="hover:!bg-[#193664]" key="3">
-        <p
+  const items = [
+    {
+      key: "1",
+      label: <Link to="/dashboard/profile">Profile</Link>,
+    },
+    {
+      key: "2",
+      label: (
+        <button
           onClick={() => {
             handleLogOut();
           }}
-          className="hover:!bg-[#193664] hover:!text-white"
         >
           Logout
-        </p>
-      </Menu.Item>
-    </Menu>
-  );
+        </button>
+      ),
+    },
+  ];
   return (
     <div className=" flex justify-between items-center p-3 md:p-5 rounded-md !bg-[#2196F3]">
-
       <div className="flex items-center gap-2 md:gap-4">
         <Button
           type="text"
@@ -104,31 +91,25 @@ const Header = ({ toggleMobileMenu }) => {
           >
             <BellOutlined
               style={{ cursor: "pointer" }}
-              className={`bg-primary text-xl md:text-3xl text-[#Ffffffff] p-1 md:p-2 border border-[#e7e0e0] rounded`}
+              className={`bg-primary text-xl  text-[#Ffffffff] p-1 md:p-2 border border-[#e7e0e0] rounded`}
             />
           </Badge>
         </div>
 
         {/* User dropdown */}
-        <div className="border p-0.5 md:p-1 rounded shrink-0 min-w-0">
-          <Dropdown
-            className="px-1 md:px-2"
-            overlay={menu}
-            trigger={["click"]}
-            onVisibleChange={handleMenuVisibility}
-          >
-            <a className="flex items-center text-white cursor-pointer text-whiteText min-w-0">
+        <Dropdown menu={{ items }} placement="topLeft" arrow>
+          <a className="flex items-center text-white cursor-pointer text-whiteText min-w-0">
+            {admin?.data?.attributes?.profileImage ? (
               <Avatar
+                size={40}
                 src={url + admin?.data?.attributes.profileImage}
-                className="mr-0 md:mr-2 h-[26px] w-[26px] md:h-[42px] md:w-[42px] shrink-0"
+                className="mr-0 md:mr-2 shrink-0"
               />
-              <span className="hidden md:inline truncate">
-                {admin?.data?.attributes.fullName}
-              </span>
-              <DownOutlined className="ml-1 text-[8px] md:text-xs shrink-0" />
-            </a>
-          </Dropdown>
-        </div>
+            ) : (
+              <Avatar size={50} src={user} className="mr-0 md:mr-2 shrink-0" />
+            )}
+          </a>
+        </Dropdown>
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
-import { Button, Card } from "antd";
+import { Button } from "antd";
 import { Edit, Mail, User, User as UserIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import url from "../../../redux/api/baseUrl";
 import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
-
+import userImage from "../../../../public/image/user.jpg";
 const Profile = () => {
   const navigate = useNavigate();
   const { data: admin, isLoading } = useGetProfileQuery();
@@ -27,9 +27,10 @@ const Profile = () => {
           <p className="text-gray-600">Manage your personal information</p>
         </div>
         <Button
+          type="primary"
           size="large"
           onClick={() => navigate(`/dashboard/editprofile`)}
-          className="h-10 bg-blue-400 text-white flex items-center gap-2 rounded-lg hover:bg-blue-500"
+          className="h-10  text-white flex items-center gap-2 rounded-lg hover:bg-blue-500"
         >
           <Edit size={16} />
           <span>Edit Profile</span>
@@ -50,9 +51,11 @@ const Profile = () => {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                      <UserIcon size={48} className="text-gray-400" />
-                    </div>
+                    <img
+                      src={userImage}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
                   )}
                 </div>
               </div>
@@ -62,14 +65,6 @@ const Profile = () => {
               </h3>
               <p className="text-gray-600">{userData?.role || "User"}</p>
             </div>
-            <Card
-              className=" rounded-xl border-0 mt-6"
-              title={
-                <h2 className="text-lg font-semibold text-gray-800">
-                  Account Security
-                </h2>
-              }
-            ></Card>
           </div>
         </div>
         {/* Contact Information Card */}

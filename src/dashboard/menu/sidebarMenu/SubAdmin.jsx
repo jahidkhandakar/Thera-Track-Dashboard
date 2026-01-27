@@ -1,8 +1,13 @@
-import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  DeleteOutlined,
+  EyeOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import { Button, Modal, Space, Table } from "antd";
 import { useState } from "react";
-import { BsInfoCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { useGetProfileQuery } from "../../../redux/features/auth/profile/getProfile";
 import { useAllSubAdminsQuery } from "../../../redux/features/otherApi/subAdmin";
 
 const SubAdmin = () => {
@@ -11,6 +16,8 @@ const SubAdmin = () => {
   const navigate = useNavigate();
 
   const { data: subAdmins, isLoading } = useAllSubAdminsQuery();
+  const { data: user } = useGetProfileQuery();
+  const userRole = user?.data?.attributes?.role;
 
   // Safe access to sub-admin list
   const dataSource = subAdmins?.data?.attributes || [];
@@ -50,11 +57,15 @@ const SubAdmin = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <BsInfoCircle
+          <EyeOutlined
             onClick={() => handleView(record)}
-            size={18}
-            className="text-[#2196F3] cursor-pointer"
+            style={{ fontSize: "18px", color: "#2196F3", cursor: "pointer" }}
           />
+          {userRole === "admin" && (
+            <DeleteOutlined
+              style={{ fontSize: "18px", color: "red", cursor: "pointer" }}
+            />
+          )}
         </Space>
       ),
     },
@@ -70,14 +81,16 @@ const SubAdmin = () => {
       <div className="rounded-t-lg mt-[24px] ">
         <div className="flex py-[22px] justify-between items-center p-5">
           <h1 className="text-xl font-semibold">Sub Admins</h1>
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={() => navigate("add")}
-            className="bg-[#2196F3]"
-          >
-            Add Sub Admin
-          </Button>
+          {userRole === "admin" && (
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => navigate("add")}
+              className="bg-[#2196F3]"
+            >
+              Add Sub Admin
+            </Button>
+          )}
         </div>
 
         <Table

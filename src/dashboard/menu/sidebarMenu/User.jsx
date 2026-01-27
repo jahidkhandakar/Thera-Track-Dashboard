@@ -1,7 +1,11 @@
-import { CloseOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  DeleteOutlined,
+  EyeOutlined,
+  StopOutlined,
+} from "@ant-design/icons";
 import { Button, Modal, Space, Table } from "antd";
 import { useState } from "react";
-import { BsInfoCircle } from "react-icons/bs";
 import { useAllUsersQuery } from "../../../redux/features/otherApi/allUsers";
 
 const User = () => {
@@ -47,10 +51,15 @@ const User = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <BsInfoCircle
+          <EyeOutlined
             onClick={() => handleView(record)}
-            size={18}
-            className="text-[red] cursor-pointer"
+            style={{ fontSize: "18px", color: "#2196F3", cursor: "pointer" }}
+          />
+          <StopOutlined
+            style={{ fontSize: "18px", color: "#faad14", cursor: "pointer" }}
+          />
+          <DeleteOutlined
+            style={{ fontSize: "18px", color: "red", cursor: "pointer" }}
           />
         </Space>
       ),

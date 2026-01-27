@@ -18,7 +18,11 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
-  if (loggedInUser) {
+  if (
+    (loggedInUser && loggedInUser?.role === "admin") ||
+    loggedInUser?.role === "super_admin" ||
+    loggedInUser?.role === "sub_admin"
+  ) {
     return children;
   }
 
